@@ -1,0 +1,14 @@
+#summary Sarien.net wiki homepage
+
+= Welcome to the Sarien.net code repository =
+
+The current release consists of two parts:
+
+  # AgiConvert: a command line tool written in C# that converts the original game data to a png files and javascript.
+  # Website: The sarien.net website to play a game.
+
+The AgiConvert conversion tool does not use the original game data as source, but rather the exported files of a tool called [http://www.winagi.com/ WinAgi]. This was done because it saved me lots of time and allowing me to focus on the client side aspect of Sarien.net.
+
+WinAgi will throw some errors with 1% of the logic files of a game, so to fix them I use a tool called Agi Studio. There's still a lot of documentation to be done for me here, but this is the way it is.
+
+The current status of Sarien.net is early beta. Most games run, and Space Quest 1 is completable, but there are no savegames or other documentation.
