@@ -1,0 +1,324 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(10);
+  load.view(17);
+  animate.obj(o2);
+  set.view(o2, 17);
+  set.loop(o2, 3);
+  set.cel(o2, 2);
+  set.priority(o2, 5);
+  ignore.objs(o2);
+  ignore.blocks(o2);
+  position(o2, 57, 142);
+  draw(o2);
+  stop.cycling(o2);
+  assignn(v200, 10);
+  if (obj.in.room("Kitchen knife",v200)) {
+    animate.obj(o3);
+    load.view(7);
+    set.view(o3, 7);
+    set.loop(o3, 0);
+    set.cel(o3, 2);
+    position(o3, 43, 83);
+    draw(o3);
+    stop.cycling(o3);
+  }
+  load.view(18);
+  animate.obj(o4);
+  set.view(o4, 18);
+  set.loop(o4, 0);
+  if (isset(f208)) {
+    set.cel(o4, 5);
+    goto(Label1);
+  }
+  set.cel(o4, 0);
+Label1:
+  ignore.objs(o4);
+  ignore.blocks(o4);
+  position(o4, 67, 71);
+  draw(o4);
+  stop.cycling(o4);
+  animate.obj(o5);
+  set.view(o5, 18);
+  set.loop(o5, 1);
+  if (isset(f208)) {
+    set.cel(o5, 5);
+    goto(Label2);
+  }
+  set.cel(o5, 0);
+Label2:
+  ignore.objs(o5);
+  ignore.blocks(o5);
+  set.priority(o5, 5);
+  position(o5, 63, 129);
+  draw(o5);
+  stop.cycling(o5);
+  animate.obj(o6);
+  set.view(o6, 18);
+  set.loop(o6, 2);
+  if (isset(f209)) {
+    ignore.blocks(Ego);
+    set.cel(o6, 9);
+    goto(Label3);
+  }
+  observe.blocks(Ego);
+  set.cel(o6, 0);
+Label3:
+  ignore.objs(o6);
+  ignore.blocks(o6);
+  set.priority(o6, 7);
+  position(o6, 117, 130);
+  draw(o6);
+  stop.cycling(o6);
+  if (equaln(prev_room_no,17)) {
+    if (isset(f209)) {
+      assignn(v106, 3);
+      cycle.time(o6, v106);
+      observe.blocks(Ego);
+      set.cel(o6, 0);
+      end.of.loop(o6, f254);
+    }
+    position.v(Ego, v104, v105);
+  }
+  draw(Ego);
+  show.pic();
+}
+if (isset(f254)) {
+  reset(f254);
+  ignore.blocks(Ego);
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("Your kitchen is kitted out with the usual appliances. To the right is "
+        "a strange looking door.");
+}
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if ((said("check out", "ceiling") || 
+    said("check out", "blanket") || 
+    said("check out", "floor") || 
+    said("check out", "cabinet") || 
+    said("check out", "chair") || 
+    said("check out", "beams"))) {
+  print("Its just as it appears.");
+}
+if ((said("check out", "window") || 
+    said("check out", "a", "window"))) {
+  print("Through the window you see your tiny garden.");
+}
+if (said("check out", "blind")) {
+  print("It's a pink blind with a cord attached to it.");
+}
+if (said("check out", "cord")) {
+  print("It's a cord for the blind.");
+}
+if (said("get", "cord")) {
+  print("You can't! It's attached to the blind. Try pulling it instead.");
+}
+if (said("check out", "bin")) {
+  print("Its a wastebin for putting trash into.");
+}
+if ((said("check out", "in", "bin") || 
+    said("search", "bin"))) {
+  print("You put the trash out last night, so it's empty at the moment.");
+}
+if (said("check out", "fence")) {
+  print("On the western wall you spot a knife rack.");
+}
+if (said("check out", "appliance")) {
+  print("There a big fridge, a sink, an oven, a knife rack on the wall and a "
+        "toaster in the corner .");
+}
+if (said("check out", "bowl")) {
+  print("Its just your average looking sink");
+}
+if (said("check out", "toaster")) {
+  print("The toaster sits happily in the corner");
+}
+if (said("check out", "cooler")) {
+  print("A big, bulky, white fridge graces the room.");
+}
+if (said("open", "window")) {
+  print("Nah, it's fine just the way it is.");
+}
+if ((said("check out", "oven") || 
+    said("check out", "in", "oven") || 
+    said("search", "oven") || 
+    said("open", "oven"))) {
+  if (posn(Ego,50,103,62,107)) {
+    print("The oven is empty and probably not worth messing around with.");
+    goto(Label4);
+  }
+  print("You're not close enough.");
+}
+Label4:
+if (said("check out", "door")) {
+  print("This is the door to the basement. It's made of pure steel and is "
+        "electronically sealed for security reasons. Next to the door is a "
+        "panel.");
+}
+if (said("close", "door")) {
+  print("Why?");
+}
+if (said("open", "door")) {
+  print("You can't. It's electronically locked. Try using the panel next to it.");
+}
+if (said("attack", "door")) {
+  print("You give the door a swift kick and injure your foot.");
+}
+if ((said("check out", "in", "cooler") || 
+    said("search", "cooler") || 
+    said("open", "cooler"))) {
+  if (posn(Ego,85,103,108,107)) {
+    print("You open the fridge door and suddenly realise that you need to get "
+          "some more food in.");
+    goto(Label5);
+  }
+  print("You're not close enough.");
+}
+Label5:
+if ((said("check out", "cabinet") || 
+    said("check out", "in", "cabinet") || 
+    said("check out", "in", "closet") || 
+    said("search", "closet") || 
+    said("search", "cabinet") || 
+    said("check out", "closet"))) {
+  print("Your cupboards are full of the usual kitchen stuff. None of which "
+        "interests you at the moment.");
+}
+if (said("check out", "kinfe rack")) {
+  if (has("Kitchen knife")) {
+    print("There's a knife rack on the western wall with a knife on it.");
+    goto(Label6);
+  }
+  print("There's a knife rack on the western wall with two knives on it.");
+}
+Label6:
+if (said("check out", "kitchen knife")) {
+  if (has("Kitchen knife")) {
+    reset(input_parsed);
+    goto(Label7);
+  }
+  print("There's two of them on the rack.");
+}
+Label7:
+if (said("move", "cord")) {
+  if (posn(Ego,79,104,89,108)) {
+    print("You give the cord a quick tug.");
+    if (isset(f208)) {
+      reset(f208);
+      reverse.loop(o4, f255);
+      reverse.loop(o5, f253);
+      goto(Label8);
+    }
+    set(f208);
+    end.of.loop(o4, f255);
+    end.of.loop(o5, f253);
+Label8:
+    goto(Label9);
+  }
+  print("You're not close enough.");
+}
+Label9:
+if ((said("check out", "panel") || 
+    said("use", "panel"))) {
+  if (!isset(f209)) {
+    if (posn(Ego,116,126,130,143)) {
+      new.room(17);
+      goto(Label10);
+    }
+    print("You're not close enough.");
+Label10:
+    goto(Label11);
+  }
+  print("You don't need to, the door is already open.");
+}
+Label11:
+if (said("bathe", "hand")) {
+  if (posn(Ego,76,103,88,107)) {
+    print("Ok, you wash your hands. Big deal.");
+    goto(Label12);
+  }
+  print("You're not close enough to the sink.");
+}
+Label12:
+if ((said("rest") || 
+    said("rest", "down"))) {
+  print("You'd prefer to stand at the moment.");
+}
+if (said("get", "kitchen knife")) {
+  assignn(v200, 10);
+  if (obj.in.room("Kitchen knife",v200)) {
+    if (posn(Ego,40,104,52,118)) {
+      print("Taken.");
+      increment(score);
+      get("Kitchen knife");
+      erase(o3);
+      goto(Label13);
+    }
+    print("You'll need to get closer.");
+Label13:
+    goto(Label14);
+  }
+  print("But, you've already got one!");
+}
+Label14:
+if (posn(Ego,5,165,135,168)) {
+  position(Ego, 65, 76);
+  new.room(6);
+}
+if (posn(Ego,130,114,131,133)) {
+  position(Ego, 8, 56);
+  new.room(15);
+}
+if (posn(Ego,57,100,92,132)) {
+  current.loop(Ego, v103);
+  current.cel(Ego, v102);
+  get.posn(Ego, v100, v101);
+  addn(v101, 31);
+  set.loop.v(o2, v103);
+  set.cel.v(o2, v102);
+  reposition.to.v(o2, v100, v101);
+}
+return();
+
+//Messages
+#message 1 "Your kitchen is kitted out with the usual appliances. To the right is a strange looking door."
+#message 2 "You look under the rug and find....."
+#message 3 "absolutely nothing."
+#message 4 "Its just as it appears."
+#message 5 "Through the window you see your tiny garden."
+#message 6 "It's a pink blind with a cord attached to it."
+#message 7 "It's a cord for the blind."
+#message 8 "You can't! It's attached to the blind. Try pulling it instead."
+#message 9 "Its a wastebin for putting trash into."
+#message 10 "You put the trash out last night, so it's empty at the moment."
+#message 11 "On the western wall you spot a knife rack."
+#message 12 "There a big fridge, a sink, an oven, a knife rack on the wall and a toaster in the corner ."
+#message 13 "Its just your average looking sink"
+#message 14 "The toaster sits happily in the corner"
+#message 15 "A big, bulky, white fridge graces the room."
+#message 16 "Nah, it's fine just the way it is."
+#message 17 "The oven is empty and probably not worth messing around with."
+#message 18 "You're not close enough."
+#message 19 "This is the door to the basement. It's made of pure steel and is electronically sealed for security reasons. Next to the door is a panel."
+#message 20 "Why?"
+#message 21 "You can't. It's electronically locked. Try using the panel next to it."
+#message 22 "You give the door a swift kick and injure your foot."
+#message 23 "You open the fridge door and suddenly realise that you need to get some more food in."
+#message 24 "Your cupboards are full of the usual kitchen stuff. None of which interests you at the moment."
+#message 25 "There's a knife rack on the western wall with a knife on it."
+#message 26 "There's a knife rack on the western wall with two knives on it."
+#message 27 "There's two of them on the rack."
+#message 28 "You give the cord a quick tug."
+#message 29 "You don't need to, the door is already open."
+#message 30 "Ok, you wash your hands. Big deal."
+#message 31 "You're not close enough to the sink."
+#message 32 "You'd prefer to stand at the moment."
+#message 33 "Taken."
+#message 34 "You'll need to get closer."
+#message 35 "But, you've already got one!"

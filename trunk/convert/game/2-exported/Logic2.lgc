@@ -1,0 +1,82 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(50);
+  show.pic();
+  status.line.off();
+  prevent.input();
+  if (equaln(v101,1)) {
+    load.view(32);
+    animate.obj(o3);
+    set.view(o3, 32);
+    set.loop(o3, 0);
+    position(o3, 35, 80);
+    ignore.horizon(o3);
+    set.priority(o3, 5);
+    stop.cycling(o3);
+    assignn(v100, 3);
+    cycle.time(o3, v100);
+  }
+  assignn(v100, 0);
+}
+if (lessn(v100,120)) {
+  increment(v100);
+}
+if (equaln(v101,1)) {
+  if (equaln(v100,30)) {
+    draw(o3);
+    end.of.loop(o3, f255);
+  }
+  if (equaln(v100,60)) {
+    draw(o3);
+    reverse.loop(o3, f255);
+  }
+  if (equaln(v100,76)) {
+    erase(o3);
+  }
+  if (equaln(v100,90)) {
+    print("Congratulations! You've completed the Time Quest demo!");
+    if (equaln(score,45)) {
+      print("You've finished the demo with a maximum score of 45 points. Well "
+            "done!");
+      goto(Label1);
+    }
+    assignv(v102, score);
+    print("You've finished the demo with a score of %v102 out of a possible 45 "
+          "points.");
+  }
+Label1:
+  if (equaln(v100,119)) {
+    print("If you have any queries or comments about this demo feel free to "
+          "email me at beeepo@hotmail.com");
+  }
+}
+if (equaln(v101,0)) {
+  if (equaln(v100,30)) {
+    print("And then, nothing.");
+  }
+  if (equaln(v100,60)) {
+    print("You wait for what seems like an eternity.");
+  }
+  if (equaln(v100,90)) {
+    print("And are then abruptly sucked back into existence.");
+  }
+  if (equaln(v100,120)) {
+    status.line.on();
+    accept.input();
+    position(Ego, 75, 125);
+    assignn(v101, 1);
+    new.room(19);
+  }
+}
+return();
+
+//Messages
+#message 1 "Congratulations! You've completed the Time Quest demo!"
+#message 2 "You've finished the demo with a maximum score of 45 points. Well done!"
+#message 3 "You've finished the demo with a score of %v102 out of a possible 45 points."
+#message 4 "If you have any queries or comments about this demo feel free to email me at beeepo@hotmail.com"
+#message 5 "And then, nothing."
+#message 6 "You wait for what seems like an eternity."
+#message 7 "And are then abruptly sucked back into existence."

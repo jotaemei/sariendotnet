@@ -1,0 +1,246 @@
+if (isset(new_room)) {
+  status.line.off();
+  prevent.input();
+  program.control();
+  assignn(cycle_delay, 2);
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(3);
+  load.view(20);
+  load.view(26);
+  load.view(27);
+  position(Ego, 87, 114);
+  load.view(0);
+  assignn(ego_view_no, 0);
+  set.view.v(Ego, ego_view_no);
+  assignn(v200, 4);
+  assignn(v201, 0);
+  assignn(v203, 0);
+  animate.obj(o2);
+  animate.obj(o3);
+  animate.obj(o4);
+  animate.obj(o5);
+  set.view(o2, 20);
+  set.view(o3, 20);
+  set.view(o4, 20);
+  set.view(o5, 20);
+  set.loop(o2, 0);
+  set.loop(o3, 0);
+  set.loop(o4, 0);
+  set.loop(o5, 0);
+  set.cel(o2, 1);
+  set.cel(o3, 2);
+  set.cel(o4, 3);
+  set.cel(o5, 3);
+  position(o2, 56, 135);
+  position(o3, 71, 110);
+  position(o4, 93, 85);
+  position(o5, 93, 60);
+  set.priority(o2, 8);
+  set.priority(o3, 8);
+  set.priority(o4, 8);
+  set.priority(o5, 8);
+  ignore.objs(o2);
+  ignore.objs(o3);
+  ignore.objs(o4);
+  ignore.objs(o5);
+  stop.cycling(o2);
+  stop.cycling(o3);
+  stop.cycling(o4);
+  stop.cycling(o5);
+  draw(o2);
+  draw(o3);
+  draw(o4);
+  animate.obj(o6);
+  set.view(o6, 20);
+  set.loop(o6, 1);
+  set.cel(o6, 0);
+  position(o6, 12, 108);
+  set.priority(o6, 8);
+  stop.cycling(o6);
+  draw(o6);
+  animate.obj(o7);
+  set.view(o7, 20);
+  set.loop(o7, 1);
+  set.cel(o7, 1);
+  position(o7, 136, 74);
+  set.priority(o7, 8);
+  stop.cycling(o7);
+  draw(o7);
+  animate.obj(o8);
+  set.view(o8, 20);
+  set.loop(o8, 2);
+  set.cel(o8, 0);
+  ignore.horizon(o8);
+  cycle.time(o8, v200);
+  position(o8, 116, 35);
+  set.priority(o8, 6);
+  draw(o8);
+  animate.obj(o9);
+  set.view(o9, 3);
+  set.loop(o9, 2);
+  set.cel(o9, 0);
+  stop.cycling(o9);
+  position(o9, 93, 100);
+  set.priority(o9, 9);
+  draw(o9);
+  animate.obj(o10);
+  set.view(o10, 0);
+  set.loop(o10, 1);
+  set.cel(o10, 3);
+  stop.cycling(o10);
+  position(o10, 104, 110);
+  set.priority(o10, 9);
+  draw(o10);
+  animate.obj(o11);
+  set.view(o11, 27);
+  set.loop(o11, 0);
+  set.cel(o11, 0);
+  ignore.objs(o11);
+  stop.cycling(o11);
+  position(o11, 65, 126);
+  set.priority(o11, 9);
+  assignn(v207, 2);
+  cycle.time(o11, v207);
+  assignn(v200, 0);
+  assignn(v205, 1);
+  assignn(v206, 60);
+  set.priority(Ego, 9);
+  stop.motion(Ego);
+  draw(Ego);
+  show.pic();
+}
+increment(v201);
+if (equaln(v201,3)) {
+  assignn(v201, 0);
+  increment(v200);
+  if (equaln(v200,15)) {
+    assignn(v200, 0);
+  }
+  assignn(v203, 0);
+  assignn(v204, 0);
+  if (equaln(v200,0)) {
+    assignn(v204, 255);
+  }
+  if (equaln(v200,2)) {
+    assignn(v204, 255);
+    reposition(o7, v203, v204);
+  }
+  if (equaln(v200,5)) {
+    assignn(v204, 1);
+  }
+  if (equaln(v200,6)) {
+    assignn(v204, 255);
+    reposition(o6, v203, v204);
+    assignn(v204, 1);
+  }
+  if (equaln(v200,7)) {
+    assignn(v204, 1);
+  }
+  if (equaln(v200,9)) {
+    assignn(v204, 1);
+    reposition(o7, v203, v204);
+  }
+  if (equaln(v200,12)) {
+    assignn(v204, 255);
+  }
+  if (equaln(v200,14)) {
+    assignn(v204, 1);
+    reposition(o6, v203, v204);
+    assignn(v204, 255);
+  }
+  reposition(o2, v203, v204);
+  reposition(o3, v203, v204);
+  reposition(o4, v203, v204);
+  reposition(o5, v203, v204);
+  reposition(o9, v203, v204);
+  reposition(o10, v203, v204);
+  if ((equaln(ego_dir,2) || 
+      equaln(ego_dir,3) || 
+      equaln(ego_dir,4))) {
+    assignn(v203, 1);
+  }
+  if ((equaln(ego_dir,6) || 
+      equaln(ego_dir,7) || 
+      equaln(ego_dir,8))) {
+    assignn(v203, 255);
+  }
+  if ((equaln(ego_dir,8) || 
+      equaln(ego_dir,1) || 
+      equaln(ego_dir,2))) {
+    subn(v204, 1);
+  }
+  if ((equaln(ego_dir,4) || 
+      equaln(ego_dir,5) || 
+      equaln(ego_dir,6))) {
+    addn(v204, 1);
+  }
+  reposition(Ego, v203, v204);
+}
+if (isset(auto_restart) && 
+    equaln(v205,5)) {
+  stop.motion(Ego);
+  set.loop(Ego, 0);
+  set.cel(Ego, 7);
+  assignn(v206, 20);
+  assignn(v205, 6);
+}
+if (greatern(v206,0)) {
+  decrement(v206);
+  if (equaln(v206,0)) {
+    if (equaln(v205,9)) {
+      new.room(5);
+    }
+    if (equaln(v205,8)) {
+      draw(o11);
+      erase(Ego);
+      end.of.loop(o10, f255);
+      end.of.loop(o11, f255);
+      assignn(v205, 9);
+      assignn(v206, 10);
+    }
+    if (equaln(v205,7)) {
+      assignn(v207, 254);
+      assignn(v208, 0);
+      reposition(o10, v207, v208);
+      set.view(o10, 26);
+      set.cel(o10, 0);
+      set.loop(o10, 0);
+      assignn(v205, 8);
+      assignn(v206, 10);
+    }
+    if (equaln(v205,6)) {
+      print("\"Do it.\" you order.");
+      assignn(v205, 7);
+      assignn(v206, 20);
+    }
+    if (equaln(v205,4)) {
+      move.obj(Ego, 76, 127, 1, auto_restart);
+      assignn(v205, 5);
+      assignn(v206, 10);
+    }
+    if (equaln(v205,3)) {
+      print("\"I'm sorry, but this is the only chance we've got.\"");
+      assignn(v205, 4);
+      assignn(v206, 20);
+    }
+    if (equaln(v205,2)) {
+      print("\"But there must be some other way!\" she pleads.");
+      assignn(v205, 3);
+      assignn(v206, 20);
+    }
+    if (equaln(v205,1)) {
+      print("\"Amy, we don't have time.\"");
+      assignn(v205, 2);
+      assignn(v206, 20);
+    }
+  }
+}
+return();
+
+//Messages
+#message 1 "\"Do it.\" you order."
+#message 2 "\"I'm sorry, but this is the only chance we've got.\""
+#message 3 "\"But there must be some other way!\" she pleads."
+#message 4 "\"Amy, we don't have time.\""

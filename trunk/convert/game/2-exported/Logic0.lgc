@@ -1,0 +1,286 @@
+if (greatern(error_code,0)) {
+  call(98);
+}
+if (equaln(room_no,0)) {
+  call(91);
+  if (isset(game_restarted)) {
+    disable.item(c20);
+    set(menu_enabled);
+    reset(f33);
+    new.room(16);
+    goto(Label1);
+  }
+  set.menu("AGI");
+  set.menu.item("About      ", c21);
+  set.menu.item("Help   <F1>", c2);
+  set.menu("File");
+  set.menu.item("Save     <F5>", c3);
+  set.menu.item("Restore  <F7>", c5);
+  set.menu.item("-------------", c20);
+  set.menu.item("Restart  <F9>", c7);
+  set.menu.item("Quit  <Alt-Z>", c1);
+  set.menu("Action");
+  set.menu.item("See Object  <F4>", c22);
+  set.menu.item("Inventory  <Tab>", c10);
+  set.menu("Special");
+  set.menu.item("Sound On/Off      <F2>", c16);
+  set.menu.item("Joystick      <Ctrl J>", c15);
+  set.menu.item("Pause            <Esc>", c18);
+  set.menu("Speed");
+  set.menu.item("Normal ", c24);
+  set.menu.item("Slow   ", c25);
+  set.menu.item("Fast   ", c23);
+  set.menu.item("Fastest", c28);
+  submit.menu();
+  disable.item(c20);
+  set(f33);
+  new.room(1);
+}
+Label1:
+if (isset(new_room)) {
+  load.logics(90);
+  reset(f32);
+  clear.lines(24, 24, 0);
+  animate.obj(Ego);
+  load.view.v(ego_view_no);
+  set.view.v(Ego, ego_view_no);
+  observe.objs(Ego);
+  assignn(v37, 255);
+}
+if (greatern(v35,0)) {
+  if (!equaln(v35,255)) {
+    disable.item(c21);
+    disable.item(c2);
+    disable.item(c3);
+    disable.item(c18);
+    disable.item(c16);
+    disable.item(c22);
+    disable.item(c15);
+    disable.item(c24);
+    disable.item(c28);
+    disable.item(c23);
+    disable.item(c25);
+    load.logics(94);
+  }
+  call(94);
+  goto(Label4);
+}
+if (!isset(f33)) {
+  if (controller(c19)) {
+    menu.input();
+  }
+}
+if (controller(c21)) {
+  print("\n     Time Quest\n\n    Version D0.1   \n\nDesigned and created\n  by "
+        "Chad Goulding\n");
+}
+if ((controller(c28) || 
+    said("fastest") || 
+    said("fastest", "speed"))) {
+  assignn(cycle_delay, 0);
+}
+if ((controller(c23) || 
+    said("fast") || 
+    said("fast", "speed"))) {
+  assignn(cycle_delay, 1);
+}
+if ((controller(c24) || 
+    said("normal") || 
+    said("normal", "speed"))) {
+  assignn(cycle_delay, 2);
+}
+if ((controller(c25) || 
+    said("slow") || 
+    said("slow", "speed"))) {
+  assignn(cycle_delay, 4);
+}
+if (controller(c26)) {
+  decrement(sound_volume);
+}
+if (controller(c27) && 
+    lessn(sound_volume,15)) {
+  increment(sound_volume);
+}
+if (controller(c16)) {
+  toggle(sound_on);
+}
+if (!isset(f33)) {
+  if (!isset(f32)) {
+    if (controller(c14)) {
+      set(f32);
+      print("Version D0.1");
+      version();
+      load.logics(99);
+    }
+  }
+  if ((controller(c3) || 
+      said("save", "game") || 
+      said("save"))) {
+    stop.sound();
+    save.game();
+  }
+  if ((controller(c5) || 
+      said("restore", "game") || 
+      said("restore"))) {
+    stop.sound();
+    restore.game();
+  }
+  if ((controller(c7) || 
+      said("restart", "game") || 
+      said("restart"))) {
+    restart.game();
+  }
+  if ((controller(c2) || 
+      said("help"))) {
+    call(92);
+  }
+  if (controller(c9)) {
+    echo.line();
+  }
+  if (controller(c17)) {
+    cancel.line();
+  }
+  if (controller(c15)) {
+    init.joy();
+  }
+  if ((controller(c18) || 
+      said("pause", "game") || 
+      said("pause"))) {
+    pause();
+  }
+  if ((controller(c10) || 
+      said("inv"))) {
+    status();
+  }
+  if ((controller(c22) || 
+      controller(c4))) {
+    set(inventory_select_enabled);
+    status();
+    if (greatern(selected_inventory_item,0) && 
+        !equaln(selected_inventory_item,255)) {
+      if (equaln(selected_inventory_item,2)) {
+        show.obj(200);
+      }
+      if (equaln(selected_inventory_item,3)) {
+        show.obj(201);
+      }
+      if (equaln(selected_inventory_item,4)) {
+        show.obj(202);
+      }
+      if (equaln(selected_inventory_item,5)) {
+        show.obj(203);
+      }
+      if (equaln(selected_inventory_item,6)) {
+        show.obj(204);
+      }
+      if (equaln(selected_inventory_item,7)) {
+        show.obj(205);
+      }
+      if (equaln(selected_inventory_item,9)) {
+        show.obj(207);
+      }
+      if (equaln(selected_inventory_item,10)) {
+        show.obj(208);
+      }
+      if (equaln(selected_inventory_item,11)) {
+        show.obj(209);
+      }
+      if (equaln(selected_inventory_item,12)) {
+        show.obj(210);
+      }
+      if (equaln(selected_inventory_item,13)) {
+        show.obj(211);
+      }
+      reset(inventory_select_enabled);
+    }
+  }
+  if ((controller(c1) || 
+      said("leave", "game") || 
+      said("leave"))) {
+    stop.sound();
+    quit(0);
+  }
+}
+get.posn(Ego, v30, v31);
+if (equalv(ego_dir,v34) && 
+    equalv(v30,v32) && 
+    equalv(v31,v33)) {
+  stop.cycling(Ego);
+  goto(Label2);
+}
+if (!isset(f30)) {
+  start.cycling(Ego);
+}
+Label2:
+assignv(v32, v30);
+assignv(v33, v31);
+assignv(v34, ego_dir);
+if (isset(f31)) {
+  start.cycling(Ego);
+  goto(Label3);
+}
+if ((equaln(ego_dir,0) || 
+    isset(f30))) {
+  stop.cycling(Ego);
+}
+Label3:
+if (isset(game_restored)) {
+  clear.lines(23, 24, 0);
+  reset(f32);
+  disable.item(c20);
+}
+call.v(room_no);
+if (isset(f32)) {
+  call(99);
+}
+call(90);
+if (isset(input_received) && 
+    greatern(unknown_word_no,0)) {
+  reset(input_received);
+  if (equaln(unknown_word_no,1)) {
+    print("I don't understand \"%w1\"");
+  }
+  if (equaln(unknown_word_no,2)) {
+    print("I don't understand \"%w2\"");
+  }
+  if (equaln(unknown_word_no,3)) {
+    print("I don't understand \"%w3\"");
+  }
+}
+if (isset(input_received) && 
+    !isset(input_parsed)) {
+  print("I don't understand your request.");
+  reset(input_received);
+}
+reset(input_parsed);
+Label4:
+return();
+
+//Messages
+#message 1 "AGI"
+#message 2 "About      "
+#message 3 "Help   <F1>"
+#message 4 "File"
+#message 5 "Save     <F5>"
+#message 6 "Restore  <F7>"
+#message 7 "-------------"
+#message 8 "Restart  <F9>"
+#message 9 "Quit  <Alt-Z>"
+#message 10 "Action"
+#message 11 "See Object  <F4>"
+#message 12 "Inventory  <Tab>"
+#message 13 "Special"
+#message 14 "Sound On/Off      <F2>"
+#message 15 "Joystick      <Ctrl J>"
+#message 16 "Pause            <Esc>"
+#message 17 "Speed"
+#message 18 "Normal "
+#message 19 "Slow   "
+#message 20 "Fast   "
+#message 21 "Fastest"
+#message 22 "\n     Time Quest\n\n    Version D0.1   \n\nDesigned and created\n  by Chad Goulding\n"
+#message 23 "Version D0.1"
+#message 24 "I don't understand \"%w1\""
+#message 25 "I don't understand \"%w2\""
+#message 26 "I don't understand \"%w3\""
+#message 27 "I don't understand your request."

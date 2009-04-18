@@ -1,0 +1,109 @@
+if (isset(f5)) {
+  load.pic(v0);
+  draw.pic(v0);
+  discard.pic(v0);
+  status.line.off();
+  prevent.input();
+  erase(o0);
+  show.pic();
+  assignn(v100,0);
+}
+if (lessn(v100,35)) {
+  increment(v100);
+  if (equaln(v100,5)) {
+    set.text.attribute(15,0);
+    display(4,6,"Time Machine initialising...");
+  }
+  if (equaln(v100,10)) {
+    set.text.attribute(2,0);
+    display(6,6,"Time window coords set.");
+  }
+  if (equaln(v100,12)) {
+    set.text.attribute(1,0);
+    display(7,6,"(F4,HH,88x0)-(D0,JJ,01x1)");
+  }
+  if (equaln(v100,15)) {
+    set.text.attribute(2,0);
+    display(9,6,"Timer .......");
+  }
+  if (equaln(v100,17)) {
+    if (has("timer")) {
+      set.text.attribute(10,0);
+      display(9,20,"Found");
+      goto(Label1);
+    }
+    set.text.attribute(4,0);
+    display(9,20,"Not found");
+  }
+Label1:
+  if (equaln(v100,20)) {
+    set.text.attribute(2,0);
+    display(10,6,"T.A. card ...");
+  }
+  if (equaln(v100,22)) {
+    if (isset(f211)) {
+      set.text.attribute(10,0);
+      display(10,20,"Found");
+      goto(Label2);
+    }
+    set.text.attribute(4,0);
+    display(10,20,"Not found");
+  }
+Label2:
+  if (equaln(v100,25)) {
+    set.text.attribute(2,0);
+    display(12,6,"Configuration");
+  }
+  if (equaln(v100,27)) {
+    if (isset(f213)) {
+      set.text.attribute(10,0);
+      display(12,20,"Accepted!");
+      goto(Label3);
+    }
+    set.text.attribute(4,0);
+    display(12,20,"Invalid");
+  }
+Label3:
+  if (equaln(v100,30)) {
+    if (has("timer") &&
+        isset(f213) &&
+        isset(f211)) {
+      set.text.attribute(15,0);
+      display(15,10,"   Machine Ready");
+      display(16,10,"Sequence Initiated!");
+      addn(v3,4);
+      assignn(v101,1);
+      goto(Label4);
+    }
+    assignn(v101,0);
+  }
+}
+Label4:
+if (have.key() &&
+    equaln(v100,35)) {
+  if (equaln(v101,1)) {
+    print("You make sure that the time machine is set to take you one day into "
+          "the past.");
+  }
+  accept.input();
+  position(o0,43,117);
+  status.line.on();
+  set.text.attribute(15,0);
+  new.room(15);
+}
+return();
+
+// Messages
+#message 1 "Time Machine initialising..."
+#message 2 "Time window coords set."
+#message 3 "(F4,HH,88x0)-(D0,JJ,01x1)"
+#message 4 "Timer ......."
+#message 5 "Found"
+#message 6 "Not found"
+#message 7 "T.A. card ..."
+#message 8 "Configuration"
+#message 9 "Accepted!"
+#message 10 "Invalid"
+#message 11 "   Machine Ready"
+#message 12 "Sequence Initiated!"
+#message 13 "You make sure that the time machine is set to take you one day into the past."

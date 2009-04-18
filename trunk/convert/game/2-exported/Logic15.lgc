@@ -1,0 +1,779 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(23);
+  animate.obj(o1);
+  set.view(o1, 23);
+  set.loop(o1, 0);
+  position(o1, 131, 106);
+  if (isset(f210)) {
+    set.cel(o1, 1);
+    goto(Label1);
+  }
+  set.cel(o1, 0);
+Label1:
+  draw(o1);
+  stop.cycling(o1);
+  stop.update(o1);
+  animate.obj(o2);
+  set.view(o2, 23);
+  set.loop(o2, 1);
+  position(o2, 140, 102);
+  assignn(v103, 10);
+  cycle.time(o2, v103);
+  if (isset(f210)) {
+    set.cel(o2, 4);
+    goto(Label2);
+  }
+  set.cel(o2, 0);
+Label2:
+  draw(o2);
+  stop.cycling(o2);
+  animate.obj(o3);
+  set.view(o3, 23);
+  set.loop(o3, 2);
+  set.cel(o3, 0);
+  position(o3, 111, 112);
+  assignn(v103, 4);
+  cycle.time(o3, v103);
+  if (isset(f210)) {
+    draw(o3);
+  }
+  animate.obj(o4);
+  set.view(o4, 23);
+  set.loop(o4, 3);
+  set.cel(o4, 0);
+  position(o4, 97, 92);
+  stop.cycling(o4);
+  if (isset(f210)) {
+    draw(o4);
+  }
+  animate.obj(o5);
+  set.view(o5, 23);
+  set.loop(o5, 4);
+  set.cel(o5, 0);
+  position(o5, 146, 146);
+  set.priority(o5, 15);
+  assignn(v103, 12);
+  cycle.time(o5, v103);
+  if (isset(f210)) {
+    draw(o5);
+  }
+  animate.obj(o6);
+  set.view(o6, 23);
+  set.loop(o6, 5);
+  set.cel(o6, 0);
+  position(o6, 23, 161);
+  set.priority(o6, 15);
+  assignn(v103, 20);
+  cycle.time(o6, v103);
+  if (isset(f210)) {
+    draw(o6);
+  }
+  animate.obj(o7);
+  set.view(o7, 23);
+  set.loop(o7, 6);
+  set.cel(o7, 0);
+  position(o7, 69, 140);
+  set.priority(o7, 13);
+  stop.cycling(o7);
+  ignore.objs(o7);
+  ignore.blocks(o7);
+  if (isset(f210)) {
+    draw(o7);
+  }
+  assignn(v108, 0);
+  assignn(v107, 0);
+  animate.obj(o8);
+  set.view(o8, 23);
+  set.loop(o8, 7);
+  set.cel(o8, 0);
+  ignore.objs(o8);
+  position(o8, 97, 106);
+  animate.obj(o9);
+  set.view(o9, 23);
+  set.cel(o9, 0);
+  ignore.objs(o9);
+  ignore.blocks(o9);
+  if (isset(f211)) {
+    set.loop(o9, 9);
+    goto(Label3);
+  }
+  set.loop(o9, 8);
+Label3:
+  position(o9, 56, 150);
+  assignn(v103, 2);
+  cycle.time(o9, v103);
+  if (isset(f210)) {
+    draw(o9);
+  }
+  animate.obj(o10);
+  set.view(o10, 23);
+  set.cel(o10, 0);
+  set.loop(o10, 10);
+  ignore.objs(o10);
+  ignore.blocks(o10);
+  set.priority(o10, 13);
+  position(o10, 98, 157);
+  stop.update(o10);
+  if (isset(f212) && 
+      !isset(f213)) {
+    draw(o10);
+  }
+  animate.obj(o11);
+  set.view(o11, 23);
+  set.cel(o11, 0);
+  set.loop(o11, 11);
+  ignore.objs(o11);
+  ignore.blocks(o11);
+  set.priority(o11, 4);
+  position(o11, 65, 96);
+  if (!has("Timer") && 
+      !has("Timer(no batteries)")) {
+    draw(o11);
+  }
+  assignn(v109, 0);
+  if (equaln(prev_room_no,13)) {
+    if (equaln(v101,1)) {
+      prevent.input();
+      assignn(v109, 1);
+      set(f250);
+      load.view(25);
+      animate.obj(o12);
+      set.view(o12, 25);
+      set.cel(o12, 0);
+      set.loop(o12, 0);
+      ignore.objs(o12);
+      ignore.blocks(o12);
+      set.priority(o12, 14);
+      position(o12, 76, 128);
+      animate.obj(o13);
+      set.view(o13, 25);
+      set.cel(o13, 0);
+      set.loop(o13, 1);
+      ignore.objs(o13);
+      stop.cycling(o13);
+      ignore.blocks(o13);
+      set.priority(o13, 13);
+      animate.obj(o14);
+      set.view(o14, 25);
+      set.cel(o14, 0);
+      set.loop(o14, 1);
+      ignore.objs(o14);
+      stop.cycling(o14);
+      ignore.blocks(o14);
+      set.priority(o14, 13);
+      animate.obj(o15);
+      set.view(o15, 25);
+      set.cel(o15, 0);
+      set.loop(o15, 1);
+      ignore.objs(o15);
+      stop.cycling(o15);
+      ignore.blocks(o15);
+      set.priority(o15, 13);
+      position(o13, 78, 67);
+      draw(o13);
+      position(o14, 78, 99);
+      draw(o14);
+      position(o15, 78, 128);
+      draw(o15);
+    }
+  }
+  assignn(v110, 0);
+  set(auto_restart);
+  ignore.objs(Ego);
+  ignore.blocks(Ego);
+  release.priority(Ego);
+  draw(Ego);
+  show.pic();
+}
+if (!isset(f214)) {
+  increment(v110);
+  if (equaln(v110,20)) {
+    print("For as long as you can remember you've been fascinated by time.");
+    print("About 3 years ago you devised a way of controlling time. Ever since "
+          "then you've been trying to make the theory a reality.");
+    print("This basement contains the results of all your work. Its a very "
+          "exciting time for you since the time machine is nearly finished.");
+    set(f214);
+  }
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("Your basement has slowly turned into a laboratory over the years. It "
+        "contains a complex network of cables, wires and machines.");
+  print("In the centre of the room is the time machine itself. Other things of "
+        "interest include a power generator in the corner and a desktop "
+        "computer.");
+}
+if (said("check out", "light")) {
+  if (isset(f210)) {
+    print("Hundreds of lights flicker on and off as the machines follow out "
+          "their tasks.");
+    goto(Label4);
+  }
+  print("It's just as it appears.");
+}
+Label4:
+if ((said("check out", "blue box") || 
+    said("check out", "in", "blue box") || 
+    said("search", "blue box"))) {
+  print("The boxes are just empty packaging.");
+}
+if (said("check out", "lever")) {
+  print("Its used to turn the power on or off.");
+}
+if (said("check out", "electricity")) {
+  print("The generator in the corner supplies power to the time machine. A big "
+        "lever on its front offers the only way of interacting with it.");
+  if (isset(f210)) {
+    print("At the moment the generator is switched on.");
+    goto(Label5);
+  }
+  print("At the moment the generator is switched off.");
+}
+Label5:
+if (said("check out", "book")) {
+  print("Dotted about the room are many books. Most (if not all) are reference "
+        "books related to your research.");
+}
+if (said("get", "device")) {
+  if (!has("Timer") && 
+      !has("Timer(no batteries)")) {
+    if (posn(Ego,56,117,70,122)) {
+      print("You pick up the timer and notice that you haven't put any "
+            "batteries in it yet.");
+      get("Timer(no batteries)");
+      increment(score);
+      erase(o11);
+      goto(Label6);
+    }
+    print("You're not close enough.");
+Label6:
+    goto(Label7);
+  }
+  print("You already have the timer.");
+}
+Label7:
+if (said("check out", "device")) {
+  if (!has("Timer") && 
+      !has("Timer(no batteries)")) {
+    print("The timing device is used to transport you back home if you are in "
+          "another time period. It does this by locating the appropriate time "
+          "window.");
+    goto(Label8);
+  }
+  reset(input_parsed);
+}
+Label8:
+if ((said("check out", "cabinet") || 
+    said("check out", "above", "cabinet"))) {
+  print("Among other things, on the desk is a computer.");
+  if (!has("Timer") && 
+      !has("Timer(no batteries)")) {
+    print("You also spot your timer lying on the desk.");
+  }
+}
+if (said("put back", "panel")) {
+  if (isset(f212)) {
+    if (isset(f213)) {
+      print("It is.");
+      goto(Label9);
+    }
+    print("But you haven't configured the machine correctly yet.");
+Label9:
+    goto(Label10);
+  }
+  print("It is.");
+}
+Label10:
+if (said("unscrew", "panel")) {
+  print("What do you want to unscrew the panel with?");
+}
+if (said("open", "panel")) {
+  if (isset(f212)) {
+    if (isset(f213)) {
+      print("You don't need to, the machine is already configured correctly.");
+      goto(Label11);
+    }
+    print("But the panel is already open!");
+Label11:
+    goto(Label12);
+  }
+  print("Since it's screwed into place you can't open it with your bare hands.");
+}
+Label12:
+if ((said("check out", "panel") || 
+    said("check out", "in", "panel") || 
+    said("check out", "in", "machine"))) {
+  if (isset(f212) && 
+      !isset(f213)) {
+    print("Inside the machine you can see a configuration board. This is used "
+          "to set the time machine correctly.");
+    print("You have yet to find out what the correct configuration is and "
+          "without it you have no way of knowing if the machine will work "
+          "correctly.");
+    goto(Label13);
+  }
+  print("The panel is currently screwed into place.");
+}
+Label13:
+if (said("check out", "beneath", "staircase")) {
+  print("There's nothing of interest under there.");
+}
+if ((said("check out", "fence") || 
+    said("check out", "bookpage") || 
+    said("check out", "chart"))) {
+  print("On the back wall there are papers, diagrams and notes. At one time "
+        "they would have been invaluable to your project, but at the moment "
+        "they don't appear to be of any interest.");
+}
+if (said("check out", "cable")) {
+  print("A complex network of cables run along the walls, floor and ceiling.");
+}
+if (said("check out", "machine")) {
+  print("It's taken you almost 3 years to build this thing, and even longer to "
+        "design it.");
+  if (isset(f210)) {
+    print("The time machine hums with activity. On its right is a panel. On the "
+          "left hand side are 4 slots.");
+    goto(Label14);
+  }
+  print("Since the power is off, the time machine lies dormant. On its right is "
+        "a panel.");
+}
+Label14:
+if (said("check out", "slot")) {
+  print("On the left hand side of the machine are four slots. These are used to "
+        "add certain components to the machine.");
+  if (isset(f210) && 
+      !isset(f211)) {
+    print("You notice that one of them has a red flashing light on it. This "
+          "indicates that the slot is empty.");
+  }
+}
+if ((said("check out", "ceiling") || 
+    said("check out", "staircase") || 
+    said("check out", "floor"))) {
+  print("Its just as it appears.");
+}
+if (said("attack", "panel")) {
+  print("You give the panel a swift kick but it still fails to open.");
+}
+if ((said("move", "lever") || 
+    said("move", "lever") || 
+    said("flip", "electricity", "above") || 
+    said("start", "electricity") || 
+    said("flip", "lever"))) {
+  if (isset(f210)) {
+    if (posn(Ego,125,122,136,127)) {
+      print("You turn the power off.");
+      set.cel(o1, 0);
+      force.update(o1);
+      reverse.loop(o2, f255);
+      erase(o3);
+      erase(o4);
+      erase(o5);
+      erase(o6);
+      erase(o7);
+      erase(o9);
+      draw(o8);
+      erase(o8);
+      reset(f210);
+      goto(Label15);
+    }
+    print("You're not close enough.");
+Label15:
+    goto(Label16);
+  }
+  if (posn(Ego,125,122,136,127)) {
+    print("You pull the lever down and the room comes to life.");
+    set.cel(o1, 1);
+    force.update(o1);
+    end.of.loop(o2, f255);
+    draw(o3);
+    draw(o4);
+    draw(o5);
+    draw(o6);
+    draw(o7);
+    draw(o9);
+    set(f210);
+    goto(Label16);
+  }
+  print("You're not close enough.");
+}
+Label16:
+if ((said("add", "kitchen knife", "in", "slot") || 
+    said("add", "kitchen knife") || 
+    said("use", "kitchen knife", "above", "slot"))) {
+  print("That's just plain dangerous.");
+}
+if ((said("add", "aliasing card", "in", "slot") || 
+    said("add", "aliasing card") || 
+    said("use", "aliasing card", "above", "slot"))) {
+  if (has("Aliasing card")) {
+    if (posn(Ego,46,148,61,160)) {
+      print("The card slots into place with a satisfying click.");
+      addn(score, 2);
+      drop("Aliasing card");
+      set.loop(o9, 9);
+      set(f211);
+      goto(Label17);
+    }
+    print("You need to get closer.");
+Label17:
+    goto(Label18);
+  }
+  print("But you don't have a card.");
+}
+Label18:
+if ((said("open", "panel", "front door key") || 
+    said("use", "front door key", "above", "panel") || 
+    said("unscrew", "panel", "front door key"))) {
+  if (has("Front door key")) {
+    print("You can't seem to get enough leverage with the key.");
+    goto(Label19);
+  }
+  print("You don't have a key!");
+}
+Label19:
+if ((said("open", "panel", "aliasing card") || 
+    said("use", "aliasing card", "above", "panel") || 
+    said("unscrew", "panel", "aliasing card"))) {
+  if (has("Aliasing card")) {
+    print("The card could easily break if you did that.");
+    goto(Label20);
+  }
+  print("You don't have a card!");
+}
+Label20:
+if ((said("open", "panel", "kitchen knife") || 
+    said("use", "kitchen knife", "above", "panel") || 
+    said("unscrew", "panel", "kitchen knife"))) {
+  if (has("Kitchen knife")) {
+    if (isset(f212) && 
+        !isset(f213)) {
+      print("But the panel has already been removed!");
+      goto(Label21);
+    }
+    if (isset(f213)) {
+      print("You don't need to, the machine is already configured correctly.");
+      goto(Label21);
+    }
+    if (posn(Ego,90,145,107,160)) {
+      print("Using the knife you unscrew the panel and remove it.");
+      addn(score, 3);
+      draw(o10);
+      set(f212);
+      goto(Label21);
+    }
+    print("You'll need to get closer.");
+Label21:
+    goto(Label22);
+  }
+  print("But you don't have a knife.");
+}
+Label22:
+if ((said("check out", "board") || 
+    said("adjust", "board"))) {
+  if (isset(f212) && 
+      !isset(f213)) {
+    if (posn(Ego,90,145,107,160)) {
+      new.room(11);
+      goto(Label23);
+    }
+    print("You'll need to get closer.");
+Label23:
+    goto(Label24);
+  }
+  print("But you can't see the configuration board at the moment.");
+}
+Label24:
+if ((said("check out", "computer") || 
+    said("check out", "display") || 
+    said("use", "computer"))) {
+  if (isset(f210)) {
+    if (posn(Ego,37,117,55,122)) {
+      new.room(13);
+      goto(Label25);
+    }
+    print("You'll need to get closer.");
+Label25:
+    goto(Label26);
+  }
+  print("The screen is blank. Try turning the power on.");
+}
+Label26:
+if (posn(Ego,6,55,7,57)) {
+  reposition.to(Ego, 128, 121);
+  new.room(10);
+}
+if (isset(f210)) {
+  random(0, 5, v104);
+  set.cel.v(o4, v104);
+  random(0, 5, v105);
+  random(0, 7, v106);
+  v105 *= 2;
+  v106 *= 2;
+  addn(v105, 97);
+  addn(v106, 92);
+  position.v(o4, v105, v106);
+  increment(v108);
+  if (equaln(v108,2)) {
+    if (equaln(v107,0)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 69, 140);
+    }
+    if (equaln(v107,1)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 61, 136);
+    }
+    if (equaln(v107,2)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 56, 131);
+    }
+    if (equaln(v107,3)) {
+      set.cel(o7, 1);
+      reposition.to(o7, 61, 125);
+    }
+    if (equaln(v107,4)) {
+      set.cel(o7, 1);
+      reposition.to(o7, 69, 122);
+    }
+    if (equaln(v107,5)) {
+      set.cel(o7, 1);
+      reposition.to(o7, 79, 121);
+    }
+    if (equaln(v107,6)) {
+      set.cel(o7, 1);
+      reposition.to(o7, 88, 122);
+    }
+    if (equaln(v107,7)) {
+      set.cel(o7, 1);
+      reposition.to(o7, 96, 125);
+    }
+    if (equaln(v107,8)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 101, 131);
+    }
+    if (equaln(v107,9)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 96, 136);
+    }
+    if (equaln(v107,10)) {
+      set.cel(o7, 0);
+      reposition.to(o7, 88, 140);
+    }
+    increment(v107);
+    if (equaln(v107,11)) {
+      assignn(v107, 0);
+    }
+    assignn(v108, 0);
+  }
+}
+if (posn(Ego,69,146,82,147)) {
+  observe.blocks(Ego);
+  set.priority(Ego, 14);
+  reset(auto_restart);
+}
+if (posn(Ego,69,149,82,150)) {
+  ignore.blocks(Ego);
+  release.priority(Ego);
+  set(auto_restart);
+}
+if (isset(auto_restart)) {
+  if (isset(ego_touching_signal_line)) {
+    stop.motion(Ego);
+    reposition.to.v(Ego, v101, v102);
+    start.motion(Ego);
+  }
+  get.posn(Ego, v101, v102);
+}
+if (isset(ego_on_water)) {
+  get.dir(Ego, v100);
+  if (equaln(v100,5)) {
+    assignn(v101, 255);
+    assignn(v102, 1);
+    reposition(Ego, v101, v102);
+  }
+  if (equaln(v100,1)) {
+    assignn(v101, 1);
+    assignn(v102, 255);
+    reposition(Ego, v101, v102);
+  }
+}
+if (greatern(v109,0) && 
+    isset(f250)) {
+  reset(f250);
+  if (equaln(v109,140)) {
+    assignn(v101, 0);
+    new.room(2);
+  }
+  if (greatern(v109,110) && 
+      lessn(v109,140)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,110)) {
+    erase(o13);
+    erase(o14);
+    erase(o15);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,105) && 
+      lessn(v109,110)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,105)) {
+    set.cel(o13, 0);
+    set.cel(o14, 0);
+    set.cel(o15, 0);
+    reposition.to(o13, 78, 67);
+    reposition.to(o14, 78, 99);
+    reposition.to(o15, 78, 128);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,100) && 
+      lessn(v109,105)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,100)) {
+    set.cel(o13, 1);
+    set.cel(o14, 1);
+    set.cel(o15, 1);
+    reposition.to(o13, 76, 67);
+    reposition.to(o14, 76, 99);
+    reposition.to(o15, 76, 128);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,60) && 
+      lessn(v109,100)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,60)) {
+    erase(o12);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,17) && 
+      lessn(v109,60)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,17)) {
+    erase(Ego);
+    draw(o12);
+    set.cel(o13, 2);
+    set.cel(o14, 2);
+    set.cel(o15, 2);
+    position(o13, 75, 66);
+    position(o14, 75, 98);
+    position(o15, 75, 128);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,10) && 
+      lessn(v109,17)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,10)) {
+    set.cel(o13, 1);
+    set.cel(o14, 1);
+    set.cel(o15, 1);
+    position(o13, 76, 67);
+    position(o14, 76, 99);
+    position(o15, 76, 128);
+    increment(v109);
+    set(f250);
+  }
+  if (greatern(v109,5) && 
+      lessn(v109,10)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,5)) {
+    increment(v109);
+    set(f250);
+  }
+  if (equaln(v109,4)) {
+    increment(v109);
+    move.obj(Ego, 76, 128, 0, f250);
+  }
+  if (equaln(v109,3)) {
+    increment(v109);
+    move.obj(Ego, 76, 161, 0, f250);
+  }
+  if (equaln(v109,2)) {
+    increment(v109);
+    move.obj(Ego, 55, 161, 0, f250);
+  }
+  if (equaln(v109,1)) {
+    increment(v109);
+    move.obj(Ego, 43, 149, 0, f250);
+  }
+}
+return();
+
+//Messages
+#message 1 "For as long as you can remember you've been fascinated by time."
+#message 2 "About 3 years ago you devised a way of controlling time. Ever since then you've been trying to make the theory a reality."
+#message 3 "This basement contains the results of all your work. Its a very exciting time for you since the time machine is nearly finished."
+#message 4 "Your basement has slowly turned into a laboratory over the years. It contains a complex network of cables, wires and machines."
+#message 5 "In the centre of the room is the time machine itself. Other things of interest include a power generator in the corner and a desktop computer."
+#message 6 "Hundreds of lights flicker on and off as the machines follow out their tasks."
+#message 7 "It's just as it appears."
+#message 8 "The boxes are just empty packaging."
+#message 9 "Its used to turn the power on or off."
+#message 10 "The generator in the corner supplies power to the time machine. A big lever on its front offers the only way of interacting with it."
+#message 11 "At the moment the generator is switched on."
+#message 12 "At the moment the generator is switched off."
+#message 13 "Dotted about the room are many books. Most (if not all) are reference books related to your research."
+#message 14 "You pick up the timer and notice that you haven't put any batteries in it yet."
+#message 15 "You're not close enough."
+#message 16 "You already have the timer."
+#message 17 "The timing device is used to transport you back home if you are in another time period. It does this by locating the appropriate time window."
+#message 18 "Among other things, on the desk is a computer."
+#message 19 "You also spot your timer lying on the desk."
+#message 20 "It is."
+#message 21 "But you haven't configured the machine correctly yet."
+#message 22 "What do you want to unscrew the panel with?"
+#message 23 "You don't need to, the machine is already configured correctly."
+#message 24 "But the panel is already open!"
+#message 25 "Since it's screwed into place you can't open it with your bare hands."
+#message 26 "Inside the machine you can see a configuration board. This is used to set the time machine correctly."
+#message 27 "You have yet to find out what the correct configuration is and without it you have no way of knowing if the machine will work correctly."
+#message 28 "The panel is currently screwed into place."
+#message 29 "There's nothing of interest under there."
+#message 30 "On the back wall there are papers, diagrams and notes. At one time they would have been invaluable to your project, but at the moment they don't appear to be of any interest."
+#message 31 "A complex network of cables run along the walls, floor and ceiling."
+#message 32 "It's taken you almost 3 years to build this thing, and even longer to design it."
+#message 33 "The time machine hums with activity. On its right is a panel. On the left hand side are 4 slots."
+#message 34 "Since the power is off, the time machine lies dormant. On its right is a panel."
+#message 35 "On the left hand side of the machine are four slots. These are used to add certain components to the machine."
+#message 36 "You notice that one of them has a red flashing light on it. This indicates that the slot is empty."
+#message 37 "Its just as it appears."
+#message 38 "You give the panel a swift kick but it still fails to open."
+#message 39 "You turn the power off."
+#message 40 "You pull the lever down and the room comes to life."
+#message 41 "That's just plain dangerous."
+#message 42 "The card slots into place with a satisfying click."
+#message 43 "You need to get closer."
+#message 44 "But you don't have a card."
+#message 45 "You can't seem to get enough leverage with the key."
+#message 46 "You don't have a key!"
+#message 47 "The card could easily break if you did that."
+#message 48 "You don't have a card!"
+#message 49 "But the panel has already been removed!"
+#message 50 "Using the knife you unscrew the panel and remove it."
+#message 51 "You'll need to get closer."
+#message 52 "But you don't have a knife."
+#message 53 "But you can't see the configuration board at the moment."
+#message 54 "The screen is blank. Try turning the power on."

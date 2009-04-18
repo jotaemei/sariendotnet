@@ -1,0 +1,104 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(40);
+  load.view(33);
+  show.pic();
+  if (equaln(v101,1)) {
+    load.view(25);
+    animate.obj(o2);
+    set.view(o2, 25);
+    set.loop(o2, 0);
+    set.cel(o2, 0);
+    ignore.objs(o2);
+    position(o2, 61, 98);
+    assignn(v100, 2);
+    cycle.time(o2, v100);
+    assignn(v100, 150);
+    set.loop(Ego, 2);
+    ignore.objs(Ego);
+    position(Ego, 61, 98);
+    goto(Label1);
+  }
+  assignn(v100, 0);
+  draw(Ego);
+}
+Label1:
+if ((said("check out") || 
+    said("check out", "beach") || 
+    said("check out", "area"))) {
+  print("You find yourself in an enclosed beach. To the north you can make out "
+        "the entrance to a large forest.");
+}
+if ((said("check out", "bush") || 
+    said("search", "bush") || 
+    said("check out", "flower"))) {
+  print("The bushes seem to be composed of small leaves and branches. Nothing "
+        "really interesting about them.");
+}
+if (said("check out", "boulder")) {
+  print("Rocks of different shapes and sizes are scattered about the area.");
+}
+if (said("get", "boulder")) {
+  print("The rocks here are far too heavy for you to carry around.");
+}
+if (said("check out", "lake")) {
+  print("To the south the sea stretches out towards the horizon.");
+}
+if (greatern(v100,0)) {
+  decrement(v100);
+  if (equaln(v100,100)) {
+    draw(o2);
+  }
+  if (equaln(v100,60)) {
+    draw(Ego);
+    erase(o2);
+  }
+  if (equaln(v100,45)) {
+    print("Taking a quick look around you suddenly realise that this doesn't "
+          "look like one day in the past!");
+    print("According to your timer you have succeeded in travelling back in "
+          "time. But all the way back to the Cretaceous Period!");
+  }
+  if (equaln(v100,30)) {
+    print("The timer also reveals that the next time window won't be available "
+          "for another 8 hours.");
+    print("With any luck it should then return you back home. But you have no "
+          "way of knowing if it will work.");
+  }
+  if (equaln(v100,20)) {
+    print("Until then you may as well enjoy some of the local scenery.");
+  }
+}
+if (equaln(ego_edge_code,1)) {
+  position(Ego, 56, 50);
+  new.room(18);
+}
+if (isset(ego_touching_signal_line)) {
+  print("You don't feel like going for a swim just yet.");
+  stop.motion(Ego);
+  reposition.to.v(Ego, v102, v103);
+  start.motion(Ego);
+}
+get.posn(Ego, v102, v103);
+if (isset(ego_on_water)) {
+  set.view(Ego, 33);
+  goto(Label2);
+}
+set.view(Ego, 0);
+Label2:
+return();
+
+//Messages
+#message 1 "You find yourself in an enclosed beach. To the north you can make out the entrance to a large forest."
+#message 2 "The bushes seem to be composed of small leaves and branches. Nothing really interesting about them."
+#message 3 "Rocks of different shapes and sizes are scattered about the area."
+#message 4 "The rocks here are far too heavy for you to carry around."
+#message 5 "To the south the sea stretches out towards the horizon."
+#message 6 "Taking a quick look around you suddenly realise that this doesn't look like one day in the past!"
+#message 7 "According to your timer you have succeeded in travelling back in time. But all the way back to the Cretaceous Period!"
+#message 8 "The timer also reveals that the next time window won't be available for another 8 hours."
+#message 9 "With any luck it should then return you back home. But you have no way of knowing if it will work."
+#message 10 "Until then you may as well enjoy some of the local scenery."
+#message 11 "You don't feel like going for a swim just yet."

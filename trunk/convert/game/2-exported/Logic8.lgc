@@ -1,0 +1,398 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(15);
+  load.view(15);
+  load.view(11);
+  add.to.pic(15, 2, 4, 12, 79, 5, 0);
+  add.to.pic(15, 2, 3, 64, 70, 5, 0);
+  reset(f255);
+  animate.obj(o1);
+  set.view(o1, 11);
+  set.loop(o1, 0);
+  set.cel(o1, 0);
+  ignore.objs(o1);
+  animate.obj(o3);
+  position(o3, 102, 110);
+  set.view(o3, 11);
+  set.loop(o3, 3);
+  set.cel(o3, 0);
+  ignore.objs(o3);
+  if (isset(f207) && 
+      !has("Diagram")) {
+    set.cel(o3, 16);
+    set.priority(o3, 4);
+    stop.cycling(o3);
+    draw(o3);
+  }
+  animate.obj(o2);
+  set.view(o2, 15);
+  set.loop(o2, 0);
+  set.cel(o2, 0);
+  position(o2, 42, 95);
+  assignn(v100, 5);
+  cycle.time(o2, v100);
+  draw(o2);
+  assignn(v200, 0);
+  draw(Ego);
+  show.pic();
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("You use your lounge mainly for relaxational purposes. You sometimes "
+        "read a book, sit by the fireplace or just watch some TV.");
+}
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if ((said("check out", "ceiling") || 
+    said("check out", "blanket") || 
+    said("check out", "beams"))) {
+  print("Its just as it appears.");
+}
+if ((said("check out", "floor") || 
+    said("check out", "above", "floor"))) {
+  if (isset(f207) && 
+      !has("Diagram")) {
+    print("You notice a piece of paper on the floor.");
+    goto(Label1);
+  }
+  print("Its just as it appears.");
+}
+Label1:
+if (said("get", "bookpage")) {
+  if (isset(f207) && 
+      !has("Diagram")) {
+    if (posn(Ego,93,103,113,115)) {
+      print("As you pick up the paper you see that a diagram has been drawn on "
+            "it.");
+      print("Upon studying it you notice that you've never seen it before. "
+            "Which is strange considering that you've read these books hundreds "
+            "of times.");
+      addn(score, 2);
+      get("Diagram");
+      erase(o3);
+      goto(Label2);
+    }
+    print("You'll need to get closer.");
+Label2:
+    goto(Label3);
+  }
+  print("You don't see that here!");
+}
+Label3:
+if (said("check out", "bookpage")) {
+  if (isset(f207) && 
+      !has("Diagram")) {
+    print("A piece of paper is lying on the floor.");
+    goto(Label4);
+  }
+  reset(input_parsed);
+}
+Label4:
+if ((said("check out", "bookcase") || 
+    said("check out", "book"))) {
+  print("The bookcase contains a large number of books which vary greatly in "
+        "topic.");
+}
+if (said("ascend", "bookcase")) {
+  print("Why exactly?");
+}
+if ((said("check out", "behind", "bookcase") || 
+    said("check out", "behind", "clock") || 
+    said("check out", "behind", "chair"))) {
+  print("There's nothing of interest back there.");
+}
+if (said("check out", "chair")) {
+  print("There's a nice big comfy sofa here.");
+}
+if (said("search", "chair")) {
+  print("You rummage around in your sofa, but surprisingly find nothing. No "
+        "pens or loose money, and not even a remote control.");
+}
+if ((said("check out", "beneath", "chair") || 
+    said("check out", "beneath", "clock"))) {
+  print("Nope, nothing under there.");
+}
+if ((said("hear") || 
+    said("hear", "clock"))) {
+  print("You hear the clock ticking.");
+}
+if (said("check out", "clock")) {
+  print("A grandfather clock sits in the corner. It's been in your family for "
+        "many generations.");
+}
+if (said("check out", "pendulum")) {
+  print("It sways back and forth keeping in perfect time.");
+}
+if (said("open", "clock")) {
+  print("Better not. You could easily break it.");
+}
+if ((said("move", "pendulum") || 
+    said("move", "pendulum") || 
+    said("move", "pendulum") || 
+    said("get", "pendulum"))) {
+  print("No, you'll upset the timing mechanism.");
+}
+if ((said("check out", "fireplace") || 
+    said("check out", "fire"))) {
+  print("The fireplace brings back fond memories of sitting next to a warm fire "
+        "with Amy on cold winter nights.");
+  print("On the mantlepiece you notice a couple of statues.");
+}
+if ((said("check out", "beneath", "fireplace") || 
+    said("search", "fireplace"))) {
+  print("You see nothing but a few ashes.");
+}
+if (said("get", "ash")) {
+  print("But you'd get your hands all dirty!");
+}
+if (said("check out", "ash")) {
+  print("They're just ashes, plain and simple.");
+}
+if (said("check out", "television")) {
+  print("It just a standard TV.");
+}
+if (said("check out", "candleholder")) {
+  print("You've had these for about two years now and still can't decide "
+        "whether they're statues or very ornate candleholders.");
+  print("On one of them you notice some faint markings.");
+}
+if (said("get", "candleholder")) {
+  print("You consider taking the statues but soon remember that they weigh far "
+        "too much.");
+}
+if ((said("build", "fire") || 
+    said("light", "fire") || 
+    said("build", "fire"))) {
+  print("In the middle of summer! Are you mad!?!");
+}
+if (said("check out", "cabinet")) {
+  print("There's a table in one corner of the room.");
+}
+if (said("move", "cabinet")) {
+  print("You don't need to.");
+}
+if (said("check out", "artwork")) {
+  if (posn(Ego,51,100,95,120)) {
+    print("This painting depicts some roman architecture.");
+    goto(Label5);
+  }
+  if (posn(Ego,10,100,45,140)) {
+    print("This picture seems to be of a futuristic city.");
+    goto(Label5);
+  }
+  print("Move closer to the one that you want to examine.");
+}
+Label5:
+if ((said("watch", "television") || 
+    said("start", "television"))) {
+  if (equaln(v200,0)) {
+    if (posn(Ego,38,109,116,149)) {
+      assignn(v200, 3);
+      move.obj(Ego, 66, 149, 0, f255);
+      goto(Label6);
+    }
+    print("You'll need to get closer.");
+Label6:
+    goto(Label7);
+  }
+  print("Not now, you're busy.");
+}
+Label7:
+if ((said("rest") || 
+    said("rest", "down") || 
+    said("rest", "above", "chair"))) {
+  if (equaln(v200,0)) {
+    if (posn(Ego,38,109,116,140)) {
+      assignn(v200, 1);
+      move.obj(Ego, 76, 109, 0, f255);
+      goto(Label8);
+    }
+    print("You'll need to get closer to the sofa.");
+Label8:
+    goto(Label9);
+  }
+  print("Not now, you're busy.");
+}
+Label9:
+if ((said("knock") || 
+    said("knock", "up") || 
+    said("get", "up"))) {
+  if (equaln(v200,2)) {
+    set(f255);
+    goto(Label10);
+  }
+  print("But you aren't sat down!");
+}
+Label10:
+if (isset(f255)) {
+  if (equaln(v200,3)) {
+    reset(f255);
+    print("You turn on the TV and flick through the channels.");
+    print("Nothing of apparent interest seems to be on, so you turn it off.");
+    assignn(v200, 0);
+  }
+  if (equaln(v200,2)) {
+    reset(f255);
+    draw(Ego);
+    erase(o1);
+    player.control();
+    assignn(v200, 0);
+  }
+  if (equaln(v200,1)) {
+    set.cel.v(o1, ego_view_no);
+    set.loop(o1, 0);
+    stop.cycling(o1);
+    position(o1, 77, 109);
+    draw(o1);
+    erase(Ego);
+    program.control();
+    reset(f255);
+    assignn(v200, 2);
+  }
+  if (equaln(v200,9)) {
+    draw(Ego);
+    erase(o1);
+    player.control();
+    assignn(v200, 0);
+  }
+  if (equaln(v200,8)) {
+    reverse.loop(o1, f255);
+    program.control();
+    assignn(v200, 9);
+  }
+  if (equaln(v200,7)) {
+    set.cel(o1, 0);
+    set.loop(o1, 1);
+    end.of.loop(o1, f255);
+    program.control();
+    assignn(v200, 8);
+  }
+  if (equaln(v200,6)) {
+    set.loop(o1, 2);
+    set.cel(o1, 0);
+    end.of.loop(o1, f255);
+    program.control();
+    increment(v100);
+    if (equaln(v100,3) && 
+        !isset(f207)) {
+      random(1, 3, v101);
+      if (equaln(v101,1)) {
+        draw(o3);
+        stop.cycling(o3);
+        end.of.loop(o3, f207);
+      }
+    }
+    if (equaln(v100,10)) {
+      print("Finding nothing of interest, you put the book back.");
+      assignn(v200, 7);
+    }
+  }
+  if (equaln(v200,5)) {
+    print("You grab a book at random.");
+    reverse.loop(o1, f255);
+    program.control();
+    assignn(v100, 0);
+    assignn(v200, 6);
+  }
+  if (equaln(v200,4)) {
+    set.cel.v(o1, ego_view_no);
+    set.loop(o1, 1);
+    end.of.loop(o1, f255);
+    position(o1, 96, 105);
+    draw(o1);
+    erase(Ego);
+    program.control();
+    assignn(v200, 5);
+  }
+}
+if ((said("get", "book") || 
+    said("read", "book") || 
+    said("use", "book"))) {
+  if (equaln(ego_view_no,0)) {
+    if (equaln(v200,0)) {
+      if (posn(Ego,90,103,114,129)) {
+        assignn(v200, 4);
+        move.obj(Ego, 96, 105, 0, f255);
+        goto(Label11);
+      }
+      print("You'll need to get closer to the bookcase.");
+Label11:
+      goto(Label12);
+    }
+    print("Not now, you're busy.");
+Label12:
+    goto(Label13);
+  }
+  print("Wouldn't you rather get dressed first?");
+}
+Label13:
+if (isset(f207)) {
+  set.priority(o3, 4);
+}
+if ((said("check out", "mark") || 
+    said("read", "mark") || 
+    said("read", "candleholder"))) {
+  if (posn(Ego,15,102,37,136)) {
+    show.obj(206);
+    goto(Label14);
+  }
+  print("You'll need to get closer to the statues.");
+}
+Label14:
+if (posn(Ego,141,30,142,137)) {
+  position(Ego, 21, 109);
+  new.room(6);
+}
+return();
+
+//Messages
+#message 1 "You use your lounge mainly for relaxational purposes. You sometimes read a book, sit by the fireplace or just watch some TV."
+#message 2 "You look under the rug and find....."
+#message 3 "absolutely nothing."
+#message 4 "Its just as it appears."
+#message 5 "You notice a piece of paper on the floor."
+#message 6 "As you pick up the paper you see that a diagram has been drawn on it."
+#message 7 "Upon studying it you notice that you've never seen it before. Which is strange considering that you've read these books hundreds of times."
+#message 8 "You'll need to get closer."
+#message 9 "You don't see that here!"
+#message 10 "A piece of paper is lying on the floor."
+#message 11 "The bookcase contains a large number of books which vary greatly in topic."
+#message 12 "Why exactly?"
+#message 13 "There's nothing of interest back there."
+#message 14 "There's a nice big comfy sofa here."
+#message 15 "You rummage around in your sofa, but surprisingly find nothing. No pens or loose money, and not even a remote control."
+#message 16 "Nope, nothing under there."
+#message 17 "You hear the clock ticking."
+#message 18 "A grandfather clock sits in the corner. It's been in your family for many generations."
+#message 19 "It sways back and forth keeping in perfect time."
+#message 20 "Better not. You could easily break it."
+#message 21 "No, you'll upset the timing mechanism."
+#message 22 "The fireplace brings back fond memories of sitting next to a warm fire with Amy on cold winter nights."
+#message 23 "On the mantlepiece you notice a couple of statues."
+#message 24 "You see nothing but a few ashes."
+#message 25 "But you'd get your hands all dirty!"
+#message 26 "They're just ashes, plain and simple."
+#message 27 "It just a standard TV."
+#message 28 "You've had these for about two years now and still can't decide whether they're statues or very ornate candleholders."
+#message 29 "On one of them you notice some faint markings."
+#message 30 "You consider taking the statues but soon remember that they weigh far too much."
+#message 31 "In the middle of summer! Are you mad!?!"
+#message 32 "There's a table in one corner of the room."
+#message 33 "You don't need to."
+#message 34 "This painting depicts some roman architecture."
+#message 35 "This picture seems to be of a futuristic city."
+#message 36 "Move closer to the one that you want to examine."
+#message 37 "Not now, you're busy."
+#message 38 "You'll need to get closer to the sofa."
+#message 39 "But you aren't sat down!"
+#message 40 "You turn on the TV and flick through the channels."
+#message 41 "Nothing of apparent interest seems to be on, so you turn it off."
+#message 42 "Finding nothing of interest, you put the book back."
+#message 43 "You grab a book at random."
+#message 44 "You'll need to get closer to the bookcase."
+#message 45 "Wouldn't you rather get dressed first?"
+#message 46 "You'll need to get closer to the statues."

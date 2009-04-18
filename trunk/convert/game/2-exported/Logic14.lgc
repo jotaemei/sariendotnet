@@ -1,0 +1,45 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  status.line.off();
+  show.pic();
+  prevent.input();
+  assignn(v101, 0);
+  assignn(v100, 30);
+}
+if (equaln(v100,0)) {
+  increment(v101);
+  if (equaln(v101,1)) {
+    print.at("This was your wife, Amy.", 2, 23, 16);
+  }
+  if (equaln(v101,2)) {
+    print.at("Four months ago her car was found wrecked and burnt out at the "
+             "base of a cliff.", 2, 23, 16);
+  }
+  if (equaln(v101,3)) {
+    print.at("Her body was never found. But no one could have survived that "
+             "fall.", 2, 23, 16);
+  }
+  if (equaln(v101,4)) {
+    print.at("Your life has been very difficult since the accident.", 2, 23, 16);
+  }
+  if (equaln(v101,5)) {
+    print.at("But somehow you manage to keep on going.", 2, 23, 16);
+  }
+  if (equaln(v101,6)) {
+    accept.input();
+    status.line.on();
+    new.room(4);
+  }
+  assignn(v100, 30);
+}
+decrement(v100);
+return();
+
+//Messages
+#message 1 "This was your wife, Amy."
+#message 2 "Four months ago her car was found wrecked and burnt out at the base of a cliff."
+#message 3 "Her body was never found. But no one could have survived that fall."
+#message 4 "Your life has been very difficult since the accident."
+#message 5 "But somehow you manage to keep on going."

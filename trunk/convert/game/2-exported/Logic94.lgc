@@ -1,0 +1,48 @@
+if (!equaln(v35,255)) {
+  accept.input();
+  cancel.line();
+  program.control();
+  clear.lines(23, 24, 0);
+  assignn(v36, 12);
+  assignn(v35, 255);
+}
+decrement(v36);
+if (equaln(v36,1)) {
+  print("Thanks for playing Time Quest. Better luck next time!");
+}
+if (controller(c19)) {
+  menu.input();
+}
+if ((controller(c2) || 
+    said("help"))) {
+  call(92);
+}
+if ((controller(c5) || 
+    said("restore", "game") || 
+    said("restore"))) {
+  restore.game();
+}
+if ((controller(c7) || 
+    said("restart", "game") || 
+    said("restart"))) {
+  restart.game();
+}
+if ((controller(c10) || 
+    said("inv"))) {
+  status();
+}
+if ((controller(c1) || 
+    said("leave"))) {
+  stop.sound();
+  quit(0);
+}
+if (isset(input_received) && 
+    !isset(input_parsed)) {
+  print("You are dead! You can only restore, restart, quit the game or view "
+        "your inventory.");
+}
+return();
+
+//Messages
+#message 1 "Thanks for playing Time Quest. Better luck next time!"
+#message 2 "You are dead! You can only restore, restart, quit the game or view your inventory."

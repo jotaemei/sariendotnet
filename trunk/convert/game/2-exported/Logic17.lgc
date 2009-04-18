@@ -1,0 +1,256 @@
+if (isset(new_room)) {
+  set.key(0, 64, c12);
+  enable.item(c12);
+  assignn(v109, 36);
+  assignn(v110, 33);
+  assignn(v113, 0);
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(21);
+  load.view(22);
+  animate.obj(o2);
+  ignore.horizon(o2);
+  ignore.objs(o2);
+  set.view(o2, 21);
+  set.loop(o2, 3);
+  set.cel(o2, 0);
+  position(o2, 37, 18);
+  stop.cycling(o2);
+  draw(o2);
+  animate.obj(o3);
+  ignore.horizon(o3);
+  ignore.objs(o3);
+  set.view(o3, 21);
+  set.loop(o3, 4);
+  set.cel(o3, 0);
+  position(o3, 75, 39);
+  stop.cycling(o3);
+  draw(o3);
+  animate.obj(o4);
+  ignore.horizon(o4);
+  ignore.objs(o4);
+  set.view(o4, 21);
+  set.loop(o4, 3);
+  set.cel(o4, 1);
+  position(o4, 63, 32);
+  stop.cycling(o4);
+  draw(o4);
+  set(f255);
+  reset(f254);
+  assignv(v100, ego_view_no);
+  get.posn(Ego, v104, v105);
+  assignn(ego_view_no, 22);
+  set.view(Ego, 22);
+  set.priority(Ego, 15);
+  position(Ego, 74, 113);
+  ignore.objs(Ego);
+  stop.motion(Ego);
+  start.motion(Ego);
+  assignn(v103, 3);
+  step.size(Ego, v103);
+  status.line.off();
+  prevent.input();
+  animate.obj(o5);
+  assignn(v103, 8);
+  cycle.time(o5, v103);
+  set.view(o5, 21);
+  ignore.objs(o5);
+  display(23, 7, "Press F6 to select a key");
+  assignn(v106, 11);
+  draw(Ego);
+  show.pic();
+}
+if (controller(c12) && 
+    isset(f255)) {
+  set.loop(o5, 0);
+  set.cel(o5, 0);
+  assignn(v106, 11);
+  if (posn(Ego,41,77,58,97)) {
+    assignn(v106, 1);
+    position(o5, 41, 74);
+  }
+  if (posn(Ego,65,77,82,97)) {
+    assignn(v106, 2);
+    position(o5, 65, 74);
+  }
+  if (posn(Ego,89,77,106,97)) {
+    assignn(v106, 3);
+    position(o5, 89, 74);
+  }
+  if (posn(Ego,41,105,58,125)) {
+    assignn(v106, 4);
+    position(o5, 41, 102);
+  }
+  if (posn(Ego,65,105,82,125)) {
+    assignn(v106, 5);
+    position(o5, 65, 102);
+  }
+  if (posn(Ego,89,105,106,125)) {
+    assignn(v106, 6);
+    position(o5, 89, 102);
+  }
+  if (posn(Ego,41,133,58,153)) {
+    assignn(v106, 7);
+    position(o5, 41, 130);
+  }
+  if (posn(Ego,65,133,82,153)) {
+    assignn(v106, 8);
+    position(o5, 65, 130);
+  }
+  if (posn(Ego,89,133,106,153)) {
+    assignn(v106, 9);
+    position(o5, 89, 130);
+  }
+  if (posn(Ego,89,161,106,168)) {
+    assignn(v106, 0);
+    position(o5, 89, 158);
+  }
+  if (posn(Ego,41,161,82,168)) {
+    assignn(v106, 10);
+    set.loop(o5, 1);
+    position(o5, 41, 158);
+  }
+  if (lessn(v106,11)) {
+    if (lessn(v109,102)) {
+      assignn(v107, 21);
+      assignn(v108, 2);
+      assignn(v111, 5);
+      assignn(v112, 0);
+      if (equaln(v109,36)) {
+        erase(o2);
+        erase(o3);
+        erase(o4);
+      }
+      if (lessn(v106,10)) {
+        add.to.pic.v(v107, v108, v106, v109, v110, v111, v112);
+      }
+      if (equaln(v113,3) && 
+          lessn(v106,10)) {
+        assignn(v113, 0);
+      }
+      if (equaln(v113,2) && 
+          equaln(v106,6) && 
+          equaln(v109,62)) {
+        increment(v113);
+      }
+      if (equaln(v113,1) && 
+          equaln(v106,5) && 
+          equaln(v109,49)) {
+        increment(v113);
+      }
+      if (equaln(v113,0) && 
+          equaln(v106,2) && 
+          equaln(v109,36)) {
+        increment(v113);
+      }
+      addn(v109, 13);
+    }
+    end.of.loop(o5, f255);
+    draw(o5);
+  }
+}
+if (isset(f255)) {
+  erase(o5);
+  if (equaln(v106,10)) {
+    add.to.pic(21, 2, 10, 36, 33, 5, 0);
+    set(f254);
+    assignn(v114, 50);
+    assignn(v106, 13);
+    if (equaln(v113,3)) {
+      set.priority(o4, 10);
+      set.priority(o3, 10);
+      ignore.horizon(o3);
+      ignore.objs(o3);
+      ignore.horizon(o4);
+      ignore.objs(o4);
+      assignn(v107, 5);
+      cycle.time(o4, v107);
+      cycle.time(o3, v107);
+      set.view(o4, 21);
+      set.loop(o4, 4);
+      set.cel(o4, 0);
+      position(o4, 56, 39);
+      start.cycling(o4);
+      draw(o4);
+      set.view(o3, 21);
+      set.loop(o3, 5);
+      set.cel(o3, 0);
+      position(o3, 52, 53);
+      start.cycling(o3);
+      draw(o3);
+      set(f209);
+      goto(Label1);
+    }
+    set.priority(o4, 10);
+    set.priority(o3, 10);
+    ignore.horizon(o3);
+    ignore.objs(o3);
+    ignore.horizon(o4);
+    ignore.objs(o4);
+    assignn(v107, 5);
+    cycle.time(o4, v107);
+    cycle.time(o3, v107);
+    set.view(o4, 21);
+    set.loop(o4, 6);
+    set.cel(o4, 0);
+    position(o4, 56, 39);
+    start.cycling(o4);
+    draw(o4);
+    set.view(o3, 21);
+    set.loop(o3, 7);
+    set.cel(o3, 0);
+    position(o3, 55, 53);
+    start.cycling(o3);
+    draw(o3);
+  }
+}
+Label1:
+if (isset(f254)) {
+  decrement(v114);
+  if (equaln(v114,0)) {
+    if (equaln(v113,3)) {
+      print("Well Done!");
+      if (greatern(v99,5)) {
+        addn(score, 4);
+        goto(Label2);
+      }
+      addn(score, 8);
+Label2:
+      goto(Label3);
+    }
+    increment(v99);
+    if (greatern(v99,3)) {
+      if (greatern(v99,5)) {
+        print("Ok, it looks like you're having some trouble so I'll help you "
+              "out.");
+        print("Around the house there are 3 hidden numbers that you must find.");
+        print("Add them together and this will give you the access code.");
+        goto(Label3);
+      }
+      print("Hmmm, something just doesn't seem to ADD up here.");
+    }
+Label3:
+    stop.motion(Ego);
+    start.motion(Ego);
+    erase(Ego);
+    reset(f255);
+    reset(f254);
+    assignv(ego_view_no, v100);
+    set.view.v(Ego, ego_view_no);
+    status.line.on();
+    accept.input();
+    disable.item(c12);
+    clear.lines(23, 23, 0);
+    new.room(10);
+  }
+}
+return();
+
+//Messages
+#message 1 "Press F6 to select a key"
+#message 2 "Well Done!"
+#message 3 "Ok, it looks like you're having some trouble so I'll help you out."
+#message 4 "Around the house there are 3 hidden numbers that you must find."
+#message 5 "Add them together and this will give you the access code."
+#message 6 "Hmmm, something just doesn't seem to ADD up here."

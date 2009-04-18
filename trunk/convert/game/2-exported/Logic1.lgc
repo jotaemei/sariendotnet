@@ -1,0 +1,175 @@
+if (isset(f5)) {
+  load.pic(v0);
+  draw.pic(v0);
+  discard.pic(v0);
+  status.line.off();
+  prevent.input();
+  program.control();
+  load.view(9);
+  load.view(28);
+  animate.obj(o2);
+  set.view(o2,9);
+  set.loop(o2,0);
+  ignore.horizon(o2);
+  set.priority(o2,5);
+  set(f16);
+  animate.obj(o3);
+  set.view(o3,9);
+  set.loop(o3,1);
+  ignore.horizon(o3);
+  set.priority(o3,5);
+  set(f17);
+  animate.obj(o4);
+  set.view(o4,28);
+  set.loop(o4,0);
+  position(o4,45,155);
+  ignore.horizon(o4);
+  set.priority(o4,5);
+  stop.cycling(o4);
+  assignn(v100,3);
+  cycle.time(o4,v100);
+  show.pic();
+  assignn(v100,0);
+}
+if (lessn(v100,100)) {
+  increment(v100);
+  if (equaln(v100,20)) {
+    assignn(v101,81);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,22)) {
+    assignn(v101,82);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,24)) {
+    assignn(v101,83);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,26)) {
+    assignn(v101,84);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,28)) {
+    assignn(v101,84);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,30)) {
+    assignn(v101,85);
+    load.pic(v101);
+    draw.pic(v101);
+    show.pic();
+  }
+  if (equaln(v100,34)) {
+    set.text.attribute(15,0);
+    display(23,4,"Created by Chad Goulding (C)1998");
+    draw(o4);
+    end.of.loop(o4,f255);
+    assignn(v100,100);
+  }
+  goto(Label1);
+}
+if (isset(f16)) {
+  set.cel(o2,0);
+  random(0,7,v103);
+  if (equaln(v103,0)) {
+    assignn(v101,41);
+    assignn(v102,11);
+  }
+  if (equaln(v103,1)) {
+    assignn(v101,68);
+    assignn(v102,11);
+  }
+  if (equaln(v103,2)) {
+    assignn(v101,68);
+    assignn(v102,51);
+  }
+  if (equaln(v103,3)) {
+    assignn(v101,139);
+    assignn(v102,57);
+  }
+  if (equaln(v103,4)) {
+    assignn(v101,19);
+    assignn(v102,57);
+  }
+  if (equaln(v103,5)) {
+    assignn(v101,19);
+    assignn(v102,97);
+  }
+  if (equaln(v103,6)) {
+    assignn(v101,47);
+    assignn(v102,97);
+  }
+  if (equaln(v103,7)) {
+    assignn(v101,103);
+    assignn(v102,84);
+  }
+  position.v(o2,v101,v102);
+  end.of.loop(o2,f16);
+  draw(o2);
+}
+if (lessn(v100,105)) {
+  increment(v100);
+  goto(Label1);
+}
+if (isset(f17)) {
+  set.cel(o3,0);
+  random(0,7,v103);
+  if (equaln(v103,0)) {
+    assignn(v101,115);
+    assignn(v102,11);
+  }
+  if (equaln(v103,1)) {
+    assignn(v101,115);
+    assignn(v102,38);
+  }
+  if (equaln(v103,2)) {
+    assignn(v101,115);
+    assignn(v102,51);
+  }
+  if (equaln(v103,3)) {
+    assignn(v101,102);
+    assignn(v102,57);
+  }
+  if (equaln(v103,4)) {
+    assignn(v101,74);
+    assignn(v102,57);
+  }
+  if (equaln(v103,5)) {
+    assignn(v101,74);
+    assignn(v102,84);
+  }
+  if (equaln(v103,6)) {
+    assignn(v101,74);
+    assignn(v102,97);
+  }
+  if (equaln(v103,7)) {
+    assignn(v101,95);
+    assignn(v102,97);
+  }
+  position.v(o3,v101,v102);
+  end.of.loop(o3,f17);
+  draw(o3);
+}
+Label1:
+if (have.key()) {
+  set(f14);
+  clear.lines(22,24,0);
+  stop.motion(o0);
+  reset(f33);
+  accept.input();
+  new.room(16);
+}
+return();
+
+// Messages
+#message 1 "Created by Chad Goulding (C)1998"

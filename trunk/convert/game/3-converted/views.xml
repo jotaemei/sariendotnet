@@ -1,0 +1,886 @@
+<views>
+  <view id="0">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+  </view>
+  <view id="1">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+  </view>
+  <view id="2">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+  </view>
+  <view id="3">
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+  </view>
+  <view id="4">
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="31" />
+      <cel width="7" height="31" />
+    </loop>
+  </view>
+  <view id="5">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+  </view>
+  <view id="6">
+    <loop>
+      <cel width="1" height="1" />
+    </loop>
+    <loop>
+      <cel width="20" height="9" />
+    </loop>
+  </view>
+  <view id="7">
+    <loop>
+      <cel width="19" height="9" />
+      <cel width="4" height="2" />
+      <cel width="1" height="7" />
+      <cel width="3" height="7" />
+      <cel width="8" height="7" />
+      <cel width="8" height="1" />
+    </loop>
+  </view>
+  <view id="8">
+    <loop>
+      <cel width="19" height="30" />
+    </loop>
+    <loop>
+      <cel width="18" height="19" />
+      <cel width="18" height="19" />
+    </loop>
+    <loop>
+      <cel width="7" height="13" />
+    </loop>
+  </view>
+  <view id="9">
+    <loop>
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+      <cel width="10" height="5" />
+    </loop>
+    <loop>
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="20" height="5" />
+      <cel width="20" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+      <cel width="19" height="5" />
+    </loop>
+  </view>
+  <view id="10">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="8" height="33" />
+      <cel width="9" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="8" height="33" />
+      <cel width="9" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+    </loop>
+    <loop>
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+      <cel width="9" height="26" />
+    </loop>
+  </view>
+  <view id="11">
+    <loop>
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="36" />
+      <cel width="7" height="36" />
+      <cel width="7" height="36" />
+      <cel width="7" height="36" />
+      <cel width="7" height="36" />
+      <cel width="7" height="36" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+      <cel width="10" height="20" />
+    </loop>
+  </view>
+  <view id="12">
+    <loop>
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+      <cel width="7" height="12" />
+    </loop>
+  </view>
+  <view id="13">
+    <loop>
+      <cel width="14" height="33" />
+      <cel width="14" height="33" />
+      <cel width="14" height="33" />
+      <cel width="14" height="33" />
+      <cel width="14" height="33" />
+    </loop>
+  </view>
+  <view id="14">
+    <loop>
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+    </loop>
+    <loop>
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+      <cel width="16" height="18" />
+    </loop>
+  </view>
+  <view id="15">
+    <loop>
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+      <cel width="3" height="31" />
+    </loop>
+    <loop>
+      <cel width="19" height="30" />
+    </loop>
+    <loop>
+      <cel width="22" height="21" />
+      <cel width="22" height="21" />
+      <cel width="7" height="14" />
+      <cel width="22" height="21" />
+      <cel width="19" height="30" />
+    </loop>
+    <loop>
+      <cel width="10" height="35" />
+      <cel width="10" height="35" />
+      <cel width="10" height="35" />
+      <cel width="10" height="35" />
+      <cel width="10" height="35" />
+      <cel width="10" height="35" />
+    </loop>
+  </view>
+  <view id="16">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+  </view>
+  <view id="17">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+  </view>
+  <view id="18">
+    <loop>
+      <cel width="19" height="20" />
+      <cel width="19" height="20" />
+      <cel width="19" height="20" />
+      <cel width="19" height="20" />
+      <cel width="19" height="20" />
+      <cel width="19" height="20" />
+    </loop>
+    <loop>
+      <cel width="29" height="17" />
+      <cel width="29" height="17" />
+      <cel width="29" height="17" />
+      <cel width="29" height="17" />
+      <cel width="29" height="17" />
+      <cel width="29" height="17" />
+    </loop>
+    <loop>
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+      <cel width="9" height="55" />
+    </loop>
+  </view>
+  <view id="19">
+    <loop>
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+      <cel width="8" height="16" />
+    </loop>
+  </view>
+  <view id="20">
+    <loop>
+      <cel width="85" height="25" />
+      <cel width="73" height="25" />
+      <cel width="56" height="25" />
+      <cel width="33" height="19" />
+    </loop>
+    <loop>
+      <cel width="21" height="14" />
+      <cel width="15" height="18" />
+    </loop>
+    <loop>
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+      <cel width="19" height="16" />
+    </loop>
+  </view>
+  <view id="21">
+    <loop>
+      <cel width="18" height="21" />
+      <cel width="18" height="21" />
+    </loop>
+    <loop>
+      <cel width="42" height="21" />
+      <cel width="42" height="21" />
+    </loop>
+    <loop>
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="11" height="27" />
+      <cel width="76" height="27" />
+    </loop>
+    <loop>
+      <cel width="31" height="9" />
+      <cel width="23" height="9" />
+    </loop>
+    <loop>
+      <cel width="35" height="30" />
+      <cel width="35" height="30" />
+    </loop>
+    <loop>
+      <cel width="43" height="30" />
+      <cel width="43" height="30" />
+    </loop>
+    <loop>
+      <cel width="35" height="30" />
+      <cel width="35" height="30" />
+    </loop>
+    <loop>
+      <cel width="37" height="30" />
+      <cel width="37" height="30" />
+    </loop>
+  </view>
+  <view id="22">
+    <loop>
+      <cel width="14" height="24" />
+    </loop>
+  </view>
+  <view id="23">
+    <loop>
+      <cel width="6" height="19" />
+      <cel width="6" height="19" />
+    </loop>
+    <loop>
+      <cel width="2" height="11" />
+      <cel width="2" height="11" />
+      <cel width="2" height="11" />
+      <cel width="2" height="11" />
+      <cel width="2" height="11" />
+    </loop>
+    <loop>
+      <cel width="5" height="11" />
+      <cel width="5" height="11" />
+      <cel width="5" height="11" />
+      <cel width="5" height="11" />
+      <cel width="5" height="11" />
+      <cel width="5" height="11" />
+    </loop>
+    <loop>
+      <cel width="1" height="1" />
+      <cel width="1" height="1" />
+      <cel width="1" height="1" />
+      <cel width="1" height="1" />
+      <cel width="1" height="1" />
+      <cel width="1" height="1" />
+    </loop>
+    <loop>
+      <cel width="3" height="10" />
+      <cel width="3" height="10" />
+      <cel width="3" height="10" />
+      <cel width="3" height="10" />
+    </loop>
+    <loop>
+      <cel width="7" height="2" />
+      <cel width="7" height="2" />
+      <cel width="7" height="2" />
+      <cel width="7" height="2" />
+      <cel width="7" height="2" />
+      <cel width="7" height="2" />
+    </loop>
+    <loop>
+      <cel width="1" height="2" />
+      <cel width="1" height="1" />
+    </loop>
+    <loop>
+      <cel width="11" height="15" />
+    </loop>
+    <loop>
+      <cel width="7" height="4" />
+      <cel width="7" height="4" />
+    </loop>
+    <loop>
+      <cel width="7" height="4" />
+    </loop>
+    <loop>
+      <cel width="12" height="17" />
+    </loop>
+    <loop>
+      <cel width="4" height="3" />
+    </loop>
+  </view>
+  <view id="24">
+    <loop>
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+      <cel width="20" height="31" />
+    </loop>
+  </view>
+  <view id="25">
+    <loop>
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="3" height="32" />
+      <cel width="7" height="32" />
+      <cel width="9" height="32" />
+    </loop>
+  </view>
+  <view id="26">
+    <loop>
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+      <cel width="10" height="33" />
+    </loop>
+  </view>
+  <view id="27">
+    <loop>
+      <cel width="18" height="33" />
+      <cel width="17" height="32" />
+      <cel width="17" height="29" />
+      <cel width="17" height="30" />
+      <cel width="16" height="31" />
+    </loop>
+    <loop>
+      <cel width="18" height="33" />
+      <cel width="17" height="32" />
+      <cel width="17" height="29" />
+      <cel width="17" height="30" />
+      <cel width="16" height="31" />
+    </loop>
+  </view>
+  <view id="28">
+    <loop>
+      <cel width="71" height="12" />
+      <cel width="71" height="12" />
+      <cel width="71" height="12" />
+    </loop>
+  </view>
+  <view id="29">
+    <loop>
+      <cel width="6" height="4" />
+    </loop>
+  </view>
+  <view id="30">
+    <loop>
+      <cel width="29" height="47" />
+      <cel width="12" height="23" />
+    </loop>
+    <loop>
+      <cel width="12" height="23" />
+      <cel width="12" height="23" />
+      <cel width="12" height="23" />
+      <cel width="12" height="23" />
+    </loop>
+  </view>
+  <view id="31">
+    <loop>
+      <cel width="18" height="32" />
+      <cel width="18" height="31" />
+      <cel width="18" height="27" />
+      <cel width="18" height="22" />
+      <cel width="17" height="25" />
+      <cel width="15" height="25" />
+      <cel width="15" height="25" />
+      <cel width="15" height="25" />
+      <cel width="19" height="25" />
+    </loop>
+  </view>
+  <view id="32">
+    <loop>
+      <cel width="89" height="12" />
+      <cel width="89" height="12" />
+      <cel width="89" height="12" />
+    </loop>
+  </view>
+  <view id="33">
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="32" />
+      <cel width="7" height="32" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+    <loop>
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+      <cel width="7" height="33" />
+    </loop>
+  </view>
+  <view id="200">
+    <description>This is your front door key. Don't leave home without it!</description>
+    <loop>
+      <cel width="38" height="40" />
+    </loop>
+  </view>
+  <view id="201">
+    <description>This is a strong (and sharp) kitchen knife.</description>
+    <loop>
+      <cel width="30" height="40" />
+    </loop>
+  </view>
+  <view id="202">
+    <description>A pair of batteries. With any luck they'll still work.</description>
+    <loop>
+      <cel width="30" height="40" />
+    </loop>
+  </view>
+  <view id="203">
+    <description>Here's a few sheets of toilet paper that you grabbed from the bathroom.</description>
+    <loop>
+      <cel width="27" height="48" />
+    </loop>
+  </view>
+  <view id="204">
+    <description>This is a sweet smelling flower.</description>
+    <loop>
+      <cel width="27" height="38" />
+    </loop>
+  </view>
+  <view id="205">
+    <description>This is a big padded envelope addressed to a John Tasker. Hey, that's you!</description>
+    <loop>
+      <cel width="35" height="45" />
+    </loop>
+  </view>
+  <view id="206">
+    <description>A closer look reveals that the marks actually represent roman numerals.</description>
+    <loop>
+      <cel width="35" height="45" />
+    </loop>
+  </view>
+  <view id="207">
+    <description>The diagram seems to be of lots of colored circles.</description>
+    <loop>
+      <cel width="27" height="38" />
+    </loop>
+  </view>
+  <view id="208">
+    <description>This is a temporal aliasing card. With this you can finally complete your time machine.</description>
+    <loop>
+      <cel width="27" height="38" />
+    </loop>
+  </view>
+  <view id="209">
+    <description>This is a timing device. It doesn't work at the moment because it has no batteries in it.</description>
+    <loop>
+      <cel width="27" height="38" />
+    </loop>
+  </view>
+  <view id="210">
+    <description>This is a timing device.</description>
+    <loop>
+      <cel width="27" height="38" />
+    </loop>
+  </view>
+  <view id="211">
+    <description>It looks like an ordinary stone.</description>
+    <loop>
+      <cel width="27" height="48" />
+    </loop>
+  </view>
+</views>

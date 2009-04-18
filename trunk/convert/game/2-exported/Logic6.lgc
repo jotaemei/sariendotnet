@@ -1,0 +1,173 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(15);
+  load.view(7);
+  if (equaln(prev_room_no,3)) {
+    position(Ego, 110, 21);
+  }
+  assignn(v200, 6);
+  if (obj.in.room("Front door key",v200)) {
+    animate.obj(o2);
+    set.view(o2, 7);
+    set.loop(o2, 0);
+    set.cel(o2, 1);
+    position(o2, 45, 72);
+    draw(o2);
+    stop.cycling(o2);
+  }
+  if (isset(f208)) {
+    add.to.pic(7, 0, 4, 66, 45, 4, 0);
+    add.to.pic(7, 0, 5, 66, 71, 4, 0);
+  }
+  draw(Ego);
+  show.pic();
+  assignn(v100, 0);
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("You are standing in the downstairs hallway. Further up the hallway the "
+        "kitchen is visible and to the left is the living room.");
+  assignn(v200, 6);
+  if (obj.in.room("Front door key",v200)) {
+    print("You notice a key on the table.");
+  }
+}
+if (said("check out", "cabinet")) {
+  print("On the table is a vase containing a large bunch of flowers.");
+  if (obj.in.room("Front door key",v200)) {
+    print("You also notice a key on the table.");
+  }
+}
+if (said("check out", "cactus")) {
+  print("The vase contains a beautiful bunch of flowers.");
+}
+if (said("check out", "flower")) {
+  assignn(v200, 255);
+  if (!obj.in.room("Flower",v200)) {
+    print("The beautiful bunch of flowers help to brighten up the otherwise "
+          "dull room.");
+    goto(Label1);
+  }
+  reset(input_parsed);
+}
+Label1:
+if ((said("check out", "ceiling") || 
+    said("check out", "blanket") || 
+    said("check out", "staircase") || 
+    said("check out", "doorway") || 
+    said("check out", "artwork") || 
+    said("check out", "banister"))) {
+  print("Its just as it appears.");
+}
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if (said("get", "flower")) {
+  assignn(v200, 255);
+  if (!obj.in.room("Flower",v200)) {
+    if (posn(Ego,40,78,58,91)) {
+      print("You take a single flower from the bouquet.");
+      increment(score);
+      get("Flower");
+      goto(Label2);
+    }
+    print("You'll need to get closer.");
+Label2:
+    goto(Label3);
+  }
+  print("But, you've already got a flower!");
+}
+Label3:
+if ((said("smell") || 
+    said("smell", "flower"))) {
+  print("The flowers give a pleasing fragrance to the room.");
+}
+if (said("get", "cactus")) {
+  print("But where would you put the flowers?");
+}
+if (said("get", "front door key")) {
+  assignn(v200, 6);
+  if (obj.in.room("Front door key",v200)) {
+    if (posn(Ego,40,82,55,91)) {
+      print("Taken.");
+      increment(score);
+      get("Front door key");
+      erase(o2);
+      goto(Label4);
+    }
+    print("You'll need to get closer.");
+Label4:
+    goto(Label5);
+  }
+  print("But, you've already got the it!");
+}
+Label5:
+if (said("check out", "front door key")) {
+  assignn(v200, 6);
+  if (obj.in.room("Front door key",v200)) {
+    print("You notice your front door key on the table.");
+    goto(Label6);
+  }
+  reset(input_parsed);
+}
+Label6:
+if (isset(ego_touching_signal_line)) {
+  if (equaln(ego_dir,1)) {
+    addn(v100, 1);
+    if (equaln(v100,8)) {
+      assignn(v100, 0);
+      assignn(v101, 255);
+      assignn(v102, 255);
+      reposition(Ego, v101, v102);
+    }
+  }
+  if (equaln(ego_dir,5)) {
+    addn(v100, 1);
+    if (equaln(v100,8)) {
+      assignn(v100, 0);
+      assignn(v101, 1);
+      assignn(v102, 1);
+      reposition(Ego, v101, v102);
+    }
+  }
+}
+if (posn(Ego,55,70,75,75)) {
+  position(Ego, 73, 157);
+  new.room(10);
+}
+if (posn(Ego,10,30,20,160)) {
+  position(Ego, 140, 124);
+  new.room(8);
+}
+if (posn(Ego,50,154,72,160)) {
+  print("You open the front door and step outside.");
+  position(Ego, 98, 80);
+  new.room(7);
+}
+if (equaln(ego_edge_code,1)) {
+  new.room(3);
+}
+return();
+
+//Messages
+#message 1 "You are standing in the downstairs hallway. Further up the hallway the kitchen is visible and to the left is the living room."
+#message 2 "You notice a key on the table."
+#message 3 "On the table is a vase containing a large bunch of flowers."
+#message 4 "You also notice a key on the table."
+#message 5 "The vase contains a beautiful bunch of flowers."
+#message 6 "The beautiful bunch of flowers help to brighten up the otherwise dull room."
+#message 7 "Its just as it appears."
+#message 8 "You look under the rug and find....."
+#message 9 "absolutely nothing."
+#message 10 "You take a single flower from the bouquet."
+#message 11 "You'll need to get closer."
+#message 12 "But, you've already got a flower!"
+#message 13 "The flowers give a pleasing fragrance to the room."
+#message 14 "But where would you put the flowers?"
+#message 15 "Taken."
+#message 16 "But, you've already got the it!"
+#message 17 "You notice your front door key on the table."
+#message 18 "You open the front door and step outside."

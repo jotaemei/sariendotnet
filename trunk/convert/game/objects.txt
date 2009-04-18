@@ -1,0 +1,5 @@
+0:?
+1:test object
+2:Another object
+3:Rope
+4:Keycard

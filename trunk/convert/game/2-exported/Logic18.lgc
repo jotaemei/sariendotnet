@@ -1,0 +1,166 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(50);
+  load.view(30);
+  load.view(31);
+  animate.obj(o4);
+  ignore.objs(o4);
+  ignore.blocks(o4);
+  ignore.horizon(o4);
+  set.priority(o4, 8);
+  set.view(o4, 30);
+  set.loop(o4, 0);
+  set.cel(o4, 0);
+  position(o4, 0, 107);
+  stop.cycling(o4);
+  animate.obj(o2);
+  ignore.objs(o2);
+  ignore.blocks(o2);
+  set.view(o2, 31);
+  set.loop(o2, 0);
+  set.cel(o2, 0);
+  position(o2, 57, 104);
+  assignn(v101, 2);
+  cycle.time(o2, v101);
+  stop.cycling(o2);
+  animate.obj(o3);
+  ignore.objs(o3);
+  ignore.blocks(o3);
+  ignore.horizon(o3);
+  set.priority(o3, 8);
+  set.view(o3, 30);
+  set.loop(o3, 0);
+  set.cel(o3, 1);
+  position(o3, 29, 81);
+  stop.cycling(o3);
+  if (!has("Rock")) {
+    load.view(29);
+    animate.obj(o1);
+    set.view(o1, 29);
+    set.loop(o1, 0);
+    set.cel(o1, 0);
+    position(o1, 27, 154);
+    draw(o1);
+    stop.cycling(o1);
+    stop.update(o1);
+  }
+  show.pic();
+  ignore.objs(Ego);
+  draw(Ego);
+  assignn(v101, 0);
+}
+if ((said("check out") || 
+    said("check out", "forest") || 
+    said("check out", "area"))) {
+  print("You find yourself at the entrance to a deep and murky forest.");
+}
+if ((said("check out", "bush") || 
+    said("search", "bush") || 
+    said("check out", "flower"))) {
+  print("The bushes seem to be composed of small leaves and branches. Nothing "
+        "really interesting about them.");
+}
+if ((said("check out", "boulder") || 
+    said("check out", "floor"))) {
+  if (has("Rock")) {
+    reset(input_parsed);
+    goto(Label1);
+  }
+  print("You see a rock lying on the ground.");
+}
+Label1:
+if (said("get", "boulder")) {
+  if (has("Rock")) {
+    print("Don't be greedy, one rock is enough.");
+    goto(Label2);
+  }
+  if (posn(Ego,19,149,33,158)) {
+    print("Ok.");
+    get("Rock");
+    erase(o1);
+    increment(score);
+    goto(Label2);
+  }
+  print("You'll need to get closer.");
+}
+Label2:
+if (greatern(v101,0)) {
+  if (greatern(v100,0)) {
+    decrement(v100);
+  }
+  if (equaln(v101,1) && 
+      isset(f255)) {
+    print("Uh-oh.");
+    move.obj(Ego, 57, 104, 0, f255);
+    increment(v101);
+    assignn(v100, 35);
+  }
+  if (equaln(v101,2)) {
+    if (equaln(v100,1)) {
+      draw(o4);
+      move.obj(o4, 24, 93, 0, f254);
+      draw(o3);
+      move.obj(o3, 53, 66, 1, f255);
+    }
+    if (isset(f255)) {
+      assignn(v100, 18);
+      set.loop(o2, 0);
+      draw(o2);
+      erase(Ego);
+      end.of.loop(o2, f254);
+      reset(f255);
+      move.obj(o2, 68, 104, 0, f255);
+      increment(v101);
+    }
+  }
+  if (equaln(v101,3)) {
+    if (equaln(v100,1)) {
+      reposition.to(o2, 62, 104);
+      increment(v101);
+      assignn(v100, 10);
+    }
+  }
+  if (equaln(v101,4) && 
+      equaln(v100,1)) {
+    set.loop(o3, 1);
+    set.cel(o3, 0);
+    reset(f255);
+    assignn(v102, 6);
+    cycle.time(o3, v100);
+    end.of.loop(o3, f255);
+    increment(v101);
+    assignn(v100, 80);
+  }
+  if (equaln(v101,5) && 
+      equaln(v100,1)) {
+    assignn(v101, 1);
+    new.room(2);
+  }
+  goto(Label3);
+}
+if (isset(ego_on_water)) {
+  print("You hear some rustling in a nearby bush and decide to investigate.");
+  prevent.input();
+  ignore.objs(Ego);
+  move.obj(Ego, 10, 104, 0, f255);
+  assignn(v101, 1);
+}
+Label3:
+if (equaln(ego_edge_code,3)) {
+  position(Ego, 36, 41);
+  assignn(v101, 0);
+  new.room(19);
+}
+return();
+
+//Messages
+#message 1 "You find yourself at the entrance to a deep and murky forest."
+#message 2 "The bushes seem to be composed of small leaves and branches. Nothing really interesting about them."
+#message 3 "You see a rock lying on the ground."
+#message 4 "Don't be greedy, one rock is enough."
+#message 5 "Ok."
+#message 6 "You'll need to get closer."
+#message 7 "Uh-oh."
+#message 8 "You hear some rustling in a nearby bush and decide to investigate."
