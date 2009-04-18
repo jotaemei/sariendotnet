@@ -1,5 +1,14 @@
 0:?
-1:test object
-2:Another object
-3:Rope
-4:Keycard
+1:?
+2:Front door key
+3:Kitchen knife
+4:Batteries
+5:Toilet paper
+6:Flower
+7:Parcel
+8:?
+9:Diagram
+10:Aliasing card
+11:Timer(no batteries)
+12:Timer
+13:Rock
