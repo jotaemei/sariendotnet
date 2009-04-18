@@ -1,0 +1,214 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(50);
+  if (equaln(prev_room_no,4)) {
+    position(Ego, 22, 75);
+  }
+  if (equaln(prev_room_no,6)) {
+    position(Ego, 118, 156);
+  }
+  if ((equaln(prev_room_no,1) || 
+      equaln(prev_room_no,0))) {
+    position(Ego, 70, 80);
+    status.line.on();
+    accept.input();
+    load.view(0);
+    assignn(ego_view_no, 0);
+    set.view.v(Ego, ego_view_no);
+  }
+  load.view(15);
+  add.to.pic(15, 2, 1, 60, 55, 5, 0);
+  add.to.pic(15, 2, 0, 92, 55, 5, 0);
+  add.to.pic(15, 2, 2, 115, 120, 5, 0);
+  animate.obj(o1);
+  set.view(o1, 15);
+  set.loop(o1, 3);
+  if (isset(f203)) {
+    set.cel(o1, 5);
+    ignore.objs(Ego);
+    goto(Label1);
+  }
+  set.cel(o1, 0);
+  observe.objs(Ego);
+Label1:
+  position(o1, 38, 69);
+  draw(o1);
+  stop.cycling(o1);
+  stop.update(o1);
+  draw(Ego);
+  show.pic();
+  reset(f255);
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  if (greatern(v31,69)) {
+    print("To the left an open door leads you back into the bedroom. The "
+          "bathroom is to the right and against the back wall is the closet. A "
+          "narrow stairway leads down to the ground floor of your house.");
+    goto(Label2);
+  }
+  print("You use your closet to store things that you don't really need. "
+        "Unsurprisingly, it contains nothing of interest.");
+}
+Label2:
+if ((said("search", "closet") || 
+    said("check out", "in", "closet"))) {
+  if (greatern(v31,69)) {
+    print("But you're not in the closet!");
+    goto(Label3);
+  }
+  print("You use your closet to store things that you don't really need. "
+        "Unsurprisingly, it contains nothing of interest.");
+}
+Label3:
+if ((said("check out", "ceiling") || 
+    said("check out", "blanket") || 
+    said("check out", "staircase") || 
+    said("check out", "banister") || 
+    said("check out", "beams"))) {
+  print("Its just as it appears.");
+}
+if (said("check out", "door")) {
+  if (isset(f203)) {
+    print("The closet door is open.");
+    goto(Label4);
+  }
+  print("The closet door is closed.");
+}
+Label4:
+if (said("check out", "closet")) {
+  if (lessn(v31,69)) {
+    print("You use your closet to store things that you don't really need. "
+          "Unsurprisingly, it contains nothing of interest.");
+    goto(Label5);
+  }
+  if (isset(f203)) {
+    print("The closet door is open.");
+    goto(Label5);
+  }
+  print("The closet door is closed.");
+}
+Label5:
+if (said("unlock", "door")) {
+  print("You don't have the right key.");
+}
+if (said("check out", "fence")) {
+  print("On the walls hang many paintings.");
+}
+if (said("check out", "behind", "artwork")) {
+  print("Nope. Nothing behind there.");
+}
+if (said("search", "artwork")) {
+  print("Your search reveals nothing.");
+}
+if (said("check out", "artwork")) {
+  if (posn(Ego,53,69,81,78)) {
+    print("This painting shows a group of cavemen hunting a dinosaur.");
+    goto(Label6);
+  }
+  if (posn(Ego,86,69,113,78)) {
+    print("This haunting picture is of a city in total ruin. For some reason, "
+          "looking at it always sends a chill down your spine.");
+    goto(Label6);
+  }
+  if (posn(Ego,109,141,122,147)) {
+    print("It's just a picture of some flowers.");
+    goto(Label6);
+  }
+  print("Move closer to the one that you want to examine.");
+}
+Label6:
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if ((said("open", "door") || 
+    said("open", "closet"))) {
+  if (!isset(f203)) {
+    if (posn(Ego,32,60,47,73)) {
+      set(f203);
+      start.update(o1);
+      end.of.loop(o1, f255);
+      goto(Label7);
+    }
+    print("You'll need to get closer.");
+Label7:
+    goto(Label8);
+  }
+  print("The door is already open.");
+}
+Label8:
+if ((said("close", "door") || 
+    said("close", "closet"))) {
+  if (isset(f203)) {
+    if (posn(Ego,32,60,47,73)) {
+      if (equaln(v31,69)) {
+        print("You're in the way of the door!");
+        goto(Label9);
+      }
+      reset(f203);
+      start.update(o1);
+      reverse.loop(o1, f255);
+      observe.objs(Ego);
+Label9:
+      goto(Label10);
+    }
+    print("You'll need to get closer.");
+Label10:
+    goto(Label11);
+  }
+  print("The door is already closed.");
+}
+Label11:
+if (isset(f255) && 
+    isset(f203)) {
+  ignore.objs(Ego);
+}
+if (isset(f255) && 
+    !isset(f203) && 
+    lessn(v31,69)) {
+  print("All of a sudden it gets real dark.");
+  reset(f255);
+}
+if (equaln(ego_edge_code,3)) {
+  new.room(6);
+}
+if (posn(Ego,135,50,150,150)) {
+  position(Ego, 24, 120);
+  new.room(12);
+}
+if (posn(Ego,10,50,19,150)) {
+  new.room(4);
+}
+if (posn(Ego,31,69,42,69)) {
+  release.priority(Ego);
+}
+if (posn(Ego,31,68,42,68)) {
+  set.priority(Ego, 5);
+}
+return();
+
+//Messages
+#message 1 "To the left an open door leads you back into the bedroom. The bathroom is to the right and against the back wall is the closet. A narrow stairway leads down to the ground floor of your house."
+#message 2 "You use your closet to store things that you don't really need. Unsurprisingly, it contains nothing of interest."
+#message 3 "But you're not in the closet!"
+#message 4 "Its just as it appears."
+#message 5 "The closet door is open."
+#message 6 "The closet door is closed."
+#message 7 "You don't have the right key."
+#message 8 "On the walls hang many paintings."
+#message 9 "Nope. Nothing behind there."
+#message 10 "Your search reveals nothing."
+#message 11 "This painting shows a group of cavemen hunting a dinosaur."
+#message 12 "This haunting picture is of a city in total ruin. For some reason, looking at it always sends a chill down your spine."
+#message 13 "It's just a picture of some flowers."
+#message 14 "Move closer to the one that you want to examine."
+#message 15 "You look under the rug and find....."
+#message 16 "absolutely nothing."
+#message 17 "You'll need to get closer."
+#message 18 "The door is already open."
+#message 19 "You're in the way of the door!"
+#message 20 "The door is already closed."
+#message 21 "All of a sudden it gets real dark."

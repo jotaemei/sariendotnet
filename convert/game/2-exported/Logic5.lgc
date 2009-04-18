@@ -1,0 +1,61 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(2);
+  set.horizon(50);
+  if ((equaln(prev_room_no,16) || 
+      equaln(prev_room_no,0))) {
+    position(Ego, 39, 106);
+    assignn(ego_view_no, 2);
+    set.view.v(Ego, ego_view_no);
+  }
+  assignn(v200, 20);
+  set.loop(Ego, 3);
+  stop.motion(Ego);
+  draw(Ego);
+  show.pic();
+  print("Suddenly, you wake up.");
+}
+if ((said("check out") || 
+    said("check out", "anyword"))) {
+  print("All you can see is the morning light pouring through a small opening "
+        "in the curtains.");
+}
+if ((said("open", "blind") || 
+    said("draw", "blind") || 
+    said("move", "blind"))) {
+  if (posn(Ego,58,94,76,104)) {
+    print("You open the curtains.");
+    addn(score, 1);
+    status.line.on();
+    new.room(4);
+    goto(Label1);
+  }
+  print("You'll need to get closer.");
+}
+Label1:
+if (said("close", "blind")) {
+  print("They already are!");
+}
+if (greatern(v200,0)) {
+  decrement(v200);
+  if (equaln(v200,0)) {
+    print("What a bizarre dream!");
+    print("Trying to shrug it off, you decide to get out of bed.");
+    accept.input();
+    set.loop(Ego, 0);
+    set.cel(Ego, 0);
+    start.motion(Ego);
+  }
+}
+return();
+
+//Messages
+#message 1 "Suddenly, you wake up."
+#message 2 "All you can see is the morning light pouring through a small opening in the curtains."
+#message 3 "You open the curtains."
+#message 4 "You'll need to get closer."
+#message 5 "They already are!"
+#message 6 "What a bizarre dream!"
+#message 7 "Trying to shrug it off, you decide to get out of bed."

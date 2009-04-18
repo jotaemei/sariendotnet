@@ -1,0 +1,677 @@
+if (isset(new_room)) {
+  assignv(v121, cycle_delay);
+  assignn(cycle_delay, 0);
+  get.posn(Ego, v122, v123);
+  set.key(0, 64, c12);
+  enable.item(c12);
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(10);
+  ignore.objs(Ego);
+  set.priority(Ego, 4);
+  position(Ego, 80, 100);
+  draw(Ego);
+  show.pic();
+  status.line.on();
+  load.view(24);
+  assignn(v101, 1);
+  assignn(v102, 2);
+  assignn(v103, 3);
+  assignn(v104, 4);
+  assignn(v105, 5);
+  assignn(v106, 6);
+  assignn(v107, 7);
+  assignn(v108, 8);
+  assignn(v109, 9);
+  assignn(v110, 10);
+  assignn(v111, 11);
+  assignn(v112, 12);
+  assignn(v113, 13);
+  assignn(v114, 14);
+  assignn(v115, 15);
+  assignn(v116, 0);
+  assignn(v120, 4);
+  animate.obj(o1);
+  ignore.objs(o1);
+  set.view(o1, 24);
+  set.loop(o1, 0);
+  set.cel(o1, 0);
+  position(o1, 34, 50);
+  draw(o1);
+  stop.cycling(o1);
+  animate.obj(o2);
+  ignore.objs(o2);
+  set.view(o2, 24);
+  set.loop(o2, 0);
+  set.cel(o2, 1);
+  position(o2, 54, 50);
+  draw(o2);
+  stop.cycling(o2);
+  animate.obj(o3);
+  ignore.objs(o3);
+  set.view(o3, 24);
+  set.loop(o3, 0);
+  set.cel(o3, 2);
+  position(o3, 74, 50);
+  draw(o3);
+  stop.cycling(o3);
+  animate.obj(o4);
+  ignore.objs(o4);
+  set.view(o4, 24);
+  set.loop(o4, 0);
+  set.cel(o4, 3);
+  position(o4, 94, 50);
+  draw(o4);
+  stop.cycling(o4);
+  animate.obj(o5);
+  ignore.objs(o5);
+  set.view(o5, 24);
+  set.loop(o5, 0);
+  set.cel(o5, 4);
+  position(o5, 34, 81);
+  draw(o5);
+  stop.cycling(o5);
+  animate.obj(o6);
+  ignore.objs(o6);
+  set.view(o6, 24);
+  set.loop(o6, 0);
+  set.cel(o6, 5);
+  position(o6, 54, 81);
+  draw(o6);
+  stop.cycling(o6);
+  animate.obj(o7);
+  ignore.objs(o7);
+  set.view(o7, 24);
+  set.loop(o7, 0);
+  set.cel(o7, 6);
+  position(o7, 74, 81);
+  draw(o7);
+  stop.cycling(o7);
+  animate.obj(o8);
+  ignore.objs(o8);
+  set.view(o8, 24);
+  set.loop(o8, 0);
+  set.cel(o8, 7);
+  position(o8, 94, 81);
+  draw(o8);
+  stop.cycling(o8);
+  animate.obj(o9);
+  ignore.objs(o9);
+  set.view(o9, 24);
+  set.loop(o9, 0);
+  set.cel(o9, 8);
+  position(o9, 34, 112);
+  draw(o9);
+  stop.cycling(o9);
+  animate.obj(o10);
+  ignore.objs(o10);
+  set.view(o10, 24);
+  set.loop(o10, 0);
+  set.cel(o10, 9);
+  position(o10, 54, 112);
+  draw(o10);
+  stop.cycling(o10);
+  animate.obj(o11);
+  ignore.objs(o11);
+  set.view(o11, 24);
+  set.loop(o11, 0);
+  set.cel(o11, 10);
+  position(o11, 74, 112);
+  draw(o11);
+  stop.cycling(o11);
+  animate.obj(o12);
+  ignore.objs(o12);
+  set.view(o12, 24);
+  set.loop(o12, 0);
+  set.cel(o12, 11);
+  position(o12, 94, 112);
+  draw(o12);
+  stop.cycling(o12);
+  animate.obj(o13);
+  ignore.objs(o13);
+  set.view(o13, 24);
+  set.loop(o13, 0);
+  set.cel(o13, 12);
+  position(o13, 34, 143);
+  draw(o13);
+  stop.cycling(o13);
+  animate.obj(o14);
+  ignore.objs(o14);
+  set.view(o14, 24);
+  set.loop(o14, 0);
+  set.cel(o14, 13);
+  position(o14, 54, 143);
+  draw(o14);
+  stop.cycling(o14);
+  animate.obj(o15);
+  ignore.objs(o15);
+  set.view(o15, 24);
+  set.loop(o15, 0);
+  set.cel(o15, 14);
+  position(o15, 74, 143);
+  draw(o15);
+  stop.cycling(o15);
+  stop.update(o1);
+  stop.update(o2);
+  stop.update(o3);
+  stop.update(o4);
+  stop.update(o5);
+  stop.update(o6);
+  stop.update(o7);
+  stop.update(o8);
+  stop.update(o9);
+  stop.update(o10);
+  stop.update(o11);
+  stop.update(o12);
+  stop.update(o13);
+  stop.update(o14);
+  stop.update(o15);
+  set.priority(Ego, 4);
+  set.priority(o1, 10);
+  set.priority(o2, 10);
+  set.priority(o3, 10);
+  set.priority(o4, 10);
+  set.priority(o5, 10);
+  set.priority(o6, 10);
+  set.priority(o7, 10);
+  set.priority(o8, 10);
+  set.priority(o9, 10);
+  set.priority(o10, 10);
+  set.priority(o11, 10);
+  set.priority(o12, 10);
+  set.priority(o13, 10);
+  set.priority(o14, 10);
+  set.priority(o15, 10);
+  assignn(v100, 0);
+  if (has("Diagram")) {
+    load.view(207);
+    add.to.pic(207, 0, 0, 10, 10, 6, 0);
+  }
+  prevent.input();
+  display(23, 11, "Press F6 to quit");
+}
+if (equaln(v100,0)) {
+  if (posn(Ego,78,90,79,110)) {
+    assignn(v120, 1);
+    assignn(v117, 100);
+    if (equaln(v103,0)) {
+      assignv(v103, v104);
+      assignn(v104, 0);
+      assignv(v117, v103);
+    }
+    if (equaln(v102,0)) {
+      assignv(v102, v103);
+      assignn(v103, 0);
+      assignv(v117, v102);
+    }
+    if (equaln(v101,0)) {
+      assignv(v101, v102);
+      assignn(v102, 0);
+      assignv(v117, v101);
+    }
+    if (equaln(v107,0)) {
+      assignv(v107, v108);
+      assignn(v108, 0);
+      assignv(v117, v107);
+    }
+    if (equaln(v106,0)) {
+      assignv(v106, v107);
+      assignn(v107, 0);
+      assignv(v117, v106);
+    }
+    if (equaln(v105,0)) {
+      assignv(v105, v106);
+      assignn(v106, 0);
+      assignv(v117, v105);
+    }
+    if (equaln(v111,0)) {
+      assignv(v111, v112);
+      assignn(v112, 0);
+      assignv(v117, v111);
+    }
+    if (equaln(v110,0)) {
+      assignv(v110, v111);
+      assignn(v111, 0);
+      assignv(v117, v110);
+    }
+    if (equaln(v109,0)) {
+      assignv(v109, v110);
+      assignn(v110, 0);
+      assignv(v117, v109);
+    }
+    if (equaln(v115,0)) {
+      assignv(v115, v116);
+      assignn(v116, 0);
+      assignv(v117, v115);
+    }
+    if (equaln(v114,0)) {
+      assignv(v114, v115);
+      assignn(v115, 0);
+      assignv(v117, v114);
+    }
+    if (equaln(v113,0)) {
+      assignv(v113, v114);
+      assignn(v114, 0);
+      assignv(v117, v113);
+    }
+    goto(Label1);
+  }
+  if (posn(Ego,81,90,83,110)) {
+    assignn(v120, 2);
+    assignn(v117, 100);
+    if (equaln(v102,0)) {
+      assignv(v102, v101);
+      assignn(v101, 0);
+      assignv(v117, v102);
+    }
+    if (equaln(v103,0)) {
+      assignv(v103, v102);
+      assignn(v102, 0);
+      assignv(v117, v103);
+    }
+    if (equaln(v104,0)) {
+      assignv(v104, v103);
+      assignn(v103, 0);
+      assignv(v117, v104);
+    }
+    if (equaln(v106,0)) {
+      assignv(v106, v105);
+      assignn(v105, 0);
+      assignv(v117, v106);
+    }
+    if (equaln(v107,0)) {
+      assignv(v107, v106);
+      assignn(v106, 0);
+      assignv(v117, v107);
+    }
+    if (equaln(v108,0)) {
+      assignv(v108, v107);
+      assignn(v107, 0);
+      assignv(v117, v108);
+    }
+    if (equaln(v110,0)) {
+      assignv(v110, v109);
+      assignn(v109, 0);
+      assignv(v117, v110);
+    }
+    if (equaln(v111,0)) {
+      assignv(v111, v110);
+      assignn(v110, 0);
+      assignv(v117, v111);
+    }
+    if (equaln(v112,0)) {
+      assignv(v112, v111);
+      assignn(v111, 0);
+      assignv(v117, v112);
+    }
+    if (equaln(v114,0)) {
+      assignv(v114, v113);
+      assignn(v113, 0);
+      assignv(v117, v114);
+    }
+    if (equaln(v115,0)) {
+      assignv(v115, v114);
+      assignn(v114, 0);
+      assignv(v117, v115);
+    }
+    if (equaln(v116,0)) {
+      assignv(v116, v115);
+      assignn(v115, 0);
+      assignv(v117, v116);
+    }
+    goto(Label1);
+  }
+  if (posn(Ego,79,90,83,99)) {
+    assignn(v120, 3);
+    assignn(v117, 100);
+    if (equaln(v109,0)) {
+      assignv(v109, v113);
+      assignn(v113, 0);
+      assignv(v117, v109);
+    }
+    if (equaln(v105,0)) {
+      assignv(v105, v109);
+      assignn(v109, 0);
+      assignv(v117, v105);
+    }
+    if (equaln(v101,0)) {
+      assignv(v101, v105);
+      assignn(v105, 0);
+      assignv(v117, v101);
+    }
+    if (equaln(v110,0)) {
+      assignv(v110, v114);
+      assignn(v114, 0);
+      assignv(v117, v110);
+    }
+    if (equaln(v106,0)) {
+      assignv(v106, v110);
+      assignn(v110, 0);
+      assignv(v117, v106);
+    }
+    if (equaln(v102,0)) {
+      assignv(v102, v106);
+      assignn(v106, 0);
+      assignv(v117, v102);
+    }
+    if (equaln(v111,0)) {
+      assignv(v111, v115);
+      assignn(v115, 0);
+      assignv(v117, v111);
+    }
+    if (equaln(v107,0)) {
+      assignv(v107, v111);
+      assignn(v111, 0);
+      assignv(v117, v107);
+    }
+    if (equaln(v103,0)) {
+      assignv(v103, v107);
+      assignn(v107, 0);
+      assignv(v117, v103);
+    }
+    if (equaln(v112,0)) {
+      assignv(v112, v116);
+      assignn(v116, 0);
+      assignv(v117, v112);
+    }
+    if (equaln(v108,0)) {
+      assignv(v108, v112);
+      assignn(v112, 0);
+      assignv(v117, v108);
+    }
+    if (equaln(v104,0)) {
+      assignv(v104, v108);
+      assignn(v108, 0);
+      assignv(v117, v104);
+    }
+    goto(Label1);
+  }
+  if (posn(Ego,79,101,83,110)) {
+    assignn(v120, 4);
+    assignn(v117, 100);
+    if (equaln(v105,0)) {
+      assignv(v105, v101);
+      assignn(v101, 0);
+      assignv(v117, v105);
+    }
+    if (equaln(v109,0)) {
+      assignv(v109, v105);
+      assignn(v105, 0);
+      assignv(v117, v109);
+    }
+    if (equaln(v113,0)) {
+      assignv(v113, v109);
+      assignn(v109, 0);
+      assignv(v117, v113);
+    }
+    if (equaln(v106,0)) {
+      assignv(v106, v102);
+      assignn(v102, 0);
+      assignv(v117, v106);
+    }
+    if (equaln(v110,0)) {
+      assignv(v110, v106);
+      assignn(v106, 0);
+      assignv(v117, v110);
+    }
+    if (equaln(v114,0)) {
+      assignv(v114, v110);
+      assignn(v110, 0);
+      assignv(v117, v114);
+    }
+    if (equaln(v107,0)) {
+      assignv(v107, v103);
+      assignn(v103, 0);
+      assignv(v117, v107);
+    }
+    if (equaln(v111,0)) {
+      assignv(v111, v107);
+      assignn(v107, 0);
+      assignv(v117, v111);
+    }
+    if (equaln(v115,0)) {
+      assignv(v115, v111);
+      assignn(v111, 0);
+      assignv(v117, v115);
+    }
+    if (equaln(v108,0)) {
+      assignv(v108, v104);
+      assignn(v104, 0);
+      assignv(v117, v108);
+    }
+    if (equaln(v112,0)) {
+      assignv(v112, v108);
+      assignn(v108, 0);
+      assignv(v117, v112);
+    }
+    if (equaln(v116,0)) {
+      assignv(v116, v112);
+      assignn(v112, 0);
+      assignv(v117, v116);
+    }
+    goto(Label1);
+  }
+  goto(Label2);
+Label1:
+  stop.motion(Ego);
+  reposition.to(Ego, 80, 100);
+  if (equaln(v117,100)) {
+    start.motion(Ego);
+    assignn(v100, 0);
+    goto(Label2);
+  }
+  if (equaln(v117,1)) {
+    get.posn(o1, v118, v119);
+  }
+  if (equaln(v117,2)) {
+    get.posn(o2, v118, v119);
+  }
+  if (equaln(v117,3)) {
+    get.posn(o3, v118, v119);
+  }
+  if (equaln(v117,4)) {
+    get.posn(o4, v118, v119);
+  }
+  if (equaln(v117,5)) {
+    get.posn(o5, v118, v119);
+  }
+  if (equaln(v117,6)) {
+    get.posn(o6, v118, v119);
+  }
+  if (equaln(v117,7)) {
+    get.posn(o7, v118, v119);
+  }
+  if (equaln(v117,8)) {
+    get.posn(o8, v118, v119);
+  }
+  if (equaln(v117,9)) {
+    get.posn(o9, v118, v119);
+  }
+  if (equaln(v117,10)) {
+    get.posn(o10, v118, v119);
+  }
+  if (equaln(v117,11)) {
+    get.posn(o11, v118, v119);
+  }
+  if (equaln(v117,12)) {
+    get.posn(o12, v118, v119);
+  }
+  if (equaln(v117,13)) {
+    get.posn(o13, v118, v119);
+  }
+  if (equaln(v117,14)) {
+    get.posn(o14, v118, v119);
+  }
+  if (equaln(v117,15)) {
+    get.posn(o15, v118, v119);
+  }
+  if (equaln(v120,3)) {
+    subn(v119, 31);
+  }
+  if (equaln(v120,4)) {
+    addn(v119, 31);
+  }
+  if (equaln(v120,1)) {
+    subn(v118, 20);
+  }
+  if (equaln(v120,2)) {
+    addn(v118, 20);
+  }
+  if (equaln(v117,1)) {
+    start.update(o1);
+    move.obj.v(o1, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,2)) {
+    start.update(o2);
+    move.obj.v(o2, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,3)) {
+    start.update(o3);
+    move.obj.v(o3, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,4)) {
+    start.update(o4);
+    move.obj.v(o4, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,5)) {
+    start.update(o5);
+    move.obj.v(o5, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,6)) {
+    start.update(o6);
+    move.obj.v(o6, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,7)) {
+    start.update(o7);
+    move.obj.v(o7, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,8)) {
+    start.update(o8);
+    move.obj.v(o8, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,9)) {
+    start.update(o9);
+    move.obj.v(o9, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,10)) {
+    start.update(o10);
+    move.obj.v(o10, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,11)) {
+    start.update(o11);
+    move.obj.v(o11, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,12)) {
+    start.update(o12);
+    move.obj.v(o12, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,13)) {
+    start.update(o13);
+    move.obj.v(o13, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,14)) {
+    start.update(o14);
+    move.obj.v(o14, v118, v119, object_edge_code, f100);
+  }
+  if (equaln(v117,15)) {
+    start.update(o15);
+    move.obj.v(o15, v118, v119, object_edge_code, f100);
+  }
+  assignn(v100, 1);
+}
+Label2:
+if (controller(c12)) {
+  accept.input();
+  disable.item(c12);
+  position.v(Ego, v122, v123);
+  assignv(cycle_delay, v121);
+  clear.lines(23, 23, 0);
+  new.room(15);
+}
+if (equaln(v100,1)) {
+  if (isset(f100)) {
+    if (equaln(v117,1)) {
+      stop.update(o1);
+    }
+    if (equaln(v117,2)) {
+      stop.update(o2);
+    }
+    if (equaln(v117,3)) {
+      stop.update(o3);
+    }
+    if (equaln(v117,4)) {
+      stop.update(o4);
+    }
+    if (equaln(v117,5)) {
+      stop.update(o5);
+    }
+    if (equaln(v117,6)) {
+      stop.update(o6);
+    }
+    if (equaln(v117,7)) {
+      stop.update(o7);
+    }
+    if (equaln(v117,8)) {
+      stop.update(o8);
+    }
+    if (equaln(v117,9)) {
+      stop.update(o9);
+    }
+    if (equaln(v117,10)) {
+      stop.update(o10);
+    }
+    if (equaln(v117,11)) {
+      stop.update(o11);
+    }
+    if (equaln(v117,12)) {
+      stop.update(o12);
+    }
+    if (equaln(v117,13)) {
+      stop.update(o13);
+    }
+    if (equaln(v117,14)) {
+      stop.update(o14);
+    }
+    if (equaln(v117,15)) {
+      stop.update(o15);
+    }
+    start.motion(Ego);
+    assignn(v100, 0);
+    if (equaln(v101,15) && 
+        equaln(v102,8) && 
+        equaln(v103,7) && 
+        equaln(v104,6)) {
+      if (equaln(v105,4) && 
+          equaln(v106,13) && 
+          equaln(v107,10) && 
+          equaln(v108,3)) {
+        if (equaln(v109,14) && 
+            equaln(v110,2) && 
+            equaln(v111,12) && 
+            equaln(v112,1)) {
+          if (equaln(v113,5) && 
+              equaln(v114,11) && 
+              equaln(v115,9) && 
+              equaln(v116,0)) {
+            print("\"This looks about right\" you say to yourself. And with "
+                  "that in mind you replace the panel.");
+            set(f213);
+            accept.input();
+            disable.item(c12);
+            position.v(Ego, v122, v123);
+            assignv(cycle_delay, v121);
+            clear.lines(23, 23, 0);
+            addn(score, 10);
+            new.room(15);
+          }
+        }
+      }
+    }
+  }
+}
+return();
+
+//Messages
+#message 1 "Press F6 to quit"
+#message 2 "\"This looks about right\" you say to yourself. And with that in mind you replace the panel."

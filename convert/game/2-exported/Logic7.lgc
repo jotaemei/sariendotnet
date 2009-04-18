@@ -1,0 +1,381 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(5);
+  load.view(12);
+  load.view(13);
+  if (!isset(f205)) {
+    load.view(4);
+    load.view(14);
+  }
+  reset(f254);
+  reset(f253);
+  set.horizon(50);
+  animate.obj(o1);
+  set.view(o1, 12);
+  ignore.blocks(o1);
+  position(o1, 146, 130);
+  set.priority(o1, 13);
+  if (isset(f206)) {
+    set.loop(o1, 2);
+    goto(Label1);
+  }
+  set.loop(o1, 0);
+Label1:
+  if (isset(f202)) {
+    set.cel(o1, 3);
+    goto(Label2);
+  }
+  set.cel(o1, 0);
+Label2:
+  draw(o1);
+  stop.cycling(o1);
+  stop.update(o1);
+  animate.obj(o2);
+  set.view(o2, 13);
+  ignore.blocks(o2);
+  position(o2, 94, 80);
+  set.priority(o2, 5);
+  set.cel(o2, 4);
+  draw(o2);
+  stop.cycling(o2);
+  start.update(o2);
+  reverse.loop(o2, f252);
+  assignn(v103, 0);
+  assignn(v100, 0);
+  observe.objs(Ego);
+  draw(Ego);
+  show.pic();
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("This is the front of your house. The bright and colorful garden is "
+        "ever so nice this time of year. A mailbox stands next to the path.");
+}
+if ((said("check out", "door") || 
+    said("check out", "floor") || 
+    said("check out", "path") || 
+    said("check out", "window") || 
+    said("check out", "fence") || 
+    said("check out", "drawer"))) {
+  print("Its just as it appears.");
+}
+if ((said("smell") || 
+    said("smell", "anyword"))) {
+  print("The flowers offer a pleasing armoa.");
+}
+if (said("hear")) {
+  print("You hear the leaves rustle amongst the soft morning breeze.");
+}
+if (said("check out", "house")) {
+  print("You have lived here, with Amy, for the past 5 years. You notice a "
+        "number just above the front door.");
+}
+if (said("check out", "garden")) {
+  print("Flowers poke up through several bushes whilst a large tree looms above "
+        "the lush green lawn.");
+}
+if (said("check out", "sleep")) {
+  print("A large oak tree looms above the garden providing a natural canopy.");
+}
+if (said("check out", "flower")) {
+  print("Many differently colored flowers are dotted about the garden.");
+}
+if (said("check out", "bush")) {
+  print("Several bushes lean against the front of the house.");
+}
+if ((said("search", "bush") || 
+    said("search", "garden"))) {
+  print("A quick search reveals nothing.");
+}
+if (said("check out", "blue box")) {
+  if (isset(f202)) {
+    print("The mailbox is currently open.");
+    goto(Label3);
+  }
+  print("The mailbox is currently closed.");
+}
+Label3:
+if (said("check out", "in", "blue box")) {
+  if (isset(f202)) {
+    if (posn(Ego,137,145,153,153)) {
+      if (isset(f206)) {
+        print("Peering inside the mailbox you find nothing.");
+        goto(Label4);
+      }
+      print("It looks like there's a parcel in there.");
+Label4:
+      goto(Label5);
+    }
+    print("You'll need to get closer.");
+Label5:
+    goto(Label6);
+  }
+  print("You can't, the mailbox is closed.");
+}
+Label6:
+if (said("check out", "envelope")) {
+  if (!isset(f206) && 
+      isset(f202)) {
+    print("There's a parcel inside the mailbox.");
+    goto(Label7);
+  }
+  if (has("Parcel")) {
+    reset(input_parsed);
+    goto(Label7);
+  }
+  print("You can't see that here.");
+}
+Label7:
+if (said("get", "envelope")) {
+  if (isset(f202)) {
+    if (posn(Ego,137,145,153,153)) {
+      if (isset(f206)) {
+        print("But the mailbox is empty.");
+        goto(Label8);
+      }
+      print("Taken.");
+      set(f206);
+      increment(score);
+      get("Parcel");
+      set.loop(o1, 2);
+Label8:
+      goto(Label9);
+    }
+    print("You'll need to get closer.");
+Label9:
+    goto(Label10);
+  }
+  print("You can't get that at the moment.");
+}
+Label10:
+if ((said("break", "window") || 
+    said("open", "window"))) {
+  print("You won't get into the house that way.");
+}
+if ((said("knock", "above", "door") || 
+    said("knock", "door"))) {
+  if (posn(Ego,91,80,103,82)) {
+    print("There's no answer.");
+    goto(Label11);
+  }
+  print("You'll need to get closer.");
+}
+Label11:
+if ((said("open", "door") || 
+    said("unlock", "door"))) {
+  if (posn(Ego,91,80,103,82)) {
+    assignn(v200, 255);
+    if (obj.in.room("Front door key",v200)) {
+      start.update(o2);
+      end.of.loop(o2, f253);
+      goto(Label12);
+    }
+    print("But you don't have the key. It looks like you've locked yourself out "
+          "of the house!");
+Label12:
+    goto(Label13);
+  }
+  print("You'll need to get closer.");
+}
+Label13:
+if (isset(f253)) {
+  position(Ego, 60, 152);
+  new.room(6);
+}
+if (said("open", "blue box")) {
+  if (!isset(f202)) {
+    if (posn(Ego,137,145,153,153)) {
+      set(f202);
+      start.update(o1);
+      end.of.loop(o1, f255);
+      goto(Label14);
+    }
+    print("You'll need to get closer.");
+Label14:
+    goto(Label15);
+  }
+  print("The mailbox is already open.");
+}
+Label15:
+if (said("close", "blue box")) {
+  if (isset(f202)) {
+    if (posn(Ego,137,145,153,153)) {
+      reset(f202);
+      start.update(o1);
+      reverse.loop(o1, f252);
+      goto(Label16);
+    }
+    print("You'll need to get closer.");
+Label16:
+    goto(Label17);
+  }
+  print("The mailbox is already closed.");
+}
+Label17:
+if (!isset(f254) && 
+    (equaln(ego_edge_code,2) || 
+    equaln(ego_edge_code,4))) {
+  print("You don't feel like going for a walk just yet.");
+  set(f254);
+}
+if (!greatern(ego_edge_code,0) && 
+    isset(f254)) {
+  reset(f254);
+}
+if (said("ascend", "sleep")) {
+  print("You can't find a good place to climb up.");
+}
+if (said("ascend", "fence")) {
+  print("There's nothing over there of interest to you.");
+}
+if (said("get", "flower")) {
+  assignn(v200, 255);
+  if (!obj.in.room("Flower",v200)) {
+    if ((posn(Ego,128,87,152,99) || 
+        posn(Ego,24,92,56,99))) {
+      print("You take a single flower from the garden.");
+      increment(score);
+      get("Flower");
+      goto(Label18);
+    }
+    print("You'll need to get closer.");
+Label18:
+    goto(Label19);
+  }
+  print("But, you've already got a flower!");
+}
+Label19:
+if ((said("communicate") || 
+    said("communicate", "female"))) {
+  if (equaln(v100,40)) {
+    print("\"Good morning\" she replies.");
+    goto(Label20);
+  }
+  print("You don't see anybody here!");
+}
+Label20:
+if (said("check out", "female")) {
+  if (equaln(v100,40)) {
+    print("She's just a neighbor walking her dog.");
+    goto(Label21);
+  }
+  print("You don't see anybody here!");
+}
+Label21:
+if (said("check out", "animal")) {
+  if (equaln(v100,40)) {
+    print("It's your neighbors dog enjoying his morning walk.");
+    goto(Label22);
+  }
+  print("You don't see a dog here!");
+}
+Label22:
+if ((isset(ego_on_water) || 
+    posn(Ego,1,99,35,119))) {
+  set.view(Ego, 5);
+  goto(Label23);
+}
+set.view.v(Ego, ego_view_no);
+Label23:
+if (!isset(f205)) {
+  if (lessn(v100,40)) {
+    increment(v100);
+    if (equaln(v100,40)) {
+      animate.obj(o3);
+      set.view(o3, 4);
+      ignore.objs(o3);
+      position(o3, 1, 157);
+      set.loop(o3, 0);
+      draw(o3);
+      animate.obj(o4);
+      set.view(o4, 14);
+      ignore.objs(o4);
+      position(o4, 8, 157);
+      set.loop(o4, 0);
+      draw(o4);
+      assignn(v101, 3);
+      set.dir(o3, v101);
+      set.dir(o4, v101);
+    }
+    goto(Label24);
+  }
+  get.posn(o4, v101, v102);
+  if (greatern(v101,143)) {
+    increment(v100);
+    set(f205);
+    erase(o4);
+    stop.update(o4);
+    erase(o3);
+    stop.update(o3);
+    if (equaln(v103,1)) {
+      assignn(v35, 1);
+    }
+  }
+}
+Label24:
+if (equaln(ego_view_no,1)) {
+  get.posn(o3, v101, v102);
+  if (equaln(v101,20)) {
+    print("\"My Goodness!\" your neighbor blurts.");
+    print("\"Did you forget to put your clothes on this morning?\" she asks.");
+    print("With a little giggle your neighbor carries on her way, while you die "
+          "of embarassment.");
+    animate.obj(o5);
+    set.view(o5, 12);
+    ignore.objs(o5);
+    get.posn(Ego, v101, v102);
+    position.v(o5, v101, v102);
+    set.loop(o5, 1);
+    assignn(v101, 2);
+    cycle.time(o5, v101);
+    draw(o5);
+    program.control();
+    stop.motion(Ego);
+    erase(Ego);
+    assignn(v103, 1);
+  }
+}
+return();
+
+//Messages
+#message 1 "This is the front of your house. The bright and colorful garden is ever so nice this time of year. A mailbox stands next to the path."
+#message 2 "Its just as it appears."
+#message 3 "The flowers offer a pleasing armoa."
+#message 4 "You hear the leaves rustle amongst the soft morning breeze."
+#message 5 "You have lived here, with Amy, for the past 5 years. You notice a number just above the front door."
+#message 6 "Flowers poke up through several bushes whilst a large tree looms above the lush green lawn."
+#message 7 "A large oak tree looms above the garden providing a natural canopy."
+#message 8 "Many differently colored flowers are dotted about the garden."
+#message 9 "Several bushes lean against the front of the house."
+#message 10 "A quick search reveals nothing."
+#message 11 "The mailbox is currently open."
+#message 12 "The mailbox is currently closed."
+#message 13 "Peering inside the mailbox you find nothing."
+#message 14 "It looks like there's a parcel in there."
+#message 15 "You'll need to get closer."
+#message 16 "You can't, the mailbox is closed."
+#message 17 "There's a parcel inside the mailbox."
+#message 18 "You can't see that here."
+#message 19 "But the mailbox is empty."
+#message 20 "Taken."
+#message 21 "You can't get that at the moment."
+#message 22 "You won't get into the house that way."
+#message 23 "There's no answer."
+#message 24 "But you don't have the key. It looks like you've locked yourself out of the house!"
+#message 25 "The mailbox is already open."
+#message 26 "The mailbox is already closed."
+#message 27 "You don't feel like going for a walk just yet."
+#message 28 "You can't find a good place to climb up."
+#message 29 "There's nothing over there of interest to you."
+#message 30 "You take a single flower from the garden."
+#message 31 "But, you've already got a flower!"
+#message 32 "\"Good morning\" she replies."
+#message 33 "You don't see anybody here!"
+#message 34 "She's just a neighbor walking her dog."
+#message 35 "It's your neighbors dog enjoying his morning walk."
+#message 36 "You don't see a dog here!"
+#message 37 "\"My Goodness!\" your neighbor blurts."
+#message 38 "\"Did you forget to put your clothes on this morning?\" she asks."
+#message 39 "With a little giggle your neighbor carries on her way, while you die of embarassment."

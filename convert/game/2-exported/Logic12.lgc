@@ -1,0 +1,261 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(10);
+  assignn(v200, 12);
+  load.view(10);
+  if (obj.in.room("Toilet paper",v200)) {
+    load.view(7);
+    animate.obj(o1);
+    set.view(o1, 7);
+    set.loop(o1, 0);
+    set.cel(o1, 3);
+    position(o1, 98, 92);
+    draw(o1);
+    stop.cycling(o1);
+  }
+  animate.obj(o3);
+  set.view(o3, 10);
+  set.loop(o3, 2);
+  if (isset(f204)) {
+    set.cel(o3, 6);
+    goto(Label1);
+  }
+  set.cel(o3, 0);
+Label1:
+  position(o3, 101, 85);
+  draw(o3);
+  stop.cycling(o3);
+  animate.obj(o2);
+  set.view(o2, 10);
+  set.cel(o2, 0);
+  ignore.blocks(o2);
+  ignore.objs(o2);
+  position(o2, 102, 115);
+  stop.cycling(o2);
+  ignore.objs(Ego);
+  draw(Ego);
+  show.pic();
+}
+if ((said("check out") || 
+    said("check out", "area"))) {
+  print("The bathroom comes complete with all basic features. Bath, toilet and "
+        "sink.");
+}
+if (said("check out", "artwork")) {
+  print("It's of a beautiful tropical beach.");
+}
+if (said("check out", "bath")) {
+  print("You look at the large white (and clean) bath. Some shampoo bottles are "
+        "resting on the side.");
+}
+if ((said("check out", "shampoo") || 
+    said("check out", "bottle"))) {
+  print("Some shampoo bottles are resting on the side of the bath.");
+}
+if (said("check out", "bookpage")) {
+  assignn(v200, 12);
+  if (obj.in.room("Toilet paper",v200)) {
+    print("It's just as it appears.");
+    goto(Label2);
+  }
+  reset(input_parsed);
+}
+Label2:
+if (said("check out", "blanket")) {
+  print("It's just as it appears.");
+}
+if (said("check out", "throne")) {
+  print("Next to the toilet you notice a roll of toilet paper.");
+}
+if ((said("check out", "behind", "throne") || 
+    said("check out", "in", "throne"))) {
+  print("You find nothing of interest.");
+}
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if ((said("check out", "window") || 
+    said("check out", "a", "window"))) {
+  print("From this window you can see all the way down your street. Next to the "
+        "window you notice a cord.");
+}
+if ((said("check out", "cactus") || 
+    said("check out", "flower"))) {
+  print("You spot a potted cactus in the corner of the room.");
+}
+if ((said("check out", "bowl") || 
+    said("check out", "faucet"))) {
+  print("Its just as it appears.");
+}
+if (said("check out", "cord")) {
+  print("Its a cord for pulling down the blind.");
+}
+if ((said("check out", "mirror") || 
+    said("check out", "in", "mirror"))) {
+  print("Looking in the mirror you see the face of a middle aged man.");
+}
+if (said("check out", "blind")) {
+  print("There's a cord attached to it.");
+  if (isset(f204)) {
+    print("On the blind you notice the number 71 clearly written. How odd.");
+  }
+}
+if (said("bathe", "hand")) {
+  if (posn(Ego,96,110,108,122)) {
+    print("Ok, you wash your hands. Big deal.");
+    goto(Label3);
+  }
+  print("You're not close enough.");
+}
+Label3:
+if (said("get", "cactus")) {
+  print("No, its far too prickly. And anyway, it's just meant to decorate the "
+        "room.");
+}
+if ((said("move", "cord") || 
+    said("use", "cord") || 
+    said("move", "cord"))) {
+  if (posn(Ego,80,115,102,125)) {
+    set(f255);
+    assignn(v200, 0);
+    goto(Label4);
+  }
+  if (posn(Ego,80,100,102,115)) {
+    get.posn(Ego, v202, v201);
+    assignn(v201, 115);
+    if (lessn(v202,94)) {
+      assignn(v202, 94);
+    }
+    move.obj.v(Ego, v202, v201, object_touching_edge, f255);
+    assignn(v200, 0);
+    goto(Label4);
+  }
+  print("You're not close enough.");
+}
+Label4:
+if (isset(f255)) {
+  if (equaln(v200,3)) {
+    draw(Ego);
+    erase(o2);
+    player.control();
+  }
+  if (equaln(v200,2)) {
+    reverse.loop(o2, f255);
+    assignn(v200, 3);
+    toggle(f204);
+    if (isset(f204)) {
+      end.of.loop(o3, f254);
+      goto(Label5);
+    }
+    reverse.loop(o3, f254);
+  }
+Label5:
+  if (equaln(v200,1)) {
+    if (equaln(ego_view_no,1)) {
+      set.loop(o2, 0);
+      goto(Label6);
+    }
+    set.loop(o2, 1);
+Label6:
+    draw(o2);
+    erase(Ego);
+    program.control();
+    end.of.loop(o2, f255);
+    assignn(v200, 2);
+  }
+  if (equaln(v200,0)) {
+    assignn(v200, 1);
+    move.obj(Ego, 102, 115, 1, f255);
+  }
+}
+if (said("open", "window")) {
+  print("You can't, its stuck.");
+}
+if (said("close", "window")) {
+  print("It already is.");
+}
+if ((said("flush", "throne") || 
+    said("flush"))) {
+  if (posn(Ego,81,80,97,103)) {
+    print("Fwhoooosh!");
+    print("Gurgle!");
+    goto(Label7);
+  }
+  print("You're not close enough.");
+}
+Label7:
+if ((said("get", "crap") || 
+    said("rest", "throne") || 
+    said("rest", "above", "throne") || 
+    said("use", "throne") || 
+    said("rest") || 
+    said("crap"))) {
+  print("But you don't need to go.");
+}
+if ((said("get", "bath") || 
+    said("use", "bath") || 
+    said("jog", "bath") || 
+    said("bathe") || 
+    said("get", "in", "bath"))) {
+  print("Why? You last had a bath only two months ago.");
+}
+if ((said("get", "shampoo") || 
+    said("get", "bottle"))) {
+  print("You don't really need any shampoo at the moment.");
+}
+if (said("get", "bookpage")) {
+  assignn(v200, 12);
+  if (obj.in.room("Toilet paper",v200)) {
+    if (posn(Ego,88,97,100,106)) {
+      print("You grab a few sheets of toilet paper.");
+      increment(score);
+      get("Toilet paper");
+      erase(o1);
+      goto(Label8);
+    }
+    print("You'll need to get closer.");
+Label8:
+    goto(Label9);
+  }
+  print("You've already got some toilet paper.");
+}
+Label9:
+if (posn(Ego,20,110,22,132)) {
+  position(Ego, 134, 76);
+  new.room(3);
+}
+return();
+
+//Messages
+#message 1 "The bathroom comes complete with all basic features. Bath, toilet and sink."
+#message 2 "It's of a beautiful tropical beach."
+#message 3 "You look at the large white (and clean) bath. Some shampoo bottles are resting on the side."
+#message 4 "Some shampoo bottles are resting on the side of the bath."
+#message 5 "It's just as it appears."
+#message 6 "Next to the toilet you notice a roll of toilet paper."
+#message 7 "You find nothing of interest."
+#message 8 "You look under the rug and find....."
+#message 9 "absolutely nothing."
+#message 10 "From this window you can see all the way down your street. Next to the window you notice a cord."
+#message 11 "You spot a potted cactus in the corner of the room."
+#message 12 "Its just as it appears."
+#message 13 "Its a cord for pulling down the blind."
+#message 14 "Looking in the mirror you see the face of a middle aged man."
+#message 15 "There's a cord attached to it."
+#message 16 "On the blind you notice the number 71 clearly written. How odd."
+#message 17 "Ok, you wash your hands. Big deal."
+#message 18 "You're not close enough."
+#message 19 "No, its far too prickly. And anyway, it's just meant to decorate the room."
+#message 20 "You can't, its stuck."
+#message 21 "It already is."
+#message 22 "Fwhoooosh!"
+#message 23 "Gurgle!"
+#message 24 "But you don't need to go."
+#message 25 "Why? You last had a bath only two months ago."
+#message 26 "You don't really need any shampoo at the moment."
+#message 27 "You grab a few sheets of toilet paper."
+#message 28 "You'll need to get closer."
+#message 29 "You've already got some toilet paper."

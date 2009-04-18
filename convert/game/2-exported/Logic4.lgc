@@ -1,0 +1,426 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  load.view(1);
+  load.view(0);
+  load.view(6);
+  load.view(7);
+  load.view(8);
+  load.view(16);
+  add.to.pic(8, 0, 0, 12, 79, 5, 0);
+  add.to.pic(8, 2, 0, 13, 120, 11, 0);
+  if (!isset(f201)) {
+    add.to.pic(8, 1, 0, 31, 116, 10, 0);
+  }
+  set.horizon(50);
+  if (equaln(prev_room_no,3)) {
+    position(Ego, 144, 122);
+  }
+  if (equaln(prev_room_no,5)) {
+    assignn(ego_view_no, 1);
+    set.view.v(Ego, ego_view_no);
+  }
+  reset(auto_restart);
+  animate.obj(o3);
+  set.view(o3, 16);
+  set.loop(o3, 3);
+  set.cel(o3, 2);
+  set.priority(o3, 4);
+  ignore.objs(o3);
+  ignore.blocks(o3);
+  position(o3, 85, 142);
+  draw(o3);
+  stop.cycling(o3);
+  animate.obj(o1);
+  set.view(o1, 6);
+  set.cel(o1, 0);
+  if (isset(f200)) {
+    set.loop(o1, 1);
+    goto(Label1);
+  }
+  set.loop(o1, 0);
+Label1:
+  position(o1, 100, 99);
+  set.priority(o1, 5);
+  draw(o1);
+  if (equaln(ego_view_no,1)) {
+    animate.obj(o2);
+    set.view(o2, 7);
+    set.cel(o2, 0);
+    set.loop(o2, 0);
+    position(o2, 103, 129);
+    set.priority(o2, 5);
+    draw(o2);
+    stop.update(o2);
+  }
+  ignore.objs(Ego);
+  draw(Ego);
+  show.pic();
+}
+if ((said("get", "down", "anyword") || 
+    said("ascend", "down") || 
+    said("ascend", "down") || 
+    said("ascend", "down", "anyword") || 
+    said("ascend", "down", "anyword") || 
+    said("knock", "down"))) {
+  if (!isset(auto_restart)) {
+    print("You aren't on it.");
+    goto(Label2);
+  }
+  print("You step down.");
+  erase(Ego);
+  position(Ego, 108, 105);
+  draw(Ego);
+  start.motion(Ego);
+  reset(auto_restart);
+}
+Label2:
+if (said("build", "bed")) {
+  if (posn(Ego,38,102,46,108)) {
+    if (!isset(f201)) {
+      set(f201);
+      add.to.pic(8, 1, 1, 31, 116, 10, 0);
+      addn(score, 1);
+      goto(Label3);
+    }
+    print("You already have.");
+Label3:
+    goto(Label4);
+  }
+  print("You'll need to get closer.");
+}
+Label4:
+if (said("get", "framed photo")) {
+  print("It's just fine where it is.");
+}
+if (said("check out", "framed photo")) {
+  if (posn(Ego,10,127,32,145)) {
+    new.room(14);
+    goto(Label5);
+  }
+  print("You'll need to get closer.");
+}
+Label5:
+if ((said("get", "above", "drawer") || 
+    said("ascend", "above", "drawer") || 
+    said("knock", "above", "drawer") || 
+    said("ascend", "up"))) {
+  if (posn(Ego,96,99,125,107)) {
+    if (isset(f200)) {
+      print("You step up onto the drawer.");
+      erase(Ego);
+      position(Ego, 108, 93);
+      draw(Ego);
+      stop.motion(Ego);
+      set(auto_restart);
+      goto(Label6);
+    }
+    print("You can't. It's closed.");
+Label6:
+    goto(Label7);
+  }
+  print("You'll need to get closer.");
+}
+Label7:
+if ((said("check out") || 
+    said("check out", "bedroom") || 
+    said("check out", "area"))) {
+  print("This is your spacious bedroom. The main feature of the room is your "
+        "double bed. At the back is a closet and on the floor lies a rug.");
+  if (equaln(ego_view_no,1)) {
+    print("You notice your clothes on the floor.");
+  }
+}
+if ((said("search") || 
+    said("search", "bedroom") || 
+    said("search", "area"))) {
+  print("You'll have to be more specific about what you want to search.");
+}
+if ((said("check out", "floor") || 
+    said("check out", "above", "floor"))) {
+  if (equaln(ego_view_no,1)) {
+    print("Your clothes lie motionless on the floor.");
+    goto(Label8);
+  }
+  print("Its just as it appears.");
+}
+Label8:
+if ((said("check out", "ceiling") || 
+    said("check out", "blanket") || 
+    said("check out", "fence") || 
+    said("check out", "beams"))) {
+  print("Its just as it appears.");
+}
+if ((said("move", "blanket") || 
+    said("open", "window") || 
+    said("move", "bed") || 
+    said("move", "closet"))) {
+  print("You do not need to.");
+}
+if ((said("get", "blanket") || 
+    said("get", "bed") || 
+    said("get", "closet"))) {
+  print("Its much too cumbersome to carry around.");
+}
+if ((said("close", "blind") || 
+    said("get", "blind") || 
+    said("move", "blind"))) {
+  print("They look fine just the way they are.");
+}
+if (said("open", "drawer")) {
+  if (isset(f200)) {
+    print("It's already open.");
+    goto(Label9);
+  }
+  if (posn(Ego,96,99,125,107)) {
+    print("The drawer slides open.");
+    set.loop(o1, 1);
+    set(f200);
+    goto(Label9);
+  }
+  print("You'll need to get closer.");
+}
+Label9:
+if (said("close", "drawer")) {
+  if (isset(auto_restart)) {
+    print("You can't do that while standing on the drawer!");
+    goto(Label10);
+  }
+  if (!isset(f200)) {
+    print("It's already closed.");
+    goto(Label10);
+  }
+  if (posn(Ego,96,99,125,107)) {
+    print("You firmly push the drawer shut.");
+    set.loop(o1, 0);
+    reset(f200);
+    goto(Label10);
+  }
+  print("You'll need to get closer.");
+}
+Label10:
+if (said("check out", "drawer")) {
+  if (isset(f200)) {
+    print("It is currently open.");
+    goto(Label11);
+  }
+  print("It is currently closed.");
+}
+Label11:
+if ((said("check out", "in", "drawer") || 
+    said("search", "drawer"))) {
+  if (isset(f200)) {
+    print("The drawer contains nothing you need.");
+    goto(Label12);
+  }
+  print("You can't. It's closed.");
+}
+Label12:
+if ((said("open", "blind") || 
+    said("close", "cabinet"))) {
+  print("They already are!");
+}
+if ((said("close", "window") || 
+    said("close", "closet"))) {
+  print("It already is!");
+}
+if ((said("search", "cabinet") || 
+    said("check out", "in", "cabinet") || 
+    said("open", "cabinet"))) {
+  print("They are both empty.");
+}
+if (said("check out", "beneath", "blanket")) {
+  print("You look under the rug and find.....");
+  print("absolutely nothing.");
+}
+if (said("check out", "window")) {
+  print("Light pours through the window on this beautiful morning.");
+  print("However, the days haven't seemed so bright since Amy died.");
+}
+if (said("check out", "artwork")) {
+  print("The picture depicts a snow-capped mountain range.");
+}
+if ((said("check out", "cabinet") || 
+    said("check out", "above", "cabinet"))) {
+  print("On one of the tables lies a framed photograph.");
+}
+if (said("check out", "blind")) {
+  print("The curtains delicately complement the mood of the room.");
+}
+if (said("check out", "behind", "blind")) {
+  print("Nope. Nothing behind them.");
+}
+if ((said("check out", "bed") || 
+    said("check out", "above", "bed"))) {
+  print("It's a kingsize bed with tables on either side.");
+}
+if ((said("check out", "in", "bed") || 
+    said("search", "bed"))) {
+  print("The bed contains nothing.");
+}
+if (said("check out", "closet")) {
+  print("A large closet graces the far wall. At the bottom there appears to be "
+        "a drawer.");
+}
+if ((said("get", "dust") || 
+    said("check out", "dust"))) {
+  print("It's of no use to you.");
+}
+if ((said("check out", "in", "blue box") || 
+    said("search", "blue box") || 
+    said("open", "blue box"))) {
+  if (isset(auto_restart)) {
+    assignn(v200, 4);
+    if (obj.in.room("Batteries",v200)) {
+      print("You look inside the box and find...some batteries.");
+      goto(Label13);
+    }
+    print("You look inside the box and find it completely empty.");
+Label13:
+    goto(Label14);
+  }
+  print("You can't look in the box from here.");
+}
+Label14:
+if (said("get", "blue box")) {
+  if (isset(auto_restart)) {
+    print("You don't really want the box. But you could try looking inside it.");
+    goto(Label15);
+  }
+  print("You can't get the box from here.");
+}
+Label15:
+if (said("get", "batteries")) {
+  assignn(v200, 4);
+  if (obj.in.room("Batteries",v200)) {
+    if (isset(auto_restart)) {
+      print("Taken.");
+      addn(score, 4);
+      get("Batteries");
+      goto(Label16);
+    }
+    print("You can't see any batteries here.");
+Label16:
+    goto(Label17);
+  }
+  print("But, you've already got the them!");
+}
+Label17:
+if ((said("check out", "in", "closet") || 
+    said("open", "closet") || 
+    said("search", "closet"))) {
+  if (posn(Ego,96,79,125,107)) {
+    print("You take a peek inside your closet and find an array of clothes, "
+          "none of which you need.");
+    goto(Label18);
+  }
+  print("You'll need to get closer.");
+}
+Label18:
+if ((said("check out", "above", "closet") || 
+    said("check out", "blue box"))) {
+  print("Peering up you see a small blue box on the closet.");
+}
+if ((said("check out", "beneath", "closet") || 
+    said("check out", "beneath", "bed"))) {
+  print("It's pretty dark, but you can just make out some dust.");
+}
+if (said("check out", "clothes")) {
+  if (equaln(ego_view_no,1)) {
+    print("Your clothes lie motionless on the floor.");
+    goto(Label19);
+  }
+  print("You are currently wearing them.");
+}
+Label19:
+if (said("sleep")) {
+  print("You've only just go up!");
+}
+if ((said("put on", "clothes") || 
+    said("get", "clothes"))) {
+  if (equaln(ego_view_no,1)) {
+    if (!posn(Ego,97,118,120,132)) {
+      print("You'll need to get closer.");
+      goto(Label20);
+    }
+    print("You pick up your clothes and put them on.");
+    assignn(ego_view_no, 0);
+    load.view.v(ego_view_no);
+    set.view.v(Ego, ego_view_no);
+    erase(o2);
+    addn(score, 1);
+Label20:
+    goto(Label21);
+  }
+  print("But you're already wearing your clothes.");
+}
+Label21:
+if (posn(Ego,145,50,150,150)) {
+  new.room(3);
+}
+if (posn(Ego,51,80,88,135)) {
+  current.loop(Ego, v103);
+  current.cel(Ego, v102);
+  get.posn(Ego, v100, v101);
+  addn(v101, 31);
+  set.loop.v(o3, v103);
+  set.cel.v(o3, v102);
+  reposition.to.v(o3, v100, v101);
+}
+return();
+
+//Messages
+#message 1 "You aren't on it."
+#message 2 "You step down."
+#message 3 "You already have."
+#message 4 "You'll need to get closer."
+#message 5 "It's just fine where it is."
+#message 6 "You step up onto the drawer."
+#message 7 "You can't. It's closed."
+#message 8 "This is your spacious bedroom. The main feature of the room is your double bed. At the back is a closet and on the floor lies a rug."
+#message 9 "You notice your clothes on the floor."
+#message 10 "You'll have to be more specific about what you want to search."
+#message 11 "Your clothes lie motionless on the floor."
+#message 12 "Its just as it appears."
+#message 13 "You do not need to."
+#message 14 "Its much too cumbersome to carry around."
+#message 15 "They look fine just the way they are."
+#message 16 "It's already open."
+#message 17 "The drawer slides open."
+#message 18 "You can't do that while standing on the drawer!"
+#message 19 "It's already closed."
+#message 20 "You firmly push the drawer shut."
+#message 21 "It is currently open."
+#message 22 "It is currently closed."
+#message 23 "The drawer contains nothing you need."
+#message 24 "They already are!"
+#message 25 "It already is!"
+#message 26 "They are both empty."
+#message 27 "You look under the rug and find....."
+#message 28 "absolutely nothing."
+#message 29 "Light pours through the window on this beautiful morning."
+#message 30 "However, the days haven't seemed so bright since Amy died."
+#message 31 "The picture depicts a snow-capped mountain range."
+#message 32 "On one of the tables lies a framed photograph."
+#message 33 "The curtains delicately complement the mood of the room."
+#message 34 "Nope. Nothing behind them."
+#message 35 "It's a kingsize bed with tables on either side."
+#message 36 "The bed contains nothing."
+#message 37 "A large closet graces the far wall. At the bottom there appears to be a drawer."
+#message 38 "It's of no use to you."
+#message 39 "You look inside the box and find...some batteries."
+#message 40 "You look inside the box and find it completely empty."
+#message 41 "You can't look in the box from here."
+#message 42 "You don't really want the box. But you could try looking inside it."
+#message 43 "You can't get the box from here."
+#message 44 "Taken."
+#message 45 "You can't see any batteries here."
+#message 46 "But, you've already got the them!"
+#message 47 "You take a peek inside your closet and find an array of clothes, none of which you need."
+#message 48 "Peering up you see a small blue box on the closet."
+#message 49 "It's pretty dark, but you can just make out some dust."
+#message 50 "You are currently wearing them."
+#message 51 "You've only just go up!"
+#message 52 "You pick up your clothes and put them on."
+#message 53 "But you're already wearing your clothes."

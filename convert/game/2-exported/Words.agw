@@ -1,0 +1,157 @@
+WINAGI v1.0     
+0	a	all	an	another	at	bedside	for	from	i	is	it	me	now	of	out	some	that	the	these	this	those	through	to	using	will	with	you
+1	anyword
+2	exit
+3	restart
+4	restore
+5	save
+6	game
+7	pause
+8	help
+9	slow
+10	normal
+11	fast
+12	fastest
+13	speed
+14	y	yes
+15	n	no
+16	above	on	on top	onto	over
+17	down	off
+18	clock	grandfather clock
+19	inv	inventory
+20	check out	examine	inspect	look	observe
+21	get	grab	obtain	retrieve	take
+22	use
+23	move	pull	push	shift	tug
+30	test object
+31	die
+32	beneath	under	underneath
+33	open	pull open	slide	slide open	widen
+34	close
+35	search
+36	behind
+37	put on	wear
+38	in	inside	into
+39	ascend	climb	climb over	step
+40	knock	stand
+41	up
+42	build	construct	create	fix	make	tidy
+43	smell
+44	hear	listen
+45	break	smash
+46	leave	quit
+47	turn off
+48	unlock
+49	rest	sit
+50	crap	dump	excrete	shit
+51	flush
+52	jog	make haste	run	sprint
+53	bathe	wash
+54	communicate	converse	hello	shout	talk
+55	light	lights
+56	watch
+57	start	switch on	turn on
+58	read	scan
+59	add	insert	put
+60	unscrew
+61	put back	replace
+62	adjust	configure
+63	draw
+64	flip	turn
+65	electricity	generator	power	power generator	power supply
+100	blanket	carpet	rug
+101	closet	closets	cupboard	cupboards	dresser	wardrobe
+102	drawer	number
+103	window	windows
+104	bed	blankets	sheets
+105	sleep	tree
+106	dust
+107	floor	grass	ground	lawn
+108	ceiling	roof
+109	bedroom
+110	blind	blinds	curtain	curtains
+111	cabinet	cabinets	desk	table	tables	workbench	worktop
+112	fence	wall	walls
+113	beams	planks	supports	wood
+114	clothes
+115	blue box	box	boxes	crate	crates	cyan box	mailbox	shoe box
+116	door	front door	opening
+117	artwork	painting	paintings	picture	poster
+118	framed photo	framed photograph	photo	photograph
+119	bush	bushes
+120	flower	flowers	foliage	plant	plants
+121	house
+122	garden
+124	kitchen knife	knife
+125	front door key	key	keys
+126	path
+127	batteries	battery	cells
+128	staircase	stairs	stairway
+129	banister	railing
+130	bookpage	leaflet	notes	page	paper	papers	roll	toilet paper	toilet roll
+131	computer	pc
+132	bath	tub
+133	shampoo	shampoo bottle	shampoo bottles
+134	bottle	bottles
+135	throne	toilet	urinal
+136	cord	rope	string
+137	mirror
+138	bowl	sink
+139	faucet	tap	taps
+140	cactus	pot	vase
+141	hand	hands
+142	doorway
+143	female	girl	lady	neighbor	neighbour	woman
+144	envelope	letter	package	parcel	post
+145	bookcase	library	shelf	shelves
+146	book	books	literature	magazine	magazines
+147	chair	couch	setee	settee	sofa
+148	pendulum
+149	fireplace	mantlepeice	mantlepiece
+150	fire
+151	candleholder	candleholders	ornament	ornaments	statue	statues
+152	ash	ashes
+153	television	tv
+154	animal	dog	pet
+155	mark	marking	markings	marks	scratch	scratches
+156	chart	diagram	diagrams	sketch
+157	appliance	appliances	utensils
+158	toaster
+159	kinfe rack	rack
+160	oven
+161	cooler	fridge	refridgerator
+162	bin	wastebasket	wastebin
+163	attack	hit	kick
+164	panel
+165	lever	p	switch
+166	aliasing card	card	electronic card	electronics card	temporal aliasing card	temporal card
+167	cable	cables	lead	leads	wire	wires
+168	machine	podium	time machine
+169	slot	slots
+170	board	configuration board
+171	display	screen
+172	device	timer	timing device
+173	boulder	boulders	rock	rocks	stone	stones
+174	forest	woods
+175	beach	cove	vines
+176	lake	sea	water
+1000	sp
+1001	tp
+1002	pos	position
+1003	object
+1004	flag
+1005	mem
+1006	pri	priority
+1007	var
+1010	reset
+1011	set
+1012	show
+1013	trace
+1014	debug
+1015	area	environment	room
+1016	drop
+1017	gimme
+1018	release
+1019	hide
+1020	coords
+9999	rol

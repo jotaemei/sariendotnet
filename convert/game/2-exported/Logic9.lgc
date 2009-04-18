@@ -1,0 +1,11 @@
+if (isset(new_room)) {
+  load.pic(room_no);
+  draw.pic(room_no);
+  discard.pic(room_no);
+  set.horizon(10);
+  draw(Ego);
+  show.pic();
+}
+return();
+
+//Messages

@@ -1,0 +1,153 @@
+if (isset(input_received) && 
+    equaln(unknown_word_no,0) && 
+    !isset(input_parsed)) {
+  if ((said("add", "batteries", "in", "device") || 
+      said("use", "batteries", "a", "device") || 
+      said("use", "device", "a", "batteries") || 
+      said("use", "batteries", "above", "device"))) {
+    if (has("Timer")) {
+      print("You already have.");
+      goto(Label2);
+    }
+    if (has("Timer(no batteries)")) {
+      if (has("Batteries")) {
+        drop("Batteries");
+        drop("Timer(no batteries)");
+        get("Timer");
+        addn(score, 2);
+        print("Done.");
+        goto(Label1);
+      }
+      print("But you don't have any batteries.");
+Label1:
+      goto(Label2);
+    }
+    print("But you don't have the timer yet.");
+  }
+Label2:
+  if (said("open", "envelope")) {
+    if (has("Parcel")) {
+      print("Inside the envelope you find an electronic card that you ordered.");
+      print("With this you'll finally be able to complete your time machine!");
+      get("Aliasing card");
+      drop("Parcel");
+      goto(Label3);
+    }
+    print("But you don't have a parcel.");
+  }
+Label3:
+  if (said("check out", "front door key")) {
+    if (has("Front door key")) {
+      show.obj(200);
+      goto(Label4);
+    }
+    print("You don't have it.");
+  }
+Label4:
+  if (said("check out", "kitchen knife")) {
+    if (has("Kitchen knife")) {
+      show.obj(201);
+      goto(Label5);
+    }
+    print("You don't have it.");
+  }
+Label5:
+  if (said("check out", "batteries")) {
+    if (has("Batteries")) {
+      show.obj(202);
+      goto(Label6);
+    }
+    print("You don't have it.");
+  }
+Label6:
+  if (said("check out", "chart")) {
+    if (has("Diagram")) {
+      show.obj(207);
+      goto(Label7);
+    }
+    print("You don't have it.");
+  }
+Label7:
+  if (said("check out", "bookpage")) {
+    if (has("Toilet paper")) {
+      show.obj(203);
+      goto(Label8);
+    }
+    if (has("Diagram")) {
+      show.obj(207);
+      goto(Label8);
+    }
+    print("You don't have it.");
+  }
+Label8:
+  if (said("check out", "flower")) {
+    if (has("Flower")) {
+      show.obj(204);
+      goto(Label9);
+    }
+    print("You don't have it.");
+  }
+Label9:
+  if (said("check out", "envelope")) {
+    if (has("Parcel")) {
+      show.obj(205);
+      goto(Label10);
+    }
+    print("You don't have it.");
+  }
+Label10:
+  if (said("check out", "aliasing card")) {
+    if (has("Aliasing card")) {
+      show.obj(208);
+      goto(Label11);
+    }
+    print("You don't have it.");
+  }
+Label11:
+  if (said("check out", "boulder")) {
+    if (has("Rock")) {
+      show.obj(211);
+      goto(Label12);
+    }
+    print("You don't have it.");
+  }
+Label12:
+  if (said("check out", "device")) {
+    if (has("Timer")) {
+      show.obj(210);
+      goto(Label13);
+    }
+    if (has("Timer(no batteries)")) {
+      show.obj(209);
+      goto(Label13);
+    }
+    print("You don't have it.");
+  }
+Label13:
+  if ((said("check out", "anyword") || 
+      said("check out", "anyword", "anyword"))) {
+    print("You see nothing specific.");
+  }
+  if ((said("get", "anyword") || 
+      said("get", "anyword", "anyword"))) {
+    print("You can't get that.");
+  }
+  if ((said("use", "anyword") || 
+      said("use", "anyword", "anyword"))) {
+    print("What do you want me to do with it?");
+  }
+}
+return();
+
+//Messages
+#message 1 "You already have."
+#message 2 "Done."
+#message 3 "But you don't have any batteries."
+#message 4 "But you don't have the timer yet."
+#message 5 "Inside the envelope you find an electronic card that you ordered."
+#message 6 "With this you'll finally be able to complete your time machine!"
+#message 7 "But you don't have a parcel."
+#message 8 "You don't have it."
+#message 9 "You see nothing specific."
+#message 10 "You can't get that."
+#message 11 "What do you want me to do with it?"
