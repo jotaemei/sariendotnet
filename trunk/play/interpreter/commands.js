@@ -742,6 +742,29 @@ function cmd_show_obj(n) {
 function cmd_show_obj_v(n) {
   Text.showInventoryItem(vars[n]);
 }
+function cmd_status_line_on() {
+  IO.showCommandLine();
+}
+function cmd_status_line_off() {
+  IO.hideCommandLine();
+}
+function cmd_quit() {
+  Text.displayMessage("Press ENTER to keep playing.\nPress ESC to keep playing.");
+}
+function cmd_save_game() {
+  Text.displayMessage("Sarien.net does not support saving a game at the moment.");
+}
+function cmd_restore_game() {
+  Text.displayMessage("Sarien.net does not support restoring a game at the moment. Instead, the current room will reload.");
+  document.location.reload();
+}
+function cmd_restart_game() {
+  document.location.href = document.location.href.replace(/#.*/gi, "");
+}
+function cmd_echo_line() {
+  IO.input = IO.lastInput;
+  IO.showCommandLine();
+}
 // unimplemented commands
 function cmd_set_cursor_char() {
 }
@@ -750,12 +773,6 @@ function cmd_discard_pic() {
 function cmd_discard_view() {
 }
 function cmd_discard_view_v() {
-}
-function cmd_status_line_on() {
-  IO.showCommandLine();
-}
-function cmd_status_line_off() {
-  IO.hideCommandLine();
 }
 function cmd_shake_screen() {
 }
@@ -771,8 +788,6 @@ function cmd_trace_info() {
 }
 function cmd_configure_screen() {
 }
-function cmd_quit() {
-}
 function cmd_drop() {
 }
 function cmd_cancel_line() {
@@ -784,16 +799,6 @@ function cmd_disable_item() {
 function cmd_get_room_v(n, m) {
 }
 function cmd_status() {
-}
-function cmd_save_game() {
-  Text.displayMessage("Sarien.net does not support saving a game at the moment.");
-}
-function cmd_restore_game() {
-  Text.displayMessage("Sarien.net does not support restoring a game at the moment. Instead, the current room will reload.");
-  document.location.reload();
-}
-function cmd_restart_game() {
-  document.location.href = document.location.href.replace(/#.*/gi, "");
 }
 function cmd_object_touched_prio(i, prio) {
 }
@@ -814,8 +819,6 @@ function cmd_open_dialogue() {
 function cmd_close_dialogue() {
 }
 function cmd_reset_scan_start() {
-}
-function cmd_echo_line() {
 }
 function cmd_menu_input() {
 }
