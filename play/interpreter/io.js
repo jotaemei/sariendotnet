@@ -33,7 +33,6 @@ var IO =
   clearSaid: false,
   input: "",
   maxInputLength: 255,
-
   FKeyCommands: [["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"]],
   locationCommands: [],
   commandsGlobal: [], // contains all logic0 actions, retrieved on startup
@@ -44,6 +43,7 @@ var IO =
   prettyVerbs: {},
   speeds: [0, 30, 42, 100],
   avatars: {}, // avatars that I have found
+  lastInput: "",
 
   x: 0,
   y: 0,
@@ -114,6 +114,11 @@ var IO =
 
     // unpause by enter, space or escape
     if (AGI.paused && Text.messageShown) {
+
+      // cancel backspace when a dialog is shown
+      if (key == 8) Agent.cancelEvent(evt);
+
+      // close a dialog by enter or esc
       if (key == 13 || key == 32 || key == 27) {
         IO.cancelNextKeyPress = true;
         cmd_reset(flag_input_received);
@@ -220,7 +225,7 @@ var IO =
       return;
     }
     IO.cancelNextKeyPress = false;
-    if (IO.actionsVisible())
+    if (IO.actionsVisible() || Text.messageShown)
       return;
 
     var evt = Agent.IE ? event : evt;
@@ -369,6 +374,7 @@ var IO =
   },
   // parses text input from the command line
   parseCommandLine: function(cmd) {
+    IO.lastInput = cmd;
     // immediately dispatch the said commands
     cmd = Utils.Trim(cmd);
     MultiplayerClient.say(cmd, true);
@@ -378,9 +384,9 @@ var IO =
     while (cmd.length > 0) {
       // remove unwanted characters
       cmd = Utils.Trim(cmd.toLowerCase().replace(/\s+/g, " ")).replace(/[^\w ]/g, "");
-      
+
       // ignore specific messages that are common in multiplayer
-      if (Utils.matches(cmd, ["^hello\\b", "^hi\\b", "^hey\\b"])) 
+      if (Utils.matches(cmd, ["^hello\\b", "^hi\\b", "^hey\\b"]))
         return;
 
       // split into parts
@@ -441,8 +447,10 @@ var IO =
 
       cmd_set(flag_input_received);
       cmd_reset(flag_input_parsed);
-      if (!fromCommandLine)
+      if (!fromCommandLine) {
         MultiplayerClient.say(IO.getPrettyVerb(input), false);
+        IO.lastInput = input;
+      }
       IO.said = input.replace(/^\s*|\s0*$/, "").toLowerCase().split(" ");
     }
   },
