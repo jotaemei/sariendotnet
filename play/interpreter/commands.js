@@ -765,6 +765,11 @@ function cmd_echo_line() {
   IO.input = IO.lastInput;
   IO.showCommandLine();
 }
+// Stores the room number of object n in variable m.
+// In this implementation, returns 255 if you have it, otherwise returns the current room no
+function cmd_get_room_v(n, m) {
+  vars[m] = cmd_has(vars[n]) ? 255 : vars[var_room_no];
+}
 // unimplemented commands
 function cmd_set_cursor_char() {
 }
@@ -796,8 +801,6 @@ function cmd_enable_item() {
 }
 function cmd_disable_item() {
 }
-function cmd_get_room_v(n, m) {
-}
 function cmd_status() {
 }
 function cmd_object_touched_prio(i, prio) {
@@ -823,4 +826,8 @@ function cmd_reset_scan_start() {
 function cmd_menu_input() {
 }
 function version() {
+}
+function cmd_put(n, m) {
+} 
+function cmd_put_v(n, m) {
 }

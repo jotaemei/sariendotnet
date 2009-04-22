@@ -55,14 +55,20 @@ var Menu =
     var curScore = vars[var_score] * 1;
     if (isNaN(curScore))
       curScore = 0;
-    if (curScore != Menu.score)
-      this.writeScore(curScore);
+    if (curScore != Menu.score) {
+      Menu.score = curScore;
+      Menu.refresh();
+    }
   },
 
   // write the score on the menu bar
-  writeScore: function(score) {
-    Menu.score = score;
-    var text = " Score:" + score + " of " + vars[var_max_score];
+  refresh: function() {
+    var text = " Score:" + Menu.score + " of " + vars[var_max_score];
+    if (MultiplayerClient.enabled) {
+      for (var i = text.length; i < 23; i++)
+        text += " ";
+      text += " Players:" + (MultiplayerClient.playerCount() + 1);
+    }
     for (var i = text.length; i < 47; i++)
       text += " ";
     text += "Esc = help";

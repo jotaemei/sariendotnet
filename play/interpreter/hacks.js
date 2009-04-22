@@ -127,9 +127,12 @@ var Hacks =
       case "BC":
         // floodfill doesn't work due to fillboundaries drawn on visual screen
         Canvas.fill = function() { };
-        //IO.addPrettyVerbs({ "6": "do", "8": "look" });
+        IO.addPrettyVerbs({ "F6": "do", "F8": "look" });
         // set title tune to last 10 seconds
         Sound.setDuration(21, 10000);
+        window.cmd_status = function() {
+          Text.displayMessage("To use an object, press \"/\" or rightclick, and choose the inventory object from the \"use\" submenu.");
+        }
         break;
       case "KQ1":
         // floodfill doesn't work due to fillboundaries drawn on visual screen
@@ -139,6 +142,37 @@ var Hacks =
         break;
     }
   },
+  // allows game specific hacks per cycle
   cycle: function(game) {
+    switch (game) {
+      case "BC":
+        // for the Black Cauldron, always fill the menu with all inventory items
+        IO.commandsLocal = [["F6"], ["F8"], ["use"]];
+        for (var i = 0; i < INVENTORY.length; i++) {
+          if (cmd_has(i))
+            IO.commandsLocal.push(["use", INVENTORY[i]]);
+        }
+        break;
+    }
+  },
+  parse: function(game, input) {
+    switch (game) {
+      case "BC":
+        if (input == "look") {
+          IO.chooseFKey(8);
+        }
+        if (input == "do") {
+          IO.chooseFKey(6);
+        }
+        for (var i = 0; i < INVENTORY.length; i++) {
+          if (input == "use " + INVENTORY[i]) {
+            cmd_assignn(v42, i);
+            IO.chooseFKey(4);
+          }
+        }
+
+        break;
+    }
+    return input;
   }
 };

@@ -9,8 +9,9 @@ var Multiplayer = {
   connected: false, // set to true once the server gives back an id
   disconnected: false, // set to true once disconnected
   props: {}, // containing the name/value pairs to send next ping
-  events: [], // containing [name,value] events to send next ping  
+  events: [], // containing [name,value] events to send next ping
   sentPersistentPropertyValues: {}, // stores sent persistent values, to prevent sending too much
+  errorCount: 0,
 
 
   init: function(url, interval, eventListener, propDefs) {
@@ -119,7 +120,10 @@ var Multiplayer = {
     try {
       eval("info = {" + js + "};");
     }
-    catch (e) { }
+    catch (e) {
+      // count the errors
+      Multiplayer.errorCount++;
+    }
     if (!info) return;
 
     // store my id for future pings

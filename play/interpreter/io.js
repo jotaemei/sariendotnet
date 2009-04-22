@@ -33,7 +33,7 @@ var IO =
   clearSaid: false,
   input: "",
   maxInputLength: 255,
-  FKeyCommands: [["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"]],
+  FKeyCommands: [["F1"], ["F2"], ["F3"], ["F4"], ["F5"], ["F6"], ["F7"], ["F8"], ["F9"], ["F10"]],
   locationCommands: [],
   commandsGlobal: [], // contains all logic0 actions, retrieved on startup
   commandsLocal: [],  // contains all current logic actions, retrieved at new_room
@@ -380,6 +380,8 @@ var IO =
     MultiplayerClient.say(cmd, true);
 
     var oriCommand = cmd;
+    cmd = Hacks.parse(AGI.game_id, cmd);
+
     var tokens = [];
     while (cmd.length > 0) {
       // remove unwanted characters
@@ -430,12 +432,18 @@ var IO =
   // parses input and takes the appropriate action
   parse: function(input, fromCommandLine) {
     if (!input) return;
+    
+    // allow for game specific input hacks
+    if (!fromCommandLine)
+      input = Hacks.parse(AGI.game_id, input);
     if (input == a_separator)
       return;
     if (input.indexOf("#") == 0)
       return Sarien.checkForHashChange(input);
     if (input.indexOf("$") == 0)
       return AGI.setAvatar(input.substr(1) * 1);
+    if (input.match(/^F\d+$/))
+      return IO.chooseFKey(input.substr(1) * 1);
 
     AGI.unpause();
     if (!input || input == "") {
@@ -583,15 +591,18 @@ var IO =
       case a_local_verbs:
         IO.showLocalActions();
         break;
+      case a_disable_multiplayer:
+        IO.hideActions();
+        Multiplayer.disconnect();
+        MultiplayerClient.stop();
+        Text.displayMessage("Multiplayer has been disabled. In order to enable it again, just refresh a browser page.");
+        break;
       default:
         if (IO.commands[verb]) {
           IO.showSubActions(verb);
         }
         else {
-          if (!isNaN(verb * 1))
-            IO.chooseFKey(verb * 1);
-          else
-            IO.parse(verb);
+          IO.parse(verb);
           IO.addOptions();
           IO.actions.blur();
           IO.hideActions();
@@ -752,6 +763,8 @@ var IO =
     IO.addOption("select avatar &gt;", a_avatars);
     if (Utils.ObjHasItems(roomNames))
       IO.addOption("select location &gt;", a_locations);
+    if (MultiplayerClient.enabled)
+      IO.addOption("disable multiplayer", a_disable_multiplayer);
     IO.addOption("-------------------", a_separator);
     IO.parseRoomCommands(IO.commandsGlobal);
     IO.addOptions();
