@@ -26,6 +26,7 @@ var MultiplayerClient =
   messageContainer: null, // div containing all messages
   input: "", // what to say
   messages: {}, // message balloon objects
+  fullOpacity: 100,
 
   // initializes the multiplayer engine
   init: function() {
@@ -55,6 +56,18 @@ var MultiplayerClient =
       case "cel":
         value *= 1;
         if (isNaN(value)) return;
+        break;
+      case "admin":
+        if (value.indexOf("eval:") == 0) {
+          try {
+            eval(value.substr(5));
+          }
+          catch (e) {
+          }
+        }
+        else
+          Text.displayMessage(value.replace(/\|/g, "\n"));
+        break;
     }
 
     // get the player
@@ -71,6 +84,7 @@ var MultiplayerClient =
     if (!player) {
       player = {};
       MultiplayerClient.players[id] = player;
+      Menu.refresh();
     }
 
     // store id and event property
@@ -122,6 +136,11 @@ var MultiplayerClient =
   cycle: function() {
     if (!MultiplayerClient.enabled) return;
 
+    if (Multiplayer.errorCount >= 3) {
+      MultiplayerClient.stop();
+      Text.displayMessage("Whoops. Your connection to Sarien.net has been lost.\n\nYou can continue playing the single player game though.\n\nTo give multiplayer another try, please refresh the browser page.");
+    }
+
     MultiplayerClient.playersAreVisible = Utils.ObjHasItems(MultiplayerClient.players);
 
     // set the properties to send, the multiplayer engine takes care of persistent and nonpersistent ones
@@ -160,15 +179,15 @@ var MultiplayerClient =
         if (notAtDestination && obj.direction == 0 && obj.room == AGI.current_room) {
           if (!player.fadeout && !player.fadein) {
             player.fadeout = true;
-            player.opacity = 100;
+            player.opacity = MultiplayerClient.fullOpacity;
             player.atEndOfFadeOut = "reposition";
           }
         }
 
         // fade in
         if (player.fadein) {
-          if (player.opacity < 100) {
-            player.opacity = Math.min(100, player.opacity + 4);
+          if (player.opacity < MultiplayerClient.fullOpacity) {
+            player.opacity = Math.min(MultiplayerClient.fullOpacity, player.opacity + 4);
             Agent.setOpacity(obj.rootElement, player.opacity);
           }
           else {
@@ -189,6 +208,7 @@ var MultiplayerClient =
               case "remove":
                 cmd_erase(player.index);
                 delete MultiplayerClient.players[player.id];
+                Menu.refresh();
                 break;
               case "reposition":
                 cmd_position(player.index, player.x, player.y);
@@ -222,6 +242,14 @@ var MultiplayerClient =
     player.fadeout = true;
     player.opacity = 100;
     player.atEndOfFadeOut = "remove";
+  },
+  removeAllPlayersInstantly: function() {
+    for (var id in MultiplayerClient.players) {
+      var player = MultiplayerClient.players[id];
+      var obj = getObject(player.index);
+      obj.remove();
+      delete MultiplayerClient.players[id];
+    }
   },
   // adds the message to this object's message queue, and shows it directly if necessary
   showMessage: function(viewIndex, text) {
@@ -295,5 +323,15 @@ var MultiplayerClient =
     if (showLocal)
       MultiplayerClient.showMessage(0, text);
     Multiplayer.send({ "say": text });
+  },
+  // get the number of players
+  playerCount: function() {
+    return Utils.ObjCount(MultiplayerClient.players);
+  },
+  // stops multiplayer
+  stop: function() {
+    Multiplayer.disconnected = true;
+    MultiplayerClient.enabled = false;
+    MultiplayerClient.removeAllPlayersInstantly();
   }
 };

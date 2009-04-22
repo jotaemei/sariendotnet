@@ -45,6 +45,13 @@ var Utils =
       return true;
     return false;
   },
+  // returns the number of items in obj
+  ObjCount: function(obj) {
+    var count = 0;
+    for (var o in obj)
+      count++;
+    return count;
+  },
   // returns true if arr contains item
   ArrayHasItem: function(arr, item) {
     for (var i = 0; i < arr.length; i++)
