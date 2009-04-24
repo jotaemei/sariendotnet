@@ -40,7 +40,7 @@ var MultiplayerClient =
     IO.textInput = true;
 
     // start the generic multiplayer engine
-    Multiplayer.init("/ping", 3000, MultiplayerClient.handleEvent, {
+    Multiplayer.init("/ping", 1000, MultiplayerClient.handleEvent, {
       "x": true, "y": true, "view": true, "loop": true, "cel": true, "say": false
     });
   },
