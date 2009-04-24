@@ -156,6 +156,20 @@ var Hacks =
     }
   },
   parse: function(game, input) {
+    switch (input) {
+      case "restart":
+        cmd_restart_game();
+        return "";
+        break;
+      case "restore":
+        cmd_restore_game();
+        return "";
+        break;
+      case "quit":
+        cmd_quit();
+        return "";
+        break;
+    }
     switch (game) {
       case "BC":
         if (input == "look") {
