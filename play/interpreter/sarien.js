@@ -109,7 +109,11 @@ var Sarien =
     xhr.open("GET", url, false);
     xhr.send(null);
     var js = xhr.responseText;
-    eval(js);
+    try {
+      eval(js);
+    } catch (e) {
+      js = "";
+    }
     return js;
   }
 };

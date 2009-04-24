@@ -318,6 +318,7 @@ var MultiplayerClient =
   },
   // sends a message to other players
   say: function(text, showLocal) {
+    text = text.replace(/\s+rol\s*$/gi, "");
     if (!MultiplayerClient.playersAreVisible)
       return;
     if (showLocal)

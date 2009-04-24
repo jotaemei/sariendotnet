@@ -756,7 +756,10 @@ function cmd_save_game() {
 }
 function cmd_restore_game() {
   Text.displayMessage("Sarien.net does not support restoring a game at the moment. Instead, the current room will reload.");
-  document.location.reload();
+  Text.afterHideMessageHandler = function() {
+    Multiplayer.disconnect();
+    document.location.reload();
+  }
 }
 function cmd_restart_game() {
   document.location.href = document.location.href.replace(/#.*/gi, "");

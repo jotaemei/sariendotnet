@@ -26,6 +26,7 @@ var Text =
   lines: [], // used to store text splitted over multiple lines
   dialog: null, // the dialog element
   messageShown: false, // true when a message is currently visible
+  afterHideMessageHandler: null,
 
   visibleInventoryItem: null, // when shown, this is a view instance
 
@@ -95,6 +96,12 @@ var Text =
     Text.messageShown = false;
     if (Text.queue.length > 0)
       Text.nextMessage();
+    else {
+      // optionally execute the afterHideMessageHandler
+      var f = Text.afterHideMessageHandler;
+      if (f) f();
+      Text.afterHideMessageHandler = null;
+    }
   },
   // shows a message
   displayMessage: function(msg) {
