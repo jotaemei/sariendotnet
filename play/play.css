@@ -1,4 +1,4 @@
-﻿html, body
+html, body
 {
   height: 100%;
   margin: 0;
@@ -157,7 +157,6 @@ html.ie,
 }
 .iphone #sarien
 {
-  margin-top: 80px;
 }
 .iphone #canvas
 {
@@ -197,6 +196,7 @@ html.ie,
 .message
 {
   position: absolute;
+  -moz-user-select: none;
 }
 .message td,
 .message div

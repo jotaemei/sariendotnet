@@ -619,11 +619,32 @@ function cmd_get(n) {
   if (n >= 0)  
     items[n] = true;
 }
+// returns true if ego has inventory object n
 function cmd_has(n) {
   // check of the object was referenced by name ("Cartridge") instead of index (1)
   if (isNaN(n))
     n = Utils.inventoryNameToIndex(n);
   return (n >= 0 && items[n])? true : false;
+}
+// drops an item by removing it from the inventory list
+function cmd_drop(n) {
+  // check of the object was referenced by name ("Cartridge") instead of index (1)
+  if (isNaN(n))
+    n = Utils.inventoryNameToIndex(n);
+  if (!isNaN(n))
+    delete items[n];
+}
+// only replaces cmd_drop and cmd_has, does not implement other values of m for now
+function cmd_put(n, m) {
+  if (m == 0)
+    cmd_drop(n);
+  if (m == 255)
+    cmd_get(n);
+}
+// only replaces cmd_drop and cmd_has, does not implement other values of m for now
+function cmd_put_v(n, m) {
+  m = vars[m];
+  cmd_put(n, m);
 }
 function cmd_have_key() {
   if (IO.key_pressed) {
@@ -748,18 +769,15 @@ function cmd_status_line_on() {
 function cmd_status_line_off() {
   IO.hideCommandLine();
 }
+// quit takes you to the homepage
 function cmd_quit() {
-  Text.displayMessage("Press ENTER to keep playing.\nPress ESC to keep playing.");
+  document.location.href = "/";
 }
 function cmd_save_game() {
-  Text.displayMessage("Sarien.net does not support saving a game at the moment.");
+  State.save();
 }
 function cmd_restore_game() {
-  Text.displayMessage("Sarien.net does not support restoring a game at the moment. Instead, the current room will reload.");
-  Text.afterHideMessageHandler = function() {
-    Multiplayer.disconnect();
-    document.location.reload();
-  }
+  State.restore();
 }
 function cmd_restart_game() {
   document.location.href = document.location.href.replace(/#.*/gi, "");
@@ -796,8 +814,6 @@ function cmd_trace_info() {
 }
 function cmd_configure_screen() {
 }
-function cmd_drop() {
-}
 function cmd_cancel_line() {
 }
 function cmd_enable_item() {
@@ -829,8 +845,4 @@ function cmd_reset_scan_start() {
 function cmd_menu_input() {
 }
 function version() {
-}
-function cmd_put(n, m) {
-} 
-function cmd_put_v(n, m) {
 }

@@ -171,7 +171,12 @@ var AGI =
       if (AGI.new_room > 0)
         AGI.new_room = 0;
       else {
-        // when a new room was issues
+
+        // load a saved state
+        if (State.stateToLoad)
+          State.load();
+
+        // when a new room was issued
         if (cmd_isset(flag_new_room)) {
           // reset the flag
           cmd_reset(flag_new_room);

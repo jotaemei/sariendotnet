@@ -27,6 +27,7 @@ var MultiplayerClient =
   input: "", // what to say
   messages: {}, // message balloon objects
   fullOpacity: 100,
+  events: [],
 
   // initializes the multiplayer engine
   init: function() {
@@ -39,6 +40,9 @@ var MultiplayerClient =
     // allow text input
     IO.textInput = true;
 
+    Multiplayer.ori_handleResponse = Multiplayer.handleResponse;
+    Multiplayer.handleResponse = MultiplayerClient.handleResponseWrapper;
+
     // start the generic multiplayer engine
     Multiplayer.init("/ping", 1000, MultiplayerClient.handleEvent, {
       "x": true, "y": true, "view": true, "loop": true, "cel": true, "say": false
@@ -47,6 +51,25 @@ var MultiplayerClient =
 
   // generic event handler for all events that we get back from the server
   handleEvent: function(id, name, value) {
+    // store the event to postpone execution time
+    MultiplayerClient.events.push([id, name, value]);
+  },
+  // we added support for the Multiplayer library to notify us of the end of the events
+  notifyEndOfEvents: function() {
+    var l = MultiplayerClient.events.length;
+    if (l == 0) return;
+    var milliSeconds = Multiplayer.interval * 0.8;
+    var timeOutPerEvent = Math.floor(milliSeconds / l);
+    for (var i = 0; i < l; i++) {
+      var ev = MultiplayerClient.events[i];
+      var id = ev[0];
+      var name = ev[1];
+      var value = ev[2];
+      setTimeout("MultiplayerClient.handleEventAfterDelay(\"" + id + "\", \"" + name + "\", \"" + value + "\");", i * timeOutPerEvent);
+    }
+    MultiplayerClient.events = [];
+  },
+  handleEventAfterDelay: function(id, name, value) {
     // convert certain props to numbers
     switch (name) {
       case "x":
@@ -334,5 +357,10 @@ var MultiplayerClient =
     Multiplayer.disconnected = true;
     MultiplayerClient.enabled = false;
     MultiplayerClient.removeAllPlayersInstantly();
+  },
+  // this wrapper is used as replacement on the Multiplayer object, to notify when the last event was given
+  handleResponseWrapper: function(js) {
+    Multiplayer.ori_handleResponse(js);
+    MultiplayerClient.notifyEndOfEvents();
   }
 };
