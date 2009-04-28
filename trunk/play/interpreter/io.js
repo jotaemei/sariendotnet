@@ -275,6 +275,7 @@ var IO =
         IO.hideActions();
       cmd_reset(flag_input_received);
       cmd_set(flag_input_parsed);
+      Agent.cancelEvent(evt);
       return AGI.unpause();
     }
     IO.usingKeyboard = false;
@@ -307,12 +308,15 @@ var IO =
   },
   onRightClick: function(evt) {
     var evt = Agent.IE ? event : evt;
+    Agent.cancelEvent(evt);
+    if (Text.messageShown)
+      return;
+
     var ox = IO.screen.offsetLeft + IO.canvas.offsetLeft;
     var oy = IO.screen.offsetTop + IO.canvas.offsetTop;
     IO.x = evt.clientX - ox;
     IO.y = evt.clientY - oy;
     IO.executeAction(a_local_verbs);
-    Agent.cancelEvent(evt);
   },
   onDoubleClick: function(evt) {
     IO.onClick(evt, true);
@@ -432,7 +436,7 @@ var IO =
   // parses input and takes the appropriate action
   parse: function(input, fromCommandLine) {
     if (!input) return;
-    
+
     // allow for game specific input hacks
     if (!fromCommandLine)
       input = Hacks.parse(AGI.game_id, input);

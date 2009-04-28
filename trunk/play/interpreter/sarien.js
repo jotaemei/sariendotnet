@@ -82,9 +82,10 @@ var Sarien =
       room = document.location.hash;
     if (room.length > 1) {
       room = room.substr(1);
-      if (isNaN(room) && roomNames[room]) {
+      if (isNaN(room) && !roomNames[room])
+        room = State.loadFromUrl(room);
+      if (isNaN(room) && roomNames[room])
         room = roomNames[room];
-      }
       if (room != AGI.current_room) {
         // prevent ego popping up twice on screen after a # change
         getEgo().hide();
@@ -95,13 +96,17 @@ var Sarien =
     }
     return false;
   },
-
-  // for every roomchange of ego, reflect it by updating the address bar
-  updateAddressBar: function(roomNr) {
+  // gets the room name
+  getRoomName: function(roomNr) {
     var name = roomNr;
     if (roomNames[roomNr])
       name = roomNames[roomNr];
-    document.location.hash = name;
+    return name;
+  },
+  // for every roomchange of ego, reflect it by updating the address bar
+  updateAddressBar: function(roomNr) {
+    if (Hacks.updateAddressBarAllowed(AGI.game_id, roomNr))
+      document.location.hash = Sarien.getRoomName(roomNr);
   },
   // loads a (js) source asynchronously
   loadResource: function(url) {

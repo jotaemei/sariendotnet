@@ -138,8 +138,6 @@ var Hacks =
         // floodfill doesn't work due to fillboundaries drawn on visual screen
         Canvas.fill = function() { };
         break;
-      default:
-        break;
     }
   },
   // allows game specific hacks per cycle
@@ -157,6 +155,10 @@ var Hacks =
   },
   parse: function(game, input) {
     switch (input) {
+      case "save":
+        cmd_save_game();
+        return "";
+        break;
       case "restart":
         cmd_restart_game();
         return "";
@@ -188,5 +190,26 @@ var Hacks =
         break;
     }
     return input;
+  },
+  // do not hash the intro
+  updateAddressBarAllowed: function(id, roomNr) {
+    switch (id) {
+      case "SQ":
+        if (roomNr == 67) return false;
+        break;
+      case "SQ2":
+        if (roomNr == 140) return false;
+        break;
+      case "PQ":
+        if (roomNr == 1) return false;
+        break;
+      case "LLLLL":
+        if (roomNr == 1) return false;
+        break;
+      case "KQ1":
+        if (roomNr == 83) return false;
+        break;
+    }
+    return true;
   }
 };
