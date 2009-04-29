@@ -523,7 +523,7 @@ function cmd_distance(n, m, d) {
   else
     vars[d] = 255;
 }
-function cmd_add_to_pic(view, loop, cel, x, y, prio) {
+function cmd_add_to_pic(view, loop, cel, x, y, prio, margin) {
   var obj = new View();
   obj.FIXED_PRIORITY = true;
   obj.load(view);
@@ -533,6 +533,7 @@ function cmd_add_to_pic(view, loop, cel, x, y, prio) {
   obj.setPriority(prio);
   obj.show();
   obj.update();
+  obj.margin = margin;
   AGI.picture.addStaticObject(obj);
   // always place static objects at the beginning of the canvas. Fixes sq1 barman z-index issue with same prio as static objects
   var parent = obj.rootElement.parentNode;

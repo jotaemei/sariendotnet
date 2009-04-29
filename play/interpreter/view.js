@@ -590,10 +590,9 @@ View.prototype =
         return false;
 
       // No horizontal overlap, check next 
-      if (obj1.x + obj1.width() < obj2.x || obj1.x > obj2.x + obj2.width())
-        return false;
+        if (obj1.x + obj1.width() < obj2.x || obj1.x > obj2.x + obj2.width())
+          return false;
 
-      //if (obj1.y < obj2.y - obj2.height() || obj1.y > obj2.y)
       if (obj1.y == obj2.y)
         return true;
 
@@ -605,12 +604,6 @@ View.prototype =
       var obj = objects[i];
       if (!obj || obj.index >= 100)
         continue;
-      if (checkCollisionWithObject(this, obj))
-        return true;
-    }
-    // check objects added staticcally using add_obj command
-    for (var i = 0; i <= AGI.picture.staticObjects.length; i++) {
-      var obj = AGI.picture.staticObjects[i];
       if (checkCollisionWithObject(this, obj))
         return true;
     }
@@ -643,7 +636,7 @@ View.prototype =
       water = 1;
 
       for (i = 0, w = this.width(); i < w; i++) {
-        pri = Canvas.getPixel(this.x + i, this.y) - 1;
+        pri = AGI.getPriority(this.x + i, this.y) - 1;
 
         /* unconditional black. no go at all! */
         if (pri == 0) {
