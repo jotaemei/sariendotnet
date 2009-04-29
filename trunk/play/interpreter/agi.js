@@ -278,6 +278,18 @@ var AGI =
   stop: function() {
     this.stopped = true;
     Multiplayer.disconnect();
+  },
+
+  // returns the priority number from the virtual screen, in combination with
+  // all static objects that have margins (which add priority blocks)
+  getPriority: function(x, y) {
+    var color = Canvas.getPixel(x, y);
+    if (!color) {
+      var checkStaticObjects = AGI.picture.staticObjects.length > 0;
+      if (checkStaticObjects)
+        color = AGI.picture.getBoundaryFromStaticObjects(x, y);
+    }
+    return color;
   }
 };
 

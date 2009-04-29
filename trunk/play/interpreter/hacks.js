@@ -180,6 +180,9 @@ var Hacks =
         if (input == "do") {
           IO.chooseFKey(6);
         }
+        if (input == "use") {
+          cmd_status();
+        }
         for (var i = 0; i < INVENTORY.length; i++) {
           if (input == "use " + INVENTORY[i]) {
             cmd_assignn(v42, i);
