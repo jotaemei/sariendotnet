@@ -108,3 +108,4 @@ MESSAGES[2]=[
 "And then, nothing.",
 "You wait for what seems like an eternity.",
 "And are then abruptly sucked back into existence."];
+CONTROLS[2]="";

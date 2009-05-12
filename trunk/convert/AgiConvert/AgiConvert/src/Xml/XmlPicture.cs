@@ -12,6 +12,7 @@ namespace AGI
     private int id;
     private List<XmlLayer> layers = new List<XmlLayer>();
     private List<XmlLine> lines = new List<XmlLine>();
+    public string ControlMap = "";
 
     public XmlPicture(int id)
     {
@@ -33,7 +34,7 @@ namespace AGI
     {
       get { return lines; }
     }
-
+    
     public string JsVisual
     {
       get
@@ -54,27 +55,7 @@ namespace AGI
     {
       get
       {
-      string js = "";
-      if (Lines.Count > 0)
-      {
-        js = String.Format("{0}:[\n", Id);
-        foreach (XmlLine l in lines)
-        {
-          if (l.IsFill)
-          {
-            js += String.Format("[\"L\",{0},", l.Priority);
-          }
-          else
-          {
-            js += String.Format("[{0},", l.Priority);
-          }
-          foreach (XmlCoord c in l.Coordinates)
-            js += String.Format("{0},{1},", c.X, c.Y);
-          js = js.TrimEnd(',') + "],\n";
-        }
-        js = js.TrimEnd(',', '\n') + "],\n";
-      }
-      return js;
+        return String.Format("{0}:\"{1}\",\n", Id, ControlMap);
       }
     }
   }

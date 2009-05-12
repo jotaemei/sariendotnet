@@ -161,3 +161,4 @@ MESSAGES[13]=[
 "   Machine Ready",
 "Sequence Initiated!",
 "You make sure that the time machine is set to take you one day into the past."];
+CONTROLS[13]="";

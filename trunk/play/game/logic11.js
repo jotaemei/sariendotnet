@@ -942,3 +942,4 @@ MESSAGES[11]=[
 "",
 "Press F6 to quit",
 "\"This looks about right\" you say to yourself. And with that in mind you replace the panel."];
+CONTROLS[11]="";

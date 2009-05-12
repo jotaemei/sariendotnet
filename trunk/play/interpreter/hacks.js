@@ -104,8 +104,6 @@ var Hacks =
         window.logic98 = function() {
           cmd_new_room(2);
         };
-        // floodfill doesn't work due to fillboundaries drawn on visual screen
-        Canvas.fill = function() { };
         break;
       case "LLLLL":
         cmd_reset(f85); // fix larry not walking
@@ -125,8 +123,7 @@ var Hacks =
       case "PQ":
         break;
       case "BC":
-        // floodfill doesn't work due to fillboundaries drawn on visual screen
-        Canvas.fill = function() { };
+        delayBorderCheck = true;
         IO.addPrettyVerbs({ "F6": "do", "F8": "look" });
         // set title tune to last 10 seconds
         Sound.setDuration(21, 10000);
@@ -135,8 +132,6 @@ var Hacks =
         }
         break;
       case "KQ1":
-        // floodfill doesn't work due to fillboundaries drawn on visual screen
-        Canvas.fill = function() { };
         break;
     }
   },
@@ -184,9 +179,10 @@ var Hacks =
           cmd_status();
         }
         for (var i = 0; i < INVENTORY.length; i++) {
-          if (input == "use " + INVENTORY[i]) {
+          if (input.toLowerCase() == ("use " + INVENTORY[i]).toLowerCase()) {
             cmd_assignn(v42, i);
             IO.chooseFKey(4);
+            break;
           }
         }
 

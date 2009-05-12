@@ -50,3 +50,4 @@ MESSAGES[14]=[
 "Her body was never found. But no one could have survived that fall.",
 "Your life has been very difficult since the accident.",
 "But somehow you manage to keep on going."];
+CONTROLS[14]="";

@@ -17,10 +17,11 @@ namespace AGI
       id = pictureId;
       agpFileName = fileName;
       loadFile();
-      initValues();
+      InitValues();
       parseData();
       fixPriorityCanvas();
       buildPriorityCanvases();
+      goaDoc.DocumentElement.SetAttribute("control", GetJsxControlMap());
     }
     
     public void SetZoom(int x, int y)
@@ -92,7 +93,7 @@ namespace AGI
     private int           zoomX = 1;
     private int           zoomY = 1;
     
-    private string[] colorPalette = new string[16]
+    public string[] ColorPalette = new string[16]
     {
       "000000", "0000A0", "00A000", "008888",
       "8A0000", "8A0088", "885000", "888888",
@@ -130,7 +131,7 @@ namespace AGI
       fs.Close();
     }
     
-    private void initValues()
+    public void InitValues()
     {
       pictureCanvas               = new Canvas(160, 168);
       priorityCanvas              = new Canvas(160, 168);
@@ -147,9 +148,9 @@ namespace AGI
 
       for (int i=0; i<16; i++)
       {
-        pictureCanvas.SetColor(colorPalette[i]);
-        priorityCanvas.SetColor(colorPalette[i]);
-        controlCanvas.SetColor(colorPalette[i]);
+        pictureCanvas.SetColor(ColorPalette[i]);
+        priorityCanvas.SetColor(ColorPalette[i]);
+        controlCanvas.SetColor(ColorPalette[i]);
         prioritiesUsed[i] = false;
       }
 
@@ -170,6 +171,9 @@ namespace AGI
       XmlElement commandNode    = null;
       XmlElement goaCommandNode = null;
       XmlElement argNode        = null;
+      PenType penType = PenType.Solid;
+      PenShape penShape = PenShape.Square;
+      byte penSize = 0;
       
       XmlElement pictureNode = pictureDoc.CreateElement("picture");
       pictureDoc.AppendChild(pictureNode);
@@ -268,7 +272,7 @@ namespace AGI
                   goaCommandNode.AppendChild(goaArgNode);
                 }
 
-                drawLine(startX, startY, x, y);
+                DrawLine(startX, startY, x, y);
 
                 startX = x;
                 startY = y;
@@ -286,7 +290,7 @@ namespace AGI
                 argNode.SetAttribute("y", "" + c);
                 int x = int.Parse(argNode.GetAttribute("x"));
                 int y = int.Parse(argNode.GetAttribute("y"));
-                setPixel(x, y);
+                SetPixel(x, y);
                 if (priorityDrawingEnabled && priorityColor <= 4)
                 {
                   XmlElement goaArgNode = (XmlElement)goaDoc.ImportNode(argNode.CloneNode(true), true);
@@ -298,7 +302,7 @@ namespace AGI
                   int y1 = int.Parse(((XmlElement)argNode.PreviousSibling).GetAttribute("y"));
                   int x2 = int.Parse(argNode.GetAttribute("x"));
                   int y2 = int.Parse(argNode.GetAttribute("y"));
-                  drawLine(x1, y1, x2, y2);
+                  DrawLine(x1, y1, x2, y2);
                 }                
               }
               break;
@@ -319,7 +323,7 @@ namespace AGI
                   XmlElement goaArgNode = (XmlElement)goaDoc.ImportNode(argNode.CloneNode(true), true);
                   goaCommandNode.AppendChild(goaArgNode);
                 }
-                setPixel(startX, startY);
+                SetPixel(startX, startY);
               }
               else 
               {
@@ -349,7 +353,7 @@ namespace AGI
                   int y1 = int.Parse(((XmlElement)argNode.PreviousSibling).GetAttribute("y"));
                   int x2 = int.Parse(argNode.GetAttribute("x"));
                   int y2 = int.Parse(argNode.GetAttribute("y"));
-                  drawLine(x1, y1, x2, y2);
+                  DrawLine(x1, y1, x2, y2);
                 }                
               }
               break;
@@ -375,28 +379,39 @@ namespace AGI
                 Fill(x, y);
               }
               break;
+            case 249:
+              // set pen type, shape and size
+              BitArray bits = new BitArray(new Byte[1]{c});
+              penType = bits[5] ? PenType.Splatter : PenType.Solid;
+              penShape = bits[4] ? PenShape.Square : PenShape.Circle;
+              penSize = 0;
+              if (bits[2])
+                penSize += 4;
+              if (bits[1])
+                penSize += 2;
+              if (bits[0])
+                penSize += 1;
+              
+              break;
             case 250: // plot
-              if (even)
+              int plotX = 0;
+              int plotY = 0;
+              if (penType == PenType.Splatter)
               {
-                argNode = pictureDoc.CreateElement("coord");
-                argNode.SetAttribute("x", "" + c);
-                commandNode.AppendChild(argNode);
+                int texture = c; // not used
+                plotX = fileData[++i];
+                plotY = fileData[++i];
               }
               else
               {
-                argNode.SetAttribute("y", "" + c);
-                int x = int.Parse(argNode.GetAttribute("x"));
-                int y = int.Parse(argNode.GetAttribute("y"));
-
-                try
-                {
-                  setPixel(x, y);
-                } 
-                catch(Exception e)
-                {
-                  // this happens when pen is set to splatter????
-                };
+                plotX = c;
+                c = fileData[++i];
+                plotY = c;
               }
+              argNode = pictureDoc.CreateElement("coord");
+              argNode.SetAttribute("x", "" + plotX);
+              argNode.SetAttribute("y", "" + plotY);
+              Plot(plotX, plotY, penShape, penType, penSize);
               break;
           }
           argumentCount++;
@@ -404,7 +419,48 @@ namespace AGI
       }
     }
     
-    private void setPixel(int x, int y)
+    private void Plot(int x, int y, PenShape penShape, PenType penType, byte penSize)
+    {
+      if (penType == PenType.Splatter)
+      {
+        SetPixel(x, y);
+        return;
+      }
+      if (penShape == PenShape.Circle)
+      {
+        Circle ci = Circle.Circles[penSize];
+        int width = penSize + 1;
+        int height = penSize * 2 + 1;
+        for (int y2 = 0; y2 < height; y2++)
+        {
+          for (int x2 = 0; x2 < width; x2++)
+          {
+            byte data = ci.Data[(y2 * width) + x2];
+            if (data == 1)
+              SetPixel(x + x2 - ci.OffsetX, y + y2 - ci.OffsetY);        
+          }
+        }
+      }
+      
+      if (penShape == PenShape.Square)
+      {
+        Square sq = Square.Squares[penSize];
+        int width = penSize + 1;
+        int height = penSize * 2 + 1;
+        for (int y2 = 0; y2 < height; y2++)
+          for (int x2 = 0; x2 < width; x2++)
+            SetPixel(x + x2 - sq.OffsetX, y + y2 - sq.OffsetY);
+      }
+      else
+        SetPixel(x, y);
+    }
+    
+    public void SetPixel(int x, int y, int prioColor)
+    {
+      pictureCanvas.SetPixel(x, y, prioColor);
+    }
+    
+    public void SetPixel(int x, int y)
     {
       if (pictureDrawingEnabled)
         pictureCanvas.SetPixel(x, y, pictureColor);
@@ -423,7 +479,7 @@ namespace AGI
       }
     }
 
-    private void drawLine(int x1, int y1, int x2, int y2)
+    public void DrawLine(int x1, int y1, int x2, int y2)
     {
       if (pictureDrawingEnabled)
         pictureCanvas.DrawLine(x1, y1, x2, y2, pictureColor);
@@ -458,7 +514,7 @@ namespace AGI
         
         if (okToFill(x1, y1))
         {
-          setPixel(x1, y1);
+          SetPixel(x1, y1);
 
           if (y1 != 0 && okToFill(x1, y1 - 1))
             fillStack.Push(new int[2]{x1, y1 - 1});
@@ -514,6 +570,86 @@ namespace AGI
       }
     }
 
+    /// <summary>
+    /// Javascript characters for use in a string, used to encode room control data
+    /// </summary>
+    public static string JSX = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdghijklmnpqrstuwxyz`~!@#$%^*()-+=_[]{}|:;,.<>/?";
+
+    /// <summary>
+    /// Gets a color-run in jsx format
+    /// </summary>
+    /// <param name="count"></param>
+    /// <param name="color"></param>
+    /// <returns></returns>
+    private string toJsx(int count, int color)
+    {
+      string s = "";
+      while (count >= 160)
+      {
+        count -= 160;
+        s += JSX[16 * 5 + 4];
+      }
+      if (count >= 128)
+      {
+        count -= 128;
+        s += JSX[16 * 5 + 3];
+      }
+      if (count >= 64)
+      {
+        count -= 64;
+        s += JSX[16 * 5 + 2];
+      }
+      if (count >= 32)
+      {
+        count -= 32;
+        s += JSX[16 * 5 + 1];
+      }
+      if (count >= 16)
+      {
+        count -= 16;
+        s += JSX[16 * 5 + 0];
+      }
+      if (count >= 0)
+      {
+        s += JSX[count * 5 + color];
+      }
+      
+      return s;
+    }
+
+    /// <summary>
+    /// Gets the control map in jsx format
+    /// </summary>
+    /// <returns></returns>
+    public string GetJsxControlMap()
+    {
+      string map = "";
+      bool noMap = true;
+
+      for (int y = 0; y < 168; y++)
+      {
+        int count = 0;
+        int drawColor = 4;
+        for (int x = 0; x < 160; x++)
+        {
+          int color = controlCanvas.GetPixel(x, y);
+          if (color != 4)
+            noMap = false;
+          if (color == drawColor)
+            count++;
+          else
+          {  
+            map += toJsx(count, drawColor);
+            drawColor = color;
+            count = 1;
+          }
+        }
+        if (count > 0)
+          map += toJsx(count, drawColor);
+      }
+      return noMap? "" : map;
+    }
+    
     private void buildPriorityCanvas(int priorityNr)
     {
       int minX = 160;
@@ -553,7 +689,7 @@ namespace AGI
       Canvas canvas = new Canvas(width * zoomX, height * zoomY);
       for (int i=0; i<16; i++)
       {
-        canvas.SetColor(colorPalette[i]);
+        canvas.SetColor(ColorPalette[i]);
       }
       canvas.FillBackground(4);
       canvas.SetTransparentColor(4);

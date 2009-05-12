@@ -101,7 +101,8 @@ View.prototype =
   },
 
   celCount: function() {
-    return VIEWS[this.id][this.loop + 1].length;
+    var cels = VIEWS[this.id][this.loop + 1];
+    return cels? cels.length : 0;
   },
 
   width: function() {
@@ -116,8 +117,8 @@ View.prototype =
 
   load: function(id) {
     if (this.index != Ego) {
-      this.loop = 0;
-      this.cel = 0;
+      // prevent illegal loop/cel values
+      cmd_set_loop(this.index, this.loop);
     }
     this.id = id;
     var imagePath = Sarien.path + "/view" + Utils.PadLeft(this.id, '0', 3) + ".png";
@@ -188,9 +189,9 @@ View.prototype =
 
   update: function() {
     this.DIDNT_MOVE = this.x == this.oldX && this.y == this.oldY;
-    if (!this.DIDNT_MOVE)
+    if (!this.DIDNT_MOVE) {
       this.position(this.x, this.y);
-
+    }
     var frameClass = ["o", this.index, " view V", this.id, " V", this.id, this.loop, this.cel].join("");
     if (this.oldClassName != frameClass)
       this.rootElement.className = frameClass;
@@ -537,14 +538,13 @@ View.prototype =
     var count, dir, size;
 
     /* test horizon */
-    if (this.observe_horizon && this.y <= AGI.horizon)
+    if (this.observe_horizon && this.y <= AGI.horizon) {
       this.y = AGI.horizon + 1;
-
+    }
     dir = 0;
     count = size = 1;
 
-
-    //while (!this.checkPriority() || !this.checkPosition() || this.checkCollision())
+    //while (!this.checkPriority() || !this.checkPosition() || this.checkCollision()) {
     while (!this.checkPosition()) {
       switch (dir) {
         case 0:     /* west */
@@ -589,9 +589,9 @@ View.prototype =
       if (obj1.index == obj2.index)
         return false;
 
-      // No horizontal overlap, check next 
-        if (obj1.x + obj1.width() < obj2.x || obj1.x > obj2.x + obj2.width())
-          return false;
+      // No horizontal overlap, check next
+      if (obj1.x + obj1.width() < obj2.x || obj1.x > obj2.x + obj2.width())
+        return false;
 
       if (obj1.y == obj2.y)
         return true;

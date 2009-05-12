@@ -70,6 +70,7 @@ namespace AGI
       {
         int id = Convert.ToInt32(pictureEl.GetAttribute("id"));
         XmlPicture p = new XmlPicture(id);
+        p.ControlMap = pictureEl.GetAttribute("control");
         pictures.Add(p);
 
         // add layers
