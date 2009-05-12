@@ -184,3 +184,4 @@ return;
 MESSAGES[1]=[
 "",
 "Created by Chad Goulding (C)1998"];
+CONTROLS[1]="";

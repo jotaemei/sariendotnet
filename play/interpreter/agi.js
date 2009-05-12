@@ -17,6 +17,7 @@
 
 // global variable storage
 var MESSAGES = []; // holds game messages per logic
+var CONTROLS = {};
 var WORDS = []; // holds words referenced by said command, said(42) -> said("bla")
 var roomNames = {}; // optionally contains pretty room names for use in the addressbar after the hash
 var avatarNames = {}; // optionally contains pretty avatar names for use in the avatar picker
@@ -29,6 +30,7 @@ var items = {}; // stores inventory items found by the player
 var controllers = []; // stores controllers, not used
 var strings = []; // stores string values such
 var jumptoLine = 0; // the javascript equivalent of goto, used inside a huge switch/case clause within each logic file
+var delayBorderCheck = false;
 
 // AGI, the interpreter
 var AGI =
@@ -178,6 +180,28 @@ var AGI =
 
         // when a new room was issued
         if (cmd_isset(flag_new_room)) {
+
+          if (delayBorderCheck) {
+            // Reposition ego in the new room
+            var ego = getEgo();
+            switch (vars[var_ego_edge_code]) {
+              case 1:
+                ego.y = AGI.screen_height - 1;
+                break;
+              case 2:
+                ego.x = 0;
+                break;
+              case 3:
+                ego.y = AGI.horizon + 1;
+                break;
+              case 4:
+                ego.x = AGI.screen_width - ego.width();
+                break;
+            }
+            cmd_assignn(var_ego_edge_code, 0);
+          }
+
+
           // reset the flag
           cmd_reset(flag_new_room);
 
@@ -205,6 +229,12 @@ var AGI =
         }
       }
     }
+    
+    // doublecheck priority screen to potentially reset a previously set trigger (fixes sq2 swamp bug)
+    var ego = getEgo();
+    if (ego.x || ego.y)
+      ego.checkPriority();
+
     // for test recording and playing, process their commands
     Test.processCycleCommands();
 

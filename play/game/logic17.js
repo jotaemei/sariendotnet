@@ -276,3 +276,4 @@ MESSAGES[17]=[
 "Around the house there are 3 hidden numbers that you must find.",
 "Add them together and this will give you the access code.",
 "Hmmm, something just doesn't seem to ADD up here."];
+CONTROLS[17]="";

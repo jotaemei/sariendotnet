@@ -30,7 +30,6 @@ var IO =
   controllerKey: 0,
   cancelNextKeyPress: false,
   cancelNextKeyClick: false,
-  clearSaid: false,
   input: "",
   maxInputLength: 255,
   FKeyCommands: [["F1"], ["F2"], ["F3"], ["F4"], ["F5"], ["F6"], ["F7"], ["F8"], ["F9"], ["F10"]],
@@ -89,10 +88,6 @@ var IO =
   },
 
   cycle: function() {
-    if (IO.clearSaid) {
-      IO.clearSaid = false;
-      IO.said = [];
-    }
   },
 
   chooseFKey: function(fkey) {
@@ -486,9 +481,9 @@ var IO =
     }
 
     if (checkText.join().indexOf("anyword") == -1) {
-      IO.clearSaid = true;
       cmd_reset(flag_input_received);
       cmd_set(flag_input_parsed);
+      IO.said = [];
     }
     return true;
   },

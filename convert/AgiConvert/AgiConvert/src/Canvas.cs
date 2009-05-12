@@ -48,6 +48,9 @@ namespace AGI
 
     public void SetPixel(int x, int y, int colorIndex)
     {
+      if (x < 0 || x >= width || y < 0 || y >= height)
+        return;
+
       bmp.SetPixel(x, y, (Color)colorPalette[colorIndex]);
     }
 

@@ -38,32 +38,34 @@ function cmd_new_room(roomNr) {
   cmd_release_priority(0);
   cmd_unblock();
   AGI.horizon = 36;
-  //set_horizon(36);
   cmd_assignv(var_prev_room_no, var_room_no);
   cmd_assignn(var_room_no, roomNr);
   cmd_assignn(var_object_touching_edge, 0);
   cmd_assignn(var_object_edge_code, 0);
-  cmd_assignn(var_ego_view_no, objects[0].id);
+  cmd_assignn(var_ego_view_no, getEgo().id);
   cmd_reset(flag_input_received);
   cmd_load_logics(roomNr);
   IO.currentRoomLogics = {};
-  // Reposition ego in the new room
-  var ego = getEgo();
-  switch (vars[var_ego_edge_code]) {
-    case 1:
-      ego.y = AGI.screen_height - 1;
-      break;
-    case 2:
-      ego.x = 0;
-      break;
-    case 3:
-      ego.y = AGI.horizon + 1;
-      break;
-    case 4:
-      ego.x = AGI.screen_width - ego.width();
-      break;
+
+  if (!delayBorderCheck) {
+    // Reposition ego in the new room
+    var ego = getEgo();
+    switch (vars[var_ego_edge_code]) {
+      case 1:
+        ego.y = AGI.screen_height - 1;
+        break;
+      case 2:
+        ego.x = 0;
+        break;
+      case 3:
+        ego.y = AGI.horizon + 1;
+        break;
+      case 4:
+        ego.x = AGI.screen_width - ego.width();
+        break;
+    }
+    cmd_assignn(var_ego_edge_code, 0);
   }
-  cmd_assignn(var_ego_edge_code, 0);
   cmd_set(flag_new_room);
   // used for msg displaying
   AGI.current_room = roomNr;
@@ -221,7 +223,10 @@ function cmd_set_view_v(i, vn) {
 function cmd_set_loop(i, loop) {
   var obj = getObject(i);
   obj.loop = loop;
-  obj.cel = 0;
+  if (obj.loop >= obj.loopCount())
+    obj.loop = 0;
+  if (obj.cel >= obj.celCount())
+    obj.cel = 0;
   obj.update();
 };
 function cmd_set_loop_v(n, m) {
@@ -355,7 +360,7 @@ function cmd_cycle_time(n, m) {
 }
 function cmd_set_horizon(n) {
   AGI.horizon = n;
-  var ego = getObject(Ego);
+  var ego = getEgo();
   ego.fixPosition();
   ego.update();
 }
@@ -617,7 +622,7 @@ function cmd_center_posn(n, x1, y1, x2, y2) {
 function cmd_get(n) {
   if (isNaN(n))
     n = Utils.inventoryNameToIndex(n);
-  if (n >= 0)  
+  if (n >= 0)
     items[n] = true;
 }
 // returns true if ego has inventory object n
@@ -671,8 +676,8 @@ function cmd_load_logics(i) {
   if (cmd_isset(flag_new_room) && AGI.current_room > 0)
     IO.currentRoomLogics[i] = 1;
 }
-function cmd_set_string(i, s) {
-  strings[i] = s;
+function cmd_set_string(n, s) {
+  strings[n] = s;
 }
 function cmd_graphics() {
   AGI.screen = s_graphics_screen;
@@ -709,8 +714,12 @@ function cmd_print_at_v(n) {
 }
 function cmd_print_v(n) {
   var i = vars[n];
-  var msg = MESSAGES[AGI.current_room][i];
-  cmd_print(msg);
+  var msgs = MESSAGES[AGI.current_room];
+  if (msgs)
+  {
+    var msg = MESSAGES[AGI.current_room][i];
+    cmd_print(msg);
+  }
 }
 function cmd_get_string(n, msg, x, y, len) {
   strings[n] = Text.getInput(msg);
@@ -732,7 +741,7 @@ function cmd_set_key(keyCode, scanCode, controller) {
     IO.keyMap[scanCode] = controller;
 }
 function cmd_compare_strings(s1, s2) {
-  return s1 == s2;
+  return strings[s1] == strings[s2];
 }
 // returns true if obj n is in room m.
 // implementation always returns true except when the object was retrieved

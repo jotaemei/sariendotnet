@@ -244,3 +244,4 @@ MESSAGES[16]=[
 "\"I'm sorry, but this is the only chance we've got.\"",
 "\"But there must be some other way!\" she pleads.",
 "\"Amy, we don't have time.\""];
+CONTROLS[16]="";

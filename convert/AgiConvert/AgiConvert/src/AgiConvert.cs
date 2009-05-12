@@ -9,8 +9,8 @@ namespace AGI
   public class AgiConvert
   {
     private static DirectoryInfo dir;
-    private static string srcPath = @"c:\Inetpub\sarien\trunk\Games\timequest\src\";
-    private static string dstPath = @"c:\Inetpub\sarien\trunk\Games\timequest\out\";
+    private static string srcPath = @"c:\Inetpub\sarien\trunk\Games\sq2\src";
+    private static string dstPath = @"c:\Inetpub\sarien\trunk\Games";
     private static int pictureCount = 0;
     private static int viewCount = 0;
     private static int logicCount = 0;
@@ -31,14 +31,66 @@ namespace AGI
       if (debug)
       {
         Picture picture = new Picture();
-        string fileName = Path.Combine(srcPath, "picture4.agp");
+        string fileName = Path.Combine(srcPath, "picture13.agp");
         picture.Load(fileName, "13");
-        picture.SavePictureAsPng(Path.Combine(dstPath, "3.png"));
+        picture.SaveControlAsPng(Path.Combine(dstPath, "13.png"));
+        
+        string map = picture.GetJsxControlMap();
+        Picture jsxPic = new Picture();
+        jsxPic.InitValues();
+        
+        int y = 0;
+        int x = 0;
+        int color = 4;
+        int count = 0;
+        for (int i=0; i<map.Length; i++)
+        {
+          char c = map[i];
+          int pos = Picture.JSX.IndexOf(c);
+          switch (pos)
+          {
+            case (16 * 5 + 4):
+              count += 160;
+              break;
+            case (16 * 5 + 3):
+              count += 128;
+              break;
+            case (16 * 5 + 2):
+              count += 64;
+              break;
+            case (16 * 5 + 1):
+              count += 32;
+              break;
+            case (16 * 5 + 0):
+              count += 16;
+              break;
+            default:
+              double d = pos / 5;
+              count += (int)Math.Floor(d);
+              color = pos % 5;
+
+              for (int run = x + count; x < run; x++)
+                jsxPic.SetPixel(x, y, color);
+              count = 0;
+              
+              if (x == 160)
+              {
+                x = 0;
+                y += 1;
+              }
+              break;
+          }
+        }
+
+        jsxPic.SavePictureAsPng(Path.Combine(dstPath, "jsx.png"));
+        
+        
         //ConvertPictures(true);
         //ConvertViews();
         //OptimizeJs = false;
         //ConvertLogics();
         //WriteJavascriptFile();
+        Console.WriteLine("Debug done.");
       }
       else
       {
@@ -131,14 +183,32 @@ namespace AGI
         js += pic.JsVisual;
       }
       js = js.TrimEnd(',', '\n') + "};";
-      js += "\nwindow.LINES={\n";
+
+
+      // add controls to logic files
+      foreach (XmlPicture pic in game.Pictures)
+      {
+        string logicFile = Path.Combine(dstPath, "logic" + pic.Id + ".js");
+        if (File.Exists(logicFile))
+        {
+          File.AppendAllText(logicFile, String.Format("\nCONTROLS[{0}]=\"{1}\";", pic.Id, pic.ControlMap));
+        }
+        else
+          Console.WriteLine("Logic file {0} missing!", logicFile);
+        //int pic.Id;
+        
+      }
+
+      /*
+      js += "\nwindow.CONTROLS={\n";
 
       foreach (XmlPicture pic in game.Pictures)
       {
         js += pic.JsPriority;
       }
       js = js.TrimEnd(',', '\n') + "};";
-
+      */
+      
       js += "\nwindow.VIEWS={\n";
       foreach (XmlView view in game.Views)
       {

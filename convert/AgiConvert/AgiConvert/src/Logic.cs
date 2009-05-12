@@ -168,6 +168,8 @@ namespace AGI
       "parse",
       "print_at",
       "posn",
+      "put",
+      "put_v",
       "quit",
       "reset",
       "release_priority",
