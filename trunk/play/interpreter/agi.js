@@ -30,7 +30,7 @@ var items = {}; // stores inventory items found by the player
 var controllers = []; // stores controllers, not used
 var strings = []; // stores string values such
 var jumptoLine = 0; // the javascript equivalent of goto, used inside a huge switch/case clause within each logic file
-var delayBorderCheck = false;
+var roomEntryPoints = {}; // used for initially positioning ego when entering a room by url
 
 // AGI, the interpreter
 var AGI =
@@ -113,6 +113,7 @@ var AGI =
       cmd_set(flag_game_restarted);
       AGI.control = c_player_control;
       cmd_set(flag_menu_enabled);
+      Hacks.afterInitialRoomChange(AGI.game_id);
     }
 
     // focus the game area
@@ -153,6 +154,8 @@ var AGI =
     // main code, only execute when not paused
     if (!AGI.paused) {
       var ego = getEgo();
+      //if (!ego.x && !ego.y)
+      //Sarien.placeAtEntryPoint();
       // for player control, store the current direction
       if (AGI.control == c_player_control)
         vars[var_ego_dir] = ego.direction;
@@ -181,27 +184,6 @@ var AGI =
         // when a new room was issued
         if (cmd_isset(flag_new_room)) {
 
-          if (delayBorderCheck) {
-            // Reposition ego in the new room
-            var ego = getEgo();
-            switch (vars[var_ego_edge_code]) {
-              case 1:
-                ego.y = AGI.screen_height - 1;
-                break;
-              case 2:
-                ego.x = 0;
-                break;
-              case 3:
-                ego.y = AGI.horizon + 1;
-                break;
-              case 4:
-                ego.x = AGI.screen_width - ego.width();
-                break;
-            }
-            cmd_assignn(var_ego_edge_code, 0);
-          }
-
-
           // reset the flag
           cmd_reset(flag_new_room);
 
@@ -229,7 +211,7 @@ var AGI =
         }
       }
     }
-    
+
     // doublecheck priority screen to potentially reset a previously set trigger (fixes sq2 swamp bug)
     var ego = getEgo();
     if (ego.x || ego.y)

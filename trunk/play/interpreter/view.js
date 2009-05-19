@@ -102,7 +102,7 @@ View.prototype =
 
   celCount: function() {
     var cels = VIEWS[this.id][this.loop + 1];
-    return cels? cels.length : 0;
+    return cels ? cels.length : 0;
   },
 
   width: function() {
@@ -233,6 +233,7 @@ View.prototype =
   },
 
   motionFollowEgo: function() {
+    this.step_size = Math.min(this.step_size, 1);
     var ego_x, ego_y;
     var obj_x, obj_y;
     var dir;
@@ -633,7 +634,6 @@ View.prototype =
     pass = 1;
 
     if (this.priority != 15) {
-      water = 1;
 
       for (i = 0, w = this.width(); i < w; i++) {
         pri = AGI.getPriority(this.x + i, this.y) - 1;
@@ -645,10 +645,10 @@ View.prototype =
         }
 
         /* water surface */
-        if (pri == 3)
+        if (pri == 3) {
+          water = 1;
           continue;
-
-        water = 0;
+        }
 
         /* conditional blue */
         if (pri == 1) {

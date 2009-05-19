@@ -47,25 +47,23 @@ function cmd_new_room(roomNr) {
   cmd_load_logics(roomNr);
   IO.currentRoomLogics = {};
 
-  if (!delayBorderCheck) {
-    // Reposition ego in the new room
-    var ego = getEgo();
-    switch (vars[var_ego_edge_code]) {
-      case 1:
-        ego.y = AGI.screen_height - 1;
-        break;
-      case 2:
-        ego.x = 0;
-        break;
-      case 3:
-        ego.y = AGI.horizon + 1;
-        break;
-      case 4:
-        ego.x = AGI.screen_width - ego.width();
-        break;
-    }
-    cmd_assignn(var_ego_edge_code, 0);
+  // Reposition ego in the new room
+  var ego = getEgo();
+  switch (vars[var_ego_edge_code]) {
+    case 1:
+      ego.y = AGI.screen_height - 1;
+      break;
+    case 2:
+      ego.x = 0;
+      break;
+    case 3:
+      ego.y = AGI.horizon + 1;
+      break;
+    case 4:
+      ego.x = AGI.screen_width - ego.width();
+      break;
   }
+  cmd_assignn(var_ego_edge_code, 0);
   cmd_set(flag_new_room);
   // used for msg displaying
   AGI.current_room = roomNr;
@@ -286,6 +284,9 @@ function cmd_get_priority(i, vn) {
 }
 function cmd_position(i, x, y) {
   var obj = getObject(i);
+  // fixes room bounce
+  if (i == 0 && y < AGI.horizon)
+    y = AGI.horizon + 1;
   obj.position(x, y);
   obj.oldX = x;
   obj.oldY = y;
@@ -855,4 +856,6 @@ function cmd_reset_scan_start() {
 function cmd_menu_input() {
 }
 function version() {
+}
+function overlay_pic() {
 }
