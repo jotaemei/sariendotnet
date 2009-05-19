@@ -38,6 +38,7 @@ var Hacks =
       "bar tender": "bartender",
       "being": "man",
       "bite": "drink",
+      "bitch": "girl",
       "bodies": "body",
       "boob": "xxx",
       "bouncer": "man",
@@ -47,6 +48,7 @@ var Hacks =
       "c": "close",
       "cab": "taxi",
       "call call": "radio",
+      "capture": "take",
       "cart": "cartridge",
       "cast": "throw",
       "catch": "take",
@@ -123,7 +125,6 @@ var Hacks =
       case "PQ":
         break;
       case "BC":
-        delayBorderCheck = true;
         IO.addPrettyVerbs({ "F6": "do", "F8": "look" });
         // set title tune to last 10 seconds
         Sound.setDuration(21, 10000);
@@ -131,7 +132,14 @@ var Hacks =
           Text.displayMessage("To use an object, press \"/\" or rightclick, and choose the inventory object from the \"use\" submenu.");
         }
         break;
-      case "KQ1":
+      case "KQ3":
+        // logic0 initializes ego at position 0,0 when going directly to a room by url
+        window.cmd_position_v = function(i, vx, vy) {
+          var x = vars[vx];
+          var y = vars[vy];
+          if (x || y)
+            cmd_position(i, x, y);
+        }
         break;
     }
   },
@@ -150,6 +158,10 @@ var Hacks =
   },
   parse: function(game, input) {
     switch (input) {
+      case "x,y":
+        Text.displayMessage(getEgo().x + "," + getEgo().y);
+        return "";
+        break;
       case "save":
         cmd_save_game();
         return "";
@@ -190,6 +202,18 @@ var Hacks =
     }
     return input;
   },
+  // fires after an initial roomChange (direct surfing to a url)
+  afterInitialRoomChange: function(id) {
+    switch (id) {
+      case "KQ3":
+        cmd_reset(42);
+        cmd_reset(35);
+        cmd_reset(36);
+        cmd_reset(46);
+        cmd_set(48);
+        break;
+    }
+  },
   // do not hash the intro
   updateAddressBarAllowed: function(id, roomNr) {
     switch (id) {
@@ -207,6 +231,12 @@ var Hacks =
         break;
       case "KQ1":
         if (roomNr == 83) return false;
+        break;
+      case "KQ2":
+        if (roomNr == 97) return false;
+        break;
+      case "KQ3":
+        if (roomNr == 45) return false;
         break;
     }
     return true;

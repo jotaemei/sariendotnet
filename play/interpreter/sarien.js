@@ -91,10 +91,24 @@ var Sarien =
         getEgo().hide();
         delete objects[0];
         cmd_new_room(room);
+        Sarien.placeAtEntryPoint();
       }
       return true;
     }
     return false;
+  },
+  // places the user at the entrypoint for the given room, if possible
+  placeAtEntryPoint: function() {
+    var entryPoint = roomEntryPoints[AGI.current_room];
+    var x = 74, y = 112;
+    if (entryPoint) {
+      x = entryPoint[0];
+      y = entryPoint[1];
+    }
+    var ego = getEgo();
+    ego.x = x;
+    ego.y = y;
+    ego.update();
   },
   // gets the room name
   getRoomName: function(roomNr) {
