@@ -50,5 +50,37 @@ var Agent =
       el.style.filter = "alpha(opacity:" + opacity + ")";
     else
       el.style.opacity = opacity / 100;
-  }
+  },
+  getBoundingClientRect: function(el)
+  {
+    if (el.getBoundingClientRect)
+      return el.getBoundingClientRect(); 
+    else if (this.OP)
+    {
+      var box = {
+        "left":   el.offsetLeft,
+        "top":    el.offsetTop,
+        "right":  el.offsetWidth,
+        "bottom": el.offsetHeight
+      };
+      for (el.offsetParent; el && el.nodeName != "BODY"; el = el.offsetParent)
+      {
+        box.left += el.offsetLeft;
+        box.top += el.offsetTop;
+      }
+      box.right += box.left;
+      box.bottom += box.top;
+      return box;
+    }
+    else
+    {
+      var box = el.ownerDocument.getBoxObjectFor(el);
+      return {
+        "left":   box.x,
+        "top":    box.y,
+        "right":  box.x + box.width,
+        "bottom": box.y + box.height
+      };
+    }
+  }  
 };
