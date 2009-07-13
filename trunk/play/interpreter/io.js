@@ -60,7 +60,7 @@ var IO =
 
     document.onkeydown = IO.onKeyDown;
     document.onkeypress = IO.onKeyPress;
-    document.body.onclick = IO.onClick;
+    //document.body.onclick = IO.onClick;
     IO.canvas.onclick = IO.onClick;
     IO.canvas.oncontextmenu = IO.onRightClick;
     IO.canvas.ondblclick = IO.onDoubleClick;
@@ -280,12 +280,7 @@ var IO =
     IO.key_pressed = true;
     IO.key_code = 13;
 
-    var canvas = {
-      top: IO.screen.offsetTop + IO.canvas.offsetTop,
-      left: IO.screen.offsetLeft + IO.canvas.offsetLeft
-    }
-    canvas.right = canvas.left + IO.canvas.offsetWidth;
-    canvas.bottom = canvas.top + IO.canvas.offsetHeight;
+    var canvas = Agent.getBoundingClientRect(IO.canvas);
     var x = Math.min(Math.max(evt.clientX, canvas.left), canvas.right) - canvas.left;
     var y = Math.min(Math.max(evt.clientY, canvas.top), canvas.bottom) - canvas.top;
     x = Math.round(x / 4);
