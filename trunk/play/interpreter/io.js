@@ -302,8 +302,10 @@ var IO =
     if (Text.messageShown)
       return;
 
-    var ox = IO.screen.offsetLeft + IO.canvas.offsetLeft;
-    var oy = IO.screen.offsetTop + IO.canvas.offsetTop;
+    var canvas = Agent.getBoundingClientRect(IO.canvas);
+    var ox = canvas.left;
+    var oy = canvas.top;
+    
     IO.x = evt.clientX - ox;
     IO.y = evt.clientY - oy;
     IO.executeAction(a_local_verbs);
