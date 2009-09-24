@@ -54,6 +54,7 @@ var AGI =
   startMilliseconds: 0, // timestamp of startup
   zoom: 2, // zoom can be used in the future for showing a larger or smaller game
   stopped: false,
+  cycle: 0,
 
   // initializes the interpreter and sets variable values
   init: function() {
@@ -137,6 +138,7 @@ var AGI =
   // A logic number is usually connected to its room number, but room logics might
   // call subsequent non-bound "common" logic files.
   interpretCycle: function() {
+    AGI.cycle++;
     // count time consumption per cycle and subtract it from the next interval number
     var cycleStarted = new Date().getTime();
 
@@ -220,6 +222,7 @@ var AGI =
     // for test recording and playing, process their commands
     Test.processCycleCommands();
 
+    IO.said = [];
     // calculate interval ms and schedule next cycle
     var cycleEnded = new Date().getTime();
     var interval = Math.max(0, AGI.interval - (cycleEnded - cycleStarted));
@@ -306,7 +309,18 @@ var AGI =
 };
 
 // jumpTo sets the line number, to allow a goto mechanism in logics
-function jumpTo(lineNr)
-{
+function jumpTo(lineNr) {
+  if (AGI.current_logic == jumpTo.lastLogic) {
+    jumpTo.count = isNaN(jumpTo.count) ? 0 : jumpTo.count + 1;
+    if (jumpTo.count > 500) {
+      alert("Press any key to continue.");
+      IO.key_pressed = true;
+      jumpTo.count = 0;
+    }
+  }
+  else
+    jumpTo.count = 0;
+    
   jumptoLine = lineNr;
+  jumpTo.lastLogic = AGI.current_logic;
 };
