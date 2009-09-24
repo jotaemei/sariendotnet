@@ -60,7 +60,6 @@ var IO =
 
     document.onkeydown = IO.onKeyDown;
     document.onkeypress = IO.onKeyPress;
-    //document.body.onclick = IO.onClick;
     IO.canvas.onclick = IO.onClick;
     IO.canvas.oncontextmenu = IO.onRightClick;
     IO.canvas.ondblclick = IO.onDoubleClick;
@@ -107,22 +106,6 @@ var IO =
 
     var ego = getEgo();
 
-    // unpause by enter, space or escape
-    if (AGI.paused && Text.messageShown) {
-
-      // cancel backspace when a dialog is shown
-      if (key == 8) Agent.cancelEvent(evt);
-
-      // close a dialog by enter or esc
-      if (key == 13 || key == 32 || key == 27) {
-        IO.cancelNextKeyPress = true;
-        cmd_reset(flag_input_received);
-        cmd_set(flag_input_parsed);
-        AGI.unpause();
-      }
-      return;
-    }
-
     if (IO.actionsVisible()) {
       if (key == 37)
         IO.executeAction(IO.backAction);
@@ -132,6 +115,24 @@ var IO =
         IO.hideActions();
       if (key == 37 || key == 13 || key == 32 || key == 39 || key == 27)
         IO.cancelNextKeyPress = true;
+      return;
+    }
+
+    // unpause by enter, space or escape
+    if (AGI.paused) {
+
+      // cancel backspace
+      if (key == 8) Agent.cancelEvent(evt);
+
+      // close a dialog by enter or esc
+      if (key == 13 || key == 32 || key == 27) {
+        if (Text.messageShown)
+          Text.hideMessage();
+        IO.cancelNextKeyPress = true;
+        cmd_reset(flag_input_received);
+        cmd_set(flag_input_parsed);
+        AGI.unpause();
+      }
       return;
     }
 
@@ -305,7 +306,7 @@ var IO =
     var canvas = Agent.getBoundingClientRect(IO.canvas);
     var ox = canvas.left;
     var oy = canvas.top;
-    
+
     IO.x = evt.clientX - ox;
     IO.y = evt.clientY - oy;
     IO.executeAction(a_local_verbs);
@@ -480,7 +481,7 @@ var IO =
     if (checkText.join().indexOf("anyword") == -1) {
       cmd_reset(flag_input_received);
       cmd_set(flag_input_parsed);
-      IO.said = [];
+      //IO.said = [];
     }
     return true;
   },

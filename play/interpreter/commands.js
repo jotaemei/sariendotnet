@@ -687,6 +687,7 @@ function cmd_graphics() {
     Text.clear();
 }
 function cmd_text_screen() {
+  Text.hideMessage();
   AGI.screen = s_text_screen;
   document.getElementById("canvas").className = "text-screen";
 }
