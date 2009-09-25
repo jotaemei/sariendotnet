@@ -106,6 +106,22 @@ var IO =
 
     var ego = getEgo();
 
+    // unpause by enter, space or escape
+    if (AGI.paused && Text.messageShown) {
+
+      // cancel backspace when a dialog is shown
+      if (key == 8) Agent.cancelEvent(evt);
+
+      // close a dialog by enter or esc
+      if (key == 13 || key == 32 || key == 27) {
+        IO.cancelNextKeyPress = true;
+        cmd_reset(flag_input_received);
+        cmd_set(flag_input_parsed);
+        AGI.unpause();
+      }
+      return;
+    }
+
     if (IO.actionsVisible()) {
       if (key == 37)
         IO.executeAction(IO.backAction);
@@ -115,24 +131,6 @@ var IO =
         IO.hideActions();
       if (key == 37 || key == 13 || key == 32 || key == 39 || key == 27)
         IO.cancelNextKeyPress = true;
-      return;
-    }
-
-    // unpause by enter, space or escape
-    if (AGI.paused) {
-
-      // cancel backspace
-      if (key == 8) Agent.cancelEvent(evt);
-
-      // close a dialog by enter or esc
-      if (key == 13 || key == 32 || key == 27) {
-        if (Text.messageShown)
-          Text.hideMessage();
-        IO.cancelNextKeyPress = true;
-        cmd_reset(flag_input_received);
-        cmd_set(flag_input_parsed);
-        AGI.unpause();
-      }
       return;
     }
 
