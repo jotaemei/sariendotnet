@@ -424,6 +424,7 @@ var IO =
       }
     }
     // now that the system commands are known, run the input through the system parser
+    IO.lastTokens = commandTokens;
     IO.parse(commandTokens.join(" "), true);
   },
   // parses input and takes the appropriate action
