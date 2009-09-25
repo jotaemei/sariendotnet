@@ -118,6 +118,8 @@ var Text =
       return Test.displayMessage(msg);
     msg = msg.replace(/^\s+|\s+$/, "");
 
+    msg = Text.parseMessage(msg);
+
     // break up the message in lines
     var lines = Text.getLines(msg, 30);
 
@@ -206,7 +208,7 @@ var Text =
     msg = msg.replace(/%v(\d+)/g, function(a, b) { return vars[b]; });
     msg = msg.replace(/%m(\d+)/g, function(a, b) { return MESSAGES[AGI.current_logic][b]; });
     msg = msg.replace(/%g(\d+)/g, function(a, b) { return MESSAGES[0][b]; });
-    msg = msg.replace(/%w(\d+)/g, function(a, b) { return "[word]"; });
+    msg = msg.replace(/%w(\d+)/g, function(a, b) { b--; return IO.lastTokens.length > (b - 1) ? IO.lastTokens[b] : "[word]"; });
     if (window["INVENTORY"])
       msg = msg.replace(/%(\d+)/g, function(a, b) { return window["INVENTORY"][b]; });
     return msg;
