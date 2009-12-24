@@ -8,9 +8,11 @@ namespace AGI
 {
   public class AgiConvert
   {
-    private static DirectoryInfo dir;
     private static string srcPath = @"c:\Inetpub\sarien\trunk\Games\sq2\src";
     private static string dstPath = @"c:\Inetpub\sarien\trunk\Games";
+    private static string gameId = "SQ2";
+
+    private static DirectoryInfo dir;
     private static int pictureCount = 0;
     private static int viewCount = 0;
     private static int logicCount = 0;
@@ -82,8 +84,7 @@ namespace AGI
           }
         }
 
-        jsxPic.SavePictureAsPng(Path.Combine(dstPath, "jsx.png"));
-        
+        jsxPic.SavePictureAsPng(Path.Combine(dstPath, "jsx.png"));        
         
         //ConvertPictures(true);
         //ConvertViews();
@@ -95,7 +96,7 @@ namespace AGI
       else
       {
         Console.WriteLine("AgiConvert - AGI source converter to web usuable format.");
-        Console.WriteLine("Usage: agiconvert.exe [srcpath] [destinationpath] [-p] [-v] [-l] [-j]");
+        Console.WriteLine("Usage: agiconvert.exe [srcpath] [destinationpath] [GAMEID] [-p] [-v] [-l] [-j]");
         Console.WriteLine("       where -p, -v, -l and -j enable pictures, views, logics and game.js file respectively.");
         Console.WriteLine("       Note that -j operator requires -p and -v operators to have created xml files already.");
 
@@ -120,6 +121,15 @@ namespace AGI
           if (!Directory.Exists(dstPath))
           {
             Console.WriteLine("Destination path does not exist.");
+            return;
+          }
+        }
+
+        if (args.Length > 2) {
+          gameId = args[2];
+          if (gameId.StartsWith("-"))
+          {
+            Console.WriteLine("No GAMEID given, please specify an id like SQ, SQ2, PQ, LLLLL, ...");
             return;
           }
         }
@@ -209,7 +219,7 @@ namespace AGI
       js = js.TrimEnd(',', '\n') + "};";
       */
       
-      js += "\nwindow.VIEWS={\n";
+      js += "\nwindow.VIEWS." + gameId + "={\n";      
       foreach (XmlView view in game.Views)
       {
         js += view.Js;
