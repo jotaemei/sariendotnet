@@ -36,8 +36,8 @@ function getEgo()
 };
 
 // View class
-function View()
-{
+function View() {
+  this.gameId = AGI.game_id;
   this.createRootElement();
 };
 
@@ -51,6 +51,7 @@ View.prototype =
 {
   index: -1,
   room: -1,
+  gameId: 0, // for crossgame avatars
   id: 0,
   x: 0,
   y: 0,
@@ -93,15 +94,15 @@ View.prototype =
   imageElement: null,
 
   description: function() {
-    return VIEWS[this.id][0];
+    return VIEWS[this.gameId][this.id][0];
   },
 
   loopCount: function() {
-    return VIEWS[this.id].length - 1;
+    return VIEWS[this.gameId][this.id].length - 1;
   },
 
   celCount: function() {
-    var cels = VIEWS[this.id][this.loop + 1];
+    var cels = VIEWS[this.gameId][this.id][this.loop + 1];
     return cels ? cels.length : 0;
   },
 
@@ -116,12 +117,38 @@ View.prototype =
   },
 
   load: function(id) {
-    if (this.index != Ego) {
-      // prevent illegal loop/cel values
-      cmd_set_loop(this.index, this.loop);
+    // prevent illegal loop/cel values
+    if (this.index != Ego) cmd_set_loop(this.index, this.loop);
+
+    // default gameId to the current game
+    var gameId = AGI.game_id;
+    var gameIdPassedExplicitly = false;
+
+    // see if the id was passed explicitly as "gameId.avatarId" format
+    id += "";
+    if (id.indexOf(".") != -1) {
+      gameIdPassedExplicitly = true;
+      var pair = id.split(".");
+      gameId = pair[0];
+      id = pair[1];
     }
+    id *= 1;
+
+    // if we're setting ego...
+    if (this.index == Ego) {
+      // if avatarid is set to the one used last, and no gameid was passed explicitly, restore the gameId
+      if (!gameIdPassedExplicitly && AGI.last_avatar_game_id && id == AGI.last_avatar_id)
+        gameId = AGI.last_avatar_game_id;
+
+      // if we're storing Ego, store gameId for future reloading
+      AGI.last_avatar_game_id = gameId;
+      AGI.last_avatar_id = id;
+    }
+
+    this.gameId = gameId;
     this.id = id;
-    var imagePath = Sarien.path + "/view" + Utils.PadLeft(this.id, '0', 3) + ".png";
+    var gamePath = Sarien.gamesPath + "/" + gameNames[gameId];
+    var imagePath = gamePath + "/view" + Utils.PadLeft(this.id, '0', 3) + ".png";
     this.imageElement.setAttribute("src", imagePath);
     this.update();
   },
@@ -192,7 +219,7 @@ View.prototype =
     if (!this.DIDNT_MOVE) {
       this.position(this.x, this.y);
     }
-    var frameClass = ["o", this.index, " view V", this.id, " V", this.id, this.loop, this.cel].join("");
+    var frameClass = ["o", this.index, " view V", this.id, " ", this.gameId, "V", this.id, this.loop, this.cel].join("");
     if (this.oldClassName != frameClass)
       this.rootElement.className = frameClass;
 

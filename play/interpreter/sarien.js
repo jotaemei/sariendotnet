@@ -20,13 +20,17 @@ var Sarien =
   // starts the sarient.net AGI interpreter
   // @param path = path of a single game, containing the logic js files, and images
   // @param multiplayerEnabled = enable multiplayer using the q42multiplayer engine
-  net: function(path, multiplayerEnabled) {
+  net: function(id, gamesPath, multiplayerEnabled) {
+    // set the game id directly
+    AGI.game_id = id;
     // set browser specific classnames on the html element
     if (Agent.IE) document.body.parentNode.className = "ie";
     if (Agent.iPhone) document.body.parentNode.className = "iphone";
-    Sarien.path = path;
+    Sarien.gamesPath = gamesPath;
+    Sarien.path = gamesPath + "/" + gameNames[id];
     if (!window.PICTURES)
-      Sarien.loadResource(path + '/game.js');
+      Sarien.loadResource(Sarien.path + '/game.js');
+    Sarien.initAvatars();
     Sarien.initViewCss();
     Sarien.initPictureCss();
     Sarien.initHTML();
@@ -35,19 +39,28 @@ var Sarien =
   },
   // write the canvas, dialog and other elements
   initHTML: function() {
-    document.getElementById('sarien').innerHTML = '<div id="canvas"><div id="dialog"><div id="border"></div></div></div>';
+    document.getElementById('sarien').innerHTML = '<div id="canvas"><div id="dialog"><div id="border"></div></div><div id="staticImgSeparator"></div></div>';
+  },
+  // make all avatars available as views
+  initAvatars: function() {
+    for (var gameId in AVATARS) {
+      if (gameId != AGI.game_id)
+        VIEWS[gameId] = AVATARS[gameId];
+    }
   },
   // initialize css for all views that have been loaded by javascript
   initViewCss: function() {
     var cssText = [];
-    for (var view in VIEWS) {
-      var loops = VIEWS[view];
-      for (var l = 1; l < loops.length; l++) {
-        var cels = loops[l];
-        for (var c = 0; c < cels.length; c++) {
-          var cel = cels[c];
-          cssText.push(".V", view, (l - 1), c, " { width:", cel[0], "px; height:", cel[1], "px; margin-top:", cel[2], "px; }");
-          cssText.push(".V", view, (l - 1), c, " img { left:", cel[3], "px; top:", cel[4], "px; }");
+    for (var id in VIEWS) {
+      for (var view in VIEWS[id]) {
+        var loops = VIEWS[id][view];
+        for (var l = 1; l < loops.length; l++) {
+          var cels = loops[l];
+          for (var c = 0; c < cels.length; c++) {
+            var cel = cels[c];
+            cssText.push(".", id, "V", view, (l - 1), c, " { width:", cel[0], "px; height:", cel[1], "px; margin-top:", cel[2], "px; }");
+            cssText.push(".", id, "V", view, (l - 1), c, " img { left:", cel[3], "px; top:", cel[4], "px; }");
+          }
         }
       }
     }

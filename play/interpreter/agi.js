@@ -19,6 +19,7 @@
 var MESSAGES = []; // holds game messages per logic
 var CONTROLS = {};
 var WORDS = []; // holds words referenced by said command, said(42) -> said("bla")
+var VIEWS = {};
 var roomNames = {}; // optionally contains pretty room names for use in the addressbar after the hash
 var avatarNames = {}; // optionally contains pretty avatar names for use in the avatar picker
 var multiplayerRooms = {}; // contains a list of rooms that allow multiplayer
@@ -41,6 +42,8 @@ var AGI =
   current_room: 0, // the current room
   control: 0, // control scheme, either player control or program control
   game_id: "", // the id of the current game, stored by the initial logic run
+  last_avatar_game_id: 0, // the game id of the avatar that was last used for Ego
+  last_avatar_id: 0, // the avatar id that was last used for Ego
   highestObjIndex: 0, // highest object index ever stored in the objects array
   horizon: 0, // the game horizon
   interval: 42, // interpreter interval used for each cycle, not set to mimic original AGI
@@ -88,6 +91,7 @@ var AGI =
     IO.init();
     Text.init();
     Menu.init();
+    User.init();
 
     // if test recording or playing is enabled, delay AGI start
     if (Test.recording || Test.playing)
@@ -200,6 +204,7 @@ var AGI =
           cmd_assignn(var_object_edge_code, 0);
           cmd_reset(flag_game_restarted);
           cmd_reset(flag_game_restored);
+          cmd_reset(flag_input_received);
 
           // check if sounds have ended and should set their flags
           Sound.setFlags();
@@ -222,7 +227,9 @@ var AGI =
     // for test recording and playing, process their commands
     Test.processCycleCommands();
 
+    // clear received text
     IO.said = [];
+
     // calculate interval ms and schedule next cycle
     var cycleEnded = new Date().getTime();
     var interval = Math.max(0, AGI.interval - (cycleEnded - cycleStarted));
@@ -286,7 +293,7 @@ var AGI =
   // changes the avatar of ego to the specified view
   // @param id = the view number to set
   setAvatar: function(id) {
-    cmd_set_view(0, id);
+    cmd_set_view(0, id, true);
   },
 
   // stops the agi cycling
@@ -310,11 +317,18 @@ var AGI =
 
 // jumpTo sets the line number, to allow a goto mechanism in logics
 function jumpTo(lineNr) {
+  AGI.updateClock();
   if (AGI.current_logic == jumpTo.lastLogic) {
     jumpTo.count = isNaN(jumpTo.count) ? 0 : jumpTo.count + 1;
     if (jumpTo.count > 500) {
-      alert("Press any key to continue.");
-      IO.key_pressed = true;
+      if (!jumpTo.clockPinged) {
+        alert("Press any key to continue.");
+        IO.key_pressed = true;
+      }
+      else {
+        // let the cpu hose for a sec, the game *WILL* be back!
+        jumpTo.clockPinged = true;
+      }
       jumpTo.count = 0;
     }
   }

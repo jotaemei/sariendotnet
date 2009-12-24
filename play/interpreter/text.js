@@ -86,7 +86,7 @@ var Text =
       Text.add(x, y + 1, remainder, fg, bg);
   },
   // hides a message
-  hideMessage: function() {
+  hideMessage: function(src) {
     clearTimeout(Text.hideMessageTimer);
     if (Text.visibleInventoryItem) {
       Text.hideInventoryItem();
@@ -94,8 +94,9 @@ var Text =
     Text.clear();
     Text.dialog.style.display = "none";
     Text.messageShown = false;
-    if (Text.queue.length > 0)
+    if (Text.queue.length > 0) {
       Text.nextMessage();
+    }
     else {
       // optionally execute the afterHideMessageHandler
       var f = Text.afterHideMessageHandler;
@@ -187,6 +188,7 @@ var Text =
   },
   // prompts for user input
   getInput: function(msg) {
+    msg = Text.parseMessage(msg);
     var result;
     if (Test.playing)
       result = Test.playInput(msg);
@@ -204,18 +206,19 @@ var Text =
     if (!msg)
       msg = "";
     msg = msg.replace(/\\/g, "");
-    msg = msg.replace(/%s(\d+)/g, function(a, b) { return strings[b]; });
-    msg = msg.replace(/%v(\d+)/g, function(a, b) { return vars[b]; });
-    msg = msg.replace(/%m(\d+)/g, function(a, b) { return MESSAGES[AGI.current_logic][b]; });
-    msg = msg.replace(/%g(\d+)/g, function(a, b) { return MESSAGES[0][b]; });
-    msg = msg.replace(/%w(\d+)/g, function(a, b) { b--; return IO.lastTokens.length > (b - 1) ? IO.lastTokens[b] : "[word]"; });
+    msg = msg.replace(/%s(\d+)/g, function(a, b) { return "{!}" + strings[b] + "{!}"; });
+    msg = msg.replace(/%v(\d+)/g, function(a, b) { return "{!}" + vars[b] + "{!}"; });
+    msg = msg.replace(/%m(\d+)/g, function(a, b) { return "{!}" + MESSAGES[AGI.current_logic][b] + "{!}"; });
+    msg = msg.replace(/%g(\d+)/g, function(a, b) { return "{!}" + MESSAGES[0][b] + "{!}"; });
+    msg = msg.replace(/%w(\d+)/g, function(a, b) { b--; return "{!}" + (IO.lastTokens.length > (b - 1) ? IO.lastTokens[b] : "[word]") + "{!}"; });
     if (window["INVENTORY"])
-      msg = msg.replace(/%(\d+)/g, function(a, b) { return window["INVENTORY"][b]; });
+      msg = msg.replace(/%(\d+)/g, function(a, b) { return "{!}" + window["INVENTORY"][b] + "{!}"; });
+    msg = msg.replace(/\{\!\}/g, "");
     return msg;
   },
   // shows the given inventory object and displays its description message
   showInventoryItem: function(id) {
-    var description = VIEWS[id][0];
+    var description = VIEWS[AGI.game_id][id][0];
     if (!description)
       return Text.displayMessage("There's nothing to see.");
     Text.displayMessage(description);

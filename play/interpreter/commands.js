@@ -13,6 +13,7 @@
 /// <reference path="test.js" />
 /// <reference path="text.js" />
 /// <reference path="utils.js" />
+/// <reference path="user.js" />
 /// <reference path="view.js" />
 
 // new room function cmd_on top for easy reference during development
@@ -78,6 +79,8 @@ function cmd_equaln(vn, value) {
   return vars[vn] == value;
 }
 function cmd_equalv(vn, vn2) {
+  if (vn == var_clock_seconds || vn == var_clock_minutes || vn == var_clock_hours)
+    jumpTo.clockPinged = true;
   return vars[vn] == vars[vn2];
 }
 function cmd_assignn(vn, value) {
@@ -184,6 +187,8 @@ function cmd_random(min, max, vn) {
 // Object control commands
 function cmd_animate_obj(i) {
   var obj = getObject(i);
+  if (obj.ANIMATED) return;
+  
   obj.ANIMATED = true;
   obj.CYCLING = true;
   obj.UPDATE = true;
@@ -203,9 +208,16 @@ function cmd_unanimate_all() {
     }
   }
 }
-function cmd_set_view(i, view) {
-  if (avatarNames[view])
-    IO.avatars[view] = 1;
+function cmd_set_view(i, view, manual) {
+  if (!manual && i == 0) {
+    // check if our avatar was set by the system to an avatar in our list
+    // if so, and we have chosen an avatarOverride, us the override
+    id = AGI.game_id + "." + view;
+    User.avatarCurrentDefault = id;
+    if (i == 0 && IO.avatars[id] && User.avatarOverride && id != User.avatarOverride)
+      view = User.avatarOverride;
+    User.unlockAvatar(view);
+  }
   var obj = getObject(i);
   obj.load(view);
   if (obj.loop >= obj.loopCount())
@@ -541,9 +553,11 @@ function cmd_add_to_pic(view, loop, cel, x, y, prio, margin) {
   obj.update();
   obj.margin = margin;
   AGI.picture.addStaticObject(obj);
-  // always place static objects at the beginning of the canvas. Fixes sq1 barman z-index issue with same prio as static objects
+  obj.rootElement.setAttribute("rel", "static");
+  // always place static objects before dynamic views. Fixes sq1 barman and pq poker z-index issues
   var parent = obj.rootElement.parentNode;
-  parent.insertBefore(obj.rootElement, parent.firstChild);
+  var before = document.getElementById("staticImgSeparator");
+  parent.insertBefore(obj.rootElement, before);
 };
 function cmd_add_to_pic_v(view, loop, cel, x, y, prio) {
   cmd_add_to_pic(vars[view], vars[loop], vars[cel], vars[x], vars[y], vars[prio]);
@@ -581,6 +595,7 @@ function cmd_controller(cn) {
   return false;
 };
 function cmd_said() {
+  if (cmd_isset(flag_input_parsed)) return false;
   return IO.hasSaid(arguments);
 };
 function cmd_show_pic() {
@@ -641,12 +656,16 @@ function cmd_drop(n) {
   if (!isNaN(n))
     delete items[n];
 }
-// only replaces cmd_drop and cmd_has, does not implement other values of m for now
+// puts object n in room m, when m = 255 the object is put in inventory
+// implementation differs; it puts it in inventory or drops it
 function cmd_put(n, m) {
-  if (m == 0)
-    cmd_drop(n);
+  if (isNaN(n))
+    n = Utils.inventoryNameToIndex(n);
+  // 255 = belongs to player
   if (m == 255)
     cmd_get(n);
+  else
+    cmd_drop(n);
 }
 // only replaces cmd_drop and cmd_has, does not implement other values of m for now
 function cmd_put_v(n, m) {
@@ -711,15 +730,15 @@ function cmd_print_at(msg) {
 }
 function cmd_print_at_v(n) {
   var i = vars[n];
-  var msg = MESSAGES[AGI.current_room][i];
+  var msg = MESSAGES[AGI.current_logic][i];
   cmd_print(msg);
 }
 function cmd_print_v(n) {
   var i = vars[n];
-  var msgs = MESSAGES[AGI.current_room];
+  var msgs = MESSAGES[AGI.current_logic];
   if (msgs)
   {
-    var msg = MESSAGES[AGI.current_room][i];
+    var msg = MESSAGES[AGI.current_logic][i];
     cmd_print(msg);
   }
 }
@@ -763,8 +782,7 @@ function cmd_clear_text_rect(y1, x1, y2, x2, c) {
 }
 // if an avatar-view is encountered, add it to the "choose avatar" list
 function cmd_load_view(n) {
-  if (avatarNames[n])
-    IO.avatars[n] = 1;
+  setTimeout(function() { User.unlockAvatar(n); }, 1000);
 };
 function cmd_load_view_v(n) {
   cmd_load_view(vars[n]);

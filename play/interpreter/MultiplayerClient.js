@@ -26,6 +26,7 @@ var MultiplayerClient =
   messageContainer: null, // div containing all messages
   input: "", // what to say
   messages: {}, // message balloon objects
+  names: {}, // player names
   fullOpacity: 100,
   events: [],
 
@@ -45,7 +46,7 @@ var MultiplayerClient =
 
     // start the generic multiplayer engine
     Multiplayer.init("/ping", 1000, MultiplayerClient.handleEvent, {
-      "x": true, "y": true, "view": true, "loop": true, "cel": true, "say": false
+      "name": true, "x": true, "y": true, "view": true, "loop": true, "cel": true, "say": false
     });
   },
 
@@ -74,7 +75,6 @@ var MultiplayerClient =
     switch (name) {
       case "x":
       case "y":
-      case "view":
       case "loop":
       case "cel":
         value *= 1;
@@ -98,6 +98,7 @@ var MultiplayerClient =
 
     // if player exists but is scheduled to leave, remove instantly, because the player is back again!
     if (player && player.atEndOfFadeOut == "remove") {
+      MultiplayerClient.removeName(player.index);
       cmd_erase(player.index);
       delete MultiplayerClient.players[player.id];
       player = null;
@@ -113,7 +114,7 @@ var MultiplayerClient =
     // store id and event property
     player.id = id;
     player[name] = value;
-    player.isActive = player.x > 0 && player.y > 0 && !isNaN(player.view);
+    player.isActive = player.x > 0 && player.y > 0 && player.view && player.name;
 
     // handle a disconnection
     if (name == "disconnect")
@@ -139,6 +140,8 @@ var MultiplayerClient =
         // change the view
         cmd_set_view(player.index, value);
         cmd_force_update(player.index);
+        break;
+      case "name":
         break;
       case "say":
         // say something
@@ -169,10 +172,11 @@ var MultiplayerClient =
     // set the properties to send, the multiplayer engine takes care of persistent and nonpersistent ones
     var ego = getEgo();
     MultiplayerClient.props = {
+      "name": User.getName(),
       "room": AGI.game_id + ":" + AGI.current_room,
       "x": ego.x,
       "y": ego.y,
-      "view": ego.id
+      "view": ego.gameId + "." + ego.id
     }
     // if our ego is standing still, set loop and cel properties
     if (ego.direction == 0) {
@@ -229,6 +233,7 @@ var MultiplayerClient =
             // check what to do at the end of a fadeout
             switch (player.atEndOfFadeOut) {
               case "remove":
+                MultiplayerClient.removeName(player.index);
                 cmd_erase(player.index);
                 delete MultiplayerClient.players[player.id];
                 Menu.refresh();
@@ -247,6 +252,10 @@ var MultiplayerClient =
     for (var index in MultiplayerClient.messages) {
       MultiplayerClient.positionMessage(index);
     }
+    // reposition names
+    for (var index in MultiplayerClient.names) {
+      MultiplayerClient.positionName(index);
+    }
   },
   // add a new player by fadein
   addPlayer: function(player) {
@@ -259,6 +268,7 @@ var MultiplayerClient =
     player.opacity = 1;
     var el = getObject(player.index).rootElement;
     Agent.setOpacity(el, player.opacity);
+    MultiplayerClient.showName(player.index, player.name);
   },
   // remove a player by fadeout
   removePlayer: function(player) {
@@ -269,6 +279,7 @@ var MultiplayerClient =
   removeAllPlayersInstantly: function() {
     for (var id in MultiplayerClient.players) {
       var player = MultiplayerClient.players[id];
+      MultiplayerClient.removeName(player.index);
       var obj = getObject(player.index);
       obj.remove();
       delete MultiplayerClient.players[id];
@@ -290,6 +301,19 @@ var MultiplayerClient =
     // schedule the first message to be shown, if there is only one message
     if (msg.queue.length == 1 && !msg.timer)
       MultiplayerClient.nextMessage(viewIndex);
+  },
+  // adds the name to this player
+  showName: function(viewIndex, name) {
+    var nameObj = MultiplayerClient.names[viewIndex];
+    // prepare a message object containing a queue of messages
+    if (!nameObj) {
+      var el = document.createElement("div");
+      el.className = "avatarName";
+      nameObj = { index: viewIndex, el: el, name: name };
+      MultiplayerClient.names[viewIndex] = nameObj;
+      MultiplayerClient.messageContainer.appendChild(el);
+    }
+    MultiplayerClient.names[viewIndex].el.innerHTML = name;
   },
   // shows the next message in the queue
   nextMessage: function(viewIndex) {
@@ -330,6 +354,16 @@ var MultiplayerClient =
       el.style.left = ((AGI.zoom * 2 * (obj.x + obj.width())) - Math.round(el.offsetWidth / 2) + 5) + "px";
     }
   },
+  // places the name at the position of the player
+  positionName: function(viewIndex) {
+    var nameObj = MultiplayerClient.names[viewIndex];
+    if (nameObj && nameObj.el) {
+      var el = nameObj.el;
+      var obj = getObject(viewIndex);
+      el.style.top = (AGI.zoom * (obj.y - obj.loopHeight)) - el.offsetHeight + "px";
+      el.style.left = ((AGI.zoom * 2 * (obj.x + Math.round(obj.width() / 2))) - Math.round(el.offsetWidth / 2)) + "px";
+    }
+  },
   // removes a message from the screen
   hideMessage: function(viewIndex) {
     var msg = MultiplayerClient.messages[viewIndex];
@@ -337,6 +371,15 @@ var MultiplayerClient =
       msg.el.parentNode.removeChild(msg.el);
       msg.el = null;
       msg.timer = 0;
+    }
+  },
+  // removes a name from screen
+  removeName: function(viewIndex) {
+    var nameObj = MultiplayerClient.names[viewIndex];
+    if (nameObj) {      
+      if (nameObj.el && nameObj.el.parentNode)
+        nameObj.el.parentNode.removeChild(nameObj.el);
+      delete MultiplayerClient.names[viewIndex];
     }
   },
   // sends a message to other players
