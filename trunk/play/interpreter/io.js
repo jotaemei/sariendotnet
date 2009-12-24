@@ -106,22 +106,6 @@ var IO =
 
     var ego = getEgo();
 
-    // unpause by enter, space or escape
-    if (AGI.paused && Text.messageShown) {
-
-      // cancel backspace when a dialog is shown
-      if (key == 8) Agent.cancelEvent(evt);
-
-      // close a dialog by enter or esc
-      if (key == 13 || key == 32 || key == 27) {
-        IO.cancelNextKeyPress = true;
-        cmd_reset(flag_input_received);
-        cmd_set(flag_input_parsed);
-        AGI.unpause();
-      }
-      return;
-    }
-
     if (IO.actionsVisible()) {
       if (key == 37)
         IO.executeAction(IO.backAction);
@@ -131,6 +115,22 @@ var IO =
         IO.hideActions();
       if (key == 37 || key == 13 || key == 32 || key == 39 || key == 27)
         IO.cancelNextKeyPress = true;
+      return;
+    }
+
+    // unpause by enter, space or escape
+    if (AGI.paused) {
+
+      // cancel backspace
+      if (key == 8) Agent.cancelEvent(evt);
+
+      // close a dialog by enter or esc
+      if (key == 13 || key == 32 || key == 27) {
+        AGI.unpause();
+        IO.cancelNextKeyPress = true;
+        cmd_reset(flag_input_received);
+        cmd_set(flag_input_parsed);
+      }
       return;
     }
 
@@ -198,6 +198,9 @@ var IO =
         new_ego_dir = down;
         break;
     }
+
+    if (AGI.control == c_program_control) return;
+
     if (new_ego_dir) {
       Agent.cancelEvent(evt);
       // pressing in same direction is a stop
@@ -437,7 +440,7 @@ var IO =
     if (input.indexOf("#") == 0)
       return Sarien.checkForHashChange(input);
     if (input.indexOf("$") == 0)
-      return AGI.setAvatar(input.substr(1) * 1);
+      return User.selectAvatar(input.substr(1));
     if (input.match(/^F\d+$/))
       return IO.chooseFKey(input.substr(1) * 1);
 
@@ -478,7 +481,7 @@ var IO =
     }
 
     if (checkText.join().indexOf("anyword") == -1) {
-      cmd_reset(flag_input_received);
+      //cmd_reset(flag_input_received);
       cmd_set(flag_input_parsed);
       //IO.said = [];
     }
@@ -701,9 +704,9 @@ var IO =
   },
   // gives you instant access to all avatars
   addAllAvatars: function() {
-    for (var id = 0; id < 256; id++)
-      if (avatarNames[id])
-      IO.avatars[id] = true;
+    for (var gameId in AVATARS)
+      for (var avatarId in AVATARS[gameId])
+      User.unlockAvatar(gameId, avatarId);
     Text.displayMessage("All avatars have been added.");
   },
   // shows the action commands that the current room accepts
@@ -742,6 +745,9 @@ var IO =
       avatarCommands.push([command]);
       var obj = {};
       var prettyName = avatarNames[id];
+      if (!prettyName)
+        prettyName = AVATARS[gameId][avatarId][0];
+
       if (prettyName) {
         obj[command] = prettyName ? prettyName : ("Avatar " + id);
         IO.addPrettyVerbs(obj);
@@ -756,7 +762,7 @@ var IO =
     IO.clearActions();
     IO.addOption("&lt;", a_local_verbs);
     IO.addOption("press F key &gt;", a_f_keys);
-    IO.addOption("select avatar &gt;", a_avatars);
+    //IO.addOption("select avatar &gt;", a_avatars);
     if (Utils.ObjHasItems(roomNames))
       IO.addOption("select location &gt;", a_locations);
     if (MultiplayerClient.enabled)

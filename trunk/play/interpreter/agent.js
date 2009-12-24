@@ -42,6 +42,15 @@ var Agent =
       evt.preventDefault();
     }
   },
+  cancelBubble: function(evt)
+  {
+    if (Agent.IE) {
+      evt.cancelBubble = true;
+    }
+    else {
+      evt.stopPropagation();
+    }
+  },
   // sets the opacity of an element
   // @param el = the element to set the opacity
   // @param opacity = a number between 0 (invisible) and 100 (opaque)
